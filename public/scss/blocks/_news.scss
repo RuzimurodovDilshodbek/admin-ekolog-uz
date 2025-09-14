@@ -1,0 +1,144 @@
+.news {
+    margin-top: 20px;
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    &__right {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    &__title {
+        font-family: "BBC Reith Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 27px;
+    }
+
+    &__cards {
+        height: 202px;
+    }
+
+    &__card-title {
+        position: absolute;
+        font-family: "BBC Reith Sans", sans-serif;
+        color: #FFF;
+        font-size: 17px;
+        font-weight: 700;
+        left: 12px;
+        bottom: 15px;
+        max-width: 301px;
+        margin-bottom: 0;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+
+    .card-img-overlay {
+        padding: 0;
+        background-image: url(/public/images/rectangle.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width:376px) {
+    .news {
+        margin-top: 40px;
+
+        &__title {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .news {
+        &__wrapper {
+            display: grid;
+            grid-template-columns: 348px 1fr;
+            grid-template-rows: 1fr;
+            gap: 32px;
+        }
+
+        &__right {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+
+        &__right &__cards {
+            height: 95.5px;
+        }
+
+        &__card-title:nth-child(1) {
+            max-width: 301px;
+            font-size: 15px;
+        }
+
+        &__right &__card-title {
+            max-width: 145px;
+            font-size: 8.538px;
+            left: 5px;
+            bottom: 7px;
+        }
+    }
+}
+
+@media only screen and (min-width:769px) {
+    .news {
+        margin-top: 65px;
+
+        &__title {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .news {
+        &__wrapper {
+            grid-template-columns: 620px 1fr;
+            gap: 43px;
+        }
+
+        &__right {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__wrapper &__cards {
+            height: 355px;
+        }
+
+        &__right &__cards {
+            height: 168px;
+            max-width: 294px;
+        }
+
+        &__card-title:nth-child(1) {
+            font-size: 24.004px;
+            max-width: 530px !important;
+        }
+
+        &__right &__card-title {
+            max-width: 253.7px;
+            font-size: 15px;
+            left: 9px;
+            bottom: 11px;
+        }
+    }
+}

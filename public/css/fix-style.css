@@ -1,0 +1,10 @@
+@media only screen and (min-width: 1200px) {
+    .news__card-title:nth-child(1) {
+        margin-top: 240px
+    }
+    .news__right .news__card-title {
+        margin-top: 100px;
+        max-width: 253.7px;
+        font-size: 15px;
+    }
+}

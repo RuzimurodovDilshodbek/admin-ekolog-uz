@@ -1,0 +1,271 @@
+.achchiqtosh {
+    margin-top: 58px;
+    margin-bottom: 58px;
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    
+    &__title {
+        padding-top: 3px;
+        padding-left: 10px;
+        border-left: 2.253px solid #F7931E;
+        opacity: 0.9;
+        color: #242424;
+        font-family: "BBC Reith Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+
+    .carousel {
+        margin-top: 10px;
+    }
+
+    .carousel-item {
+        height: 202px;
+    }
+
+    .card-img-overlay {
+        background-image: url(/public/images/rectangle.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    &__slider-text {
+        left: 12px;
+        bottom: 18px;
+        color: #FFF;
+        font-family: "BBC Reith Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        width: 301.651px;
+        margin-bottom: 0;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__img-wrapper {
+        display: none;
+    }
+
+    &__card {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+
+        &-box:nth-child(1) .achchiqtosh__img-wrapper {
+            display: block !important;
+        }
+    }
+
+    &__card-box {
+        background: #FFF;
+
+
+
+        img {
+            height: 197.104px;
+        }
+    }
+
+    &__card-sp {
+        left: 5.8px;
+        bottom: 8.7px;
+        padding: 5.63px 13.511px;
+        color: #121212;
+        font-size: 11.594px;
+        text-transform: uppercase;
+        background: #FFF;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 12px 5.8px 20px;
+
+        &-title {
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: #121212;
+            font-size: 19.324px;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        &-text {
+            overflow: hidden;
+            color: #121212;
+            text-overflow: ellipsis;
+            font-size: 15.459px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            margin-bottom: 0;
+        }
+
+        &-time {
+            margin-bottom: 0;
+            color: #A0A0A0;
+            text-overflow: ellipsis;
+            font-size: 15.459px;
+        }
+    }
+
+}
+
+@media only screen and (min-width:576px) {
+    .achchiqtosh {
+        margin-top: 58px;
+        margin-bottom: 58px;
+
+        &__img-wrapper {
+            display: block !important;
+
+        }
+
+        &__wrapper {
+            display: grid;
+            grid-template-columns: 1fr 0.5fr;
+            gap: 10px;
+        }
+
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .achchiqtosh {
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        &__wrapper {
+            grid-template-columns: 537px 1fr;
+            gap: 18px;
+        }
+
+        &__title {
+            font-size: 12.812px;
+        }
+
+        .carousel-item {
+            height: 314px;
+        }
+
+        &__slider-text {
+            left: 16.44px;
+            bottom: 13.87px;
+            width: 436.68px;
+            font-size: 20.271px;
+        }
+
+        &__card {
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        &__card-box {
+            img {
+                height: 99.531px;
+            }
+        }
+
+        &__card-sp {
+            left: 3px;
+            bottom: 4px;
+            padding: 2.837px 6.81px;
+            font-size: 6.825px;
+        }
+
+        &__info {
+            gap: 9px;
+            padding: 5px 2.61px 9px;
+
+            &-title {
+                font-size: 10px;
+            }
+
+            &-text {
+                font-size: 8px;
+            }
+
+            &-time {
+                font-size: 7.963px;
+            }
+        }
+
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .achchiqtosh {
+        margin-top: 27px;
+        margin-bottom: 27px;
+
+        &__wrapper {
+            grid-template-columns: 954px 1fr;
+            gap: 30px;
+        }
+
+        &__title {
+            font-size: 22.527px;
+        }
+
+        .carousel-item {
+            height: 550px;
+        }
+
+        &__slider-text {
+            left: 33px;
+            bottom: 24px;
+            width: 767.79px;
+            font-size: 35.642px;
+        }
+
+        &__card {
+            gap: 18px;
+        }
+
+        &__card-box {
+            img {
+                height: 175px;
+            }
+        }
+
+        &__card-sp {
+            left: 7px;
+            bottom: 11px;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        &__info {
+            gap: 15.965px;
+            padding: 10px 5.5px 18.7px;
+
+            &-title {
+                font-size: 16px;
+            }
+
+            &-text {
+                font-size: 14px;
+            }
+
+            &-time {
+                font-size: 14px;
+            }
+        }
+
+    }
+}

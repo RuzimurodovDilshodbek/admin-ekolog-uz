@@ -1,0 +1,233 @@
+#navbarTogglerDemo02 {
+    padding: 0 !important;
+}
+
+.header {
+    background-color: #fff;
+
+    &__info-text {
+        font-size: 10px;
+        margin-right: 10px !important;
+        line-height: 13.3px;
+    }
+
+    &__top {
+        height: 32px;
+
+        &-right {
+            gap: 30px;
+        }
+
+        &-btn {
+            padding: 6px;
+            background: #F8F8F8;
+            text-align: center;
+            font-size: 7.8px;
+            font-weight: 500;
+            line-height: 12px;
+            color: #242424;
+            font-family: "BBC Reith Sans", sans-serif;
+            border-radius: 5px;
+            outline: none;
+            appearance: none;
+            border: 1px solid #F8F8F8 !important;
+            cursor: pointer;
+        }
+
+        &-mainBtn {
+            padding: 6px 12px;
+            background: #F8F8F8;
+            text-align: center;
+            font-size: 7.8px;
+            font-weight: 500;
+            line-height: 12px;
+        }
+    }
+
+    &__navbar {
+        height: 64px;
+        border-bottom: 1px solid #EEE;
+        border-top: 1px solid #EEE;
+
+        .navbar-nav {
+            gap: 24PX;
+        }
+
+        .nav-link {
+            font-size: 18px;
+            font-weight: 500;
+            padding: 0 !important;
+        }
+
+        .item-menu {
+            min-width: 172px !important;
+            padding: 10px 14px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            border-radius: 10px;
+            background: #FFF;
+            box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
+
+            button {
+                padding: 0;
+                font-size: 16px;
+                font-weight: 500;
+                transition: 0.5s all;
+
+                &:hover {
+                    color: #0707074b;
+                }
+            }
+        }
+
+        .nav-item {
+            padding: 0;
+
+            &:hover {
+                .item-menu {
+                    display: inline-flex !important;
+                }
+            }
+        }
+
+        .accordion {
+            height: 100vh;
+            overflow: scroll !important;
+        }
+
+        &-middle {
+            position: absolute;
+            top: 63px;
+            left: 0;
+            background: #ffffff;
+            width: 100vw;
+
+            .accordion-item {
+                border: 1px solid #E9EBF0;
+                border-radius: 8px;
+                background: #F6F6F6;
+
+                &:nth-child(1) {
+                    margin-top: 16px;
+                }
+
+                &:last-child {
+                    margin-bottom: 47px;
+                }
+            }
+
+            .accordion-button {
+                background: #F6F6F6;
+                padding: 20px 10px;
+                color: #242424;
+                font-size: 15px;
+                font-weight: 500;
+            }
+
+            .accordion-body {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                margin: 0;
+                padding: 0 0 32px 10px;
+
+                li {
+                    font-family: "BBC Reith Sans", sans-serif;
+                    font-size: 15px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid #E9EBF0;
+                }
+            }
+
+        }
+
+        &-right {
+            gap: 16px;
+
+            .collapsed {
+
+                img:nth-child(1) {
+                    display: none !important;
+                }
+
+                img:nth-child(2) {
+                    display: block !important;
+                }
+            }
+        }
+
+        &-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            width: 39px;
+            height: 39px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            border: 1px solid #E6ECF8 !important;
+            background: #FFF;
+        }
+    }
+}
+
+@media only screen and (min-width: 376px) {
+    .header {
+
+        &__top {
+            height: 32px;
+
+            &-texts {
+                gap: 14px;
+
+                span {
+                    font-size: 10px;
+                    color: #777;
+                    font-family: "BBC Reith Sans", sans-serif;
+                }
+            }
+        }
+
+        &__navbar {
+
+            &-middle {
+                .accordion-item {
+                    &:last-child {
+                        margin-bottom: 28px;
+                    }
+                }
+
+                .accordion-body {
+                    gap: 28px;
+                    padding: 0 0 28px 10px;
+
+                    li {
+                        padding-bottom: 0;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media only screen and (min-width:1200px) {
+
+    .header {
+        &__top-texts {
+            gap: 42px;
+
+            span {
+                font-size: 12px;
+                color: #242424;
+                font-family: "IBM Plex Sans", sans-serif;
+            }
+        }
+
+        &__navbar-middle {
+            padding: 0;
+            position: static;
+        }
+    }
+}

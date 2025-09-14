@@ -1,0 +1,73 @@
+/* GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: #242424;
+    background-color: #F6F6F6 !important;
+    overflow-x: hidden;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.bg-light {
+    background-color: #F6F6F6 !important;
+}
+
+img {
+    display: block;
+    height: auto;
+}
+
+// ul,
+// a {
+//     text-decoration: none;
+//     list-style-type: none;
+// }
+
+/* STICKY FOOTER */
+.site-main {
+    flex-grow: 1;
+}
+
+.darkBody .darkMode-body {
+    background: #1C1C1C !important;
+}
+
+.darkBody .darkMode {
+    color: #DBDBDB !important;
+    background: #242424 !important;
+}
+
+.darkBody .darkMode-btn {
+    color: #DBDBDB !important;
+    background: #242424 !important;
+    border: 1px solid rgba(222, 222, 222, 0.20) !important;
+}
+
+.darkBody .darkMode2 {
+    background: #242424 !important;
+}
+
+.darkBody .darkMode-sp {
+    color: #A0A0A0 !important;
+}
+
+.darkBody .darkMode-title {
+    color: #DBDBDB !important;
+}

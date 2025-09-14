@@ -1,0 +1,1108 @@
+.mediacate__text {
+    color: #242424;
+    // font-family: "BBC Reith Sans";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+}
+
+.mediacate__card {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 37px;
+    margin-top: 27px;
+
+
+    &-img {
+        height: 355px !important;
+        cursor: pointer;
+
+    }
+
+
+    &-box1 {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 33px;
+
+        img {
+            cursor: pointer;
+        }
+
+    }
+
+    &-posi {
+        bottom: 24px !important;
+        left: 16px !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // gap: 287px;
+        padding: 0 35px 24px 0;
+        
+
+
+        &--title {
+            color: #DDD;
+            font-family: "BBC Reith Sans";
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+
+        }
+    }
+
+    &-bottom {
+        bottom: 40px;
+        left: 16px;
+        display: flex;
+        justify-content: space-between !important;
+        // gap: 76px; 
+        padding: 0 29px 21px 16px;
+
+        &--text {
+            color: #FFF;
+            font-family: "BBC Reith Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            margin-bottom: 8px;
+            // width: 147px;  
+        }
+
+        &--text1 {
+            color: #DDD;
+            font-family: "BBC Reith Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin: 0;
+        }
+
+        &--title {
+            color: #FFF;
+            // font-family: "BBC Reith Sans";
+            font-size: 35px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            top: 26px;
+            left: 16px;
+        }
+
+        &--img {
+            padding: 13px 12px;
+        }
+
+        &--imgdiv {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.20);
+            backdrop-filter: blur(7.5px);
+
+        }
+    }
+}
+
+.mediacate__galle {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 21px;
+    row-gap: 40px;
+    margin: 30px 0 60px 0;
+
+    img {
+        cursor: pointer;
+    }
+
+    &--icon {
+        bottom: 14px;
+        right: 14px;
+
+    }
+}
+
+.mediacate__all-text {
+    color: #242424;
+    // font-family: "BBC Reith Sans"; 
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+
+.mediacate__all {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: space-between;
+    row-gap: 10px;
+    column-gap: 47px;
+    margin: 33px 0 34px 0;
+
+    img {
+        cursor: pointer;
+    }
+    &-box {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 23px 0 12px;
+        background-image: url(../../mediacategoryImages/Rectangleimg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top: 120px;
+        border-radius: 12px;
+        &-text {
+            // font-family: "BBC Reith Sans"; 
+            font-size: 10px;
+            font-style: normal;
+            line-height: normal;
+            margin-bottom: 4px;
+            color: #ddd;
+        }
+
+    }
+}
+
+
+
+@media only screen and (max-width:1200px) {
+    .mediacate__text {
+        color: #242424;
+        // font-family: "BBC Reith Sans";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-variant: small-caps;
+
+    }
+
+    .mediacate__card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 20px;
+        margin-top: 30px;
+
+        &-img {
+
+            cursor: pointer;
+            height: 416px !important;
+        }
+
+
+        &-box1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 39.73px;
+
+            img {
+                cursor: pointer;
+                border-radius: 7.011px;
+                // background: rgba(36, 36, 36, 0.10);
+                // backdrop-filter: blur(31.550559997558594px);
+            }
+
+            &--img {
+                width: 343px !important;
+
+            }
+
+        }
+
+        &-posi {
+            bottom: 31px !important;
+            left: 18px !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // gap: 287px;
+            padding: 0 30px 0 0 !important;
+
+            img {
+                width: 96.284px;
+                height: 96.284px;
+            }
+
+            &--title {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 28.181px;
+                font-style: normal;
+                line-height: normal;
+
+            }
+        }
+
+        &-bottom {
+            bottom: 24px !important;
+            left: 18px !important;
+            display: flex;
+            justify-content: space-between !important;
+            // gap: 76px; 
+            padding: 0 35px 5px 16px !important;
+
+
+            &--text {
+                color: #FFF;
+                font-family: "BBC Reith Sans";
+                font-size: 18.697px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                // width: 147px;  
+            }
+
+            &--text1 {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 16.36px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+            }
+
+            &--title {
+                // font-family: "BBC Reith Sans";
+                color: #FFF;
+                font-size: 40.899px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                top: 30px;
+                left: 18px;
+                max-width: 262px;
+            }
+
+            &--img {
+                padding: 15px 16px;
+
+            }
+
+            &--imgdiv {
+                width: 46.742px;
+                height: 46.742px;
+                border-radius: 5.843px;
+                background: rgba(255, 255, 255, 0.20);
+                backdrop-filter: blur(8.764044761657715px);
+
+            }
+        }
+    }
+
+    .mediacate__galle {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 18.1px;
+        row-gap: 20px;
+        margin: 20px 0 20px 0;
+
+        img {
+            cursor: pointer;
+        }
+
+        &--icon {
+            bottom: 12.07px;
+            right: 12.07px;
+            width: 38.786px;
+        }
+    }
+
+    .mediacate__all-text {
+        color: #242424;
+        // font-family: "BBC Reith Sans"; 
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+    }
+
+    .mediacate__all {
+        display: grid;
+        grid-template-columns: auto auto  ;
+        justify-content: space-between;
+        row-gap: 20px;
+        column-gap: 55px;
+        margin: 16.36px 0 20px 0;
+
+        img {
+            cursor: pointer;
+            width: 335px !important;
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+            padding: 145px 23px 0 12px;
+
+            img {
+                width: 46px !important;
+                height: 46px !important;
+            }
+
+            &-text {
+                // font-family: "BBC Reith Sans"; 
+                font-size: 11.799px;
+                font-style: normal;
+                line-height: normal;
+                margin-bottom: 4px;
+                color: #ddd;
+            }
+
+        }
+    }
+}
+
+@media only screen and (max-width:992px) {
+    .mediacate__text {
+        color: #242424;
+        // font-family: "BBC Reith Sans";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-variant: small-caps;
+
+    }
+
+    .mediacate__card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 20px;
+        margin-top: 30px;
+
+        &-img {
+
+            cursor: pointer;
+            height: 416px !important;
+        }
+
+
+        &-box1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 39.73px;
+
+            img {
+                cursor: pointer;
+                border-radius: 7.011px;
+                // background: rgba(36, 36, 36, 0.10);
+                // backdrop-filter: blur(31.550559997558594px);
+            }
+
+            &--img {
+                width: 343px !important;
+
+            }
+
+        }
+
+        &-posi {
+            bottom: 31px !important;
+            left: 18px !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // gap: 287px;
+            padding: 0 30px 0 0 !important;
+
+            img {
+                width: 96.284px;
+                height: 96.284px;
+            }
+
+            &--title {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 28.181px;
+                font-style: normal;
+                line-height: normal;
+
+            }
+        }
+
+        &-bottom {
+            bottom: 24px !important;
+            left: 18px !important;
+            display: flex;
+            justify-content: space-between !important;
+            // gap: 76px; 
+            padding: 0 35px 5px 16px !important;
+
+
+            &--text {
+                color: #FFF;
+                font-family: "BBC Reith Sans";
+                font-size: 18.697px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                // width: 147px;  
+            }
+
+            &--text1 {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 16.36px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+            }
+
+            &--title {
+                // font-family: "BBC Reith Sans";
+                color: #FFF;
+                font-size: 40.899px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                top: 30px;
+                left: 18px;
+                max-width: 262px;
+            }
+
+            &--img {
+                padding: 15px 16px;
+
+            }
+
+            &--imgdiv {
+                width: 46.742px;
+                height: 46.742px;
+                border-radius: 5.843px;
+                background: rgba(255, 255, 255, 0.20);
+                backdrop-filter: blur(8.764044761657715px);
+
+            }
+        }
+    }
+
+    .mediacate__galle {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 18.1px;
+        row-gap: 20px;
+        margin: 20px 0 20px 0;
+
+        img {
+            cursor: pointer;
+        }
+
+        &--icon {
+            bottom: 12.07px;
+            right: 12.07px;
+            width: 38.786px;
+        }
+    }
+
+    .mediacate__all-text {
+        color: #242424;
+        // font-family: "BBC Reith Sans"; 
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+    }
+
+    .mediacate__all {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        row-gap: 20px;
+        column-gap: 55px;
+        margin: 16.36px 0 20px 0;
+
+        img {
+            cursor: pointer;
+            width: 335px !important;
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+            padding: 145px 23px 0 12px;
+            
+
+            img {
+                width: 46px !important;
+                height: 46px !important;
+            }
+
+            &-text {
+                // font-family: "BBC Reith Sans"; 
+                font-size: 11.799px;
+                font-style: normal;
+                line-height: normal;
+                margin-bottom: 4px;
+                color: #ddd;
+            }
+
+        }
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .mediacate__text {
+        color: #242424;
+        // font-family: "BBC Reith Sans";
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-variant: small-caps;
+
+    }
+
+    .mediacate__card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 20px;
+        margin-top: 30px;
+
+        &-img {
+
+            cursor: pointer;
+            height: 416px !important;
+        }
+
+
+        &-box1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 39.73px;
+
+            img {
+                cursor: pointer;
+                border-radius: 7.011px;
+                // background: rgba(36, 36, 36, 0.10);
+                // backdrop-filter: blur(31.550559997558594px);
+            }
+
+            &--img {
+                width: 343px !important;
+
+            }
+
+        }
+
+        &-posi {
+            bottom: 31px !important;
+            left: 18px !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // gap: 287px;
+            padding: 0 30px 0 0 !important;
+
+            img {
+                width: 96.284px;
+                height: 96.284px;
+            }
+
+            &--title {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 28.181px;
+                font-style: normal;
+                line-height: normal;
+
+            }
+        }
+
+        &-bottom {
+            bottom: 24px !important;
+            left: 18px !important;
+            display: flex;
+            justify-content: space-between !important;
+            // gap: 76px; 
+            padding: 0 35px 5px 16px !important;
+
+
+            &--text {
+                color: #FFF;
+                font-family: "BBC Reith Sans";
+                font-size: 18.697px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                // width: 147px;  
+            }
+
+            &--text1 {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 16.36px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+            }
+
+            &--title {
+                // font-family: "BBC Reith Sans";
+                color: #FFF;
+                font-size: 40.899px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                top: 30px;
+                left: 18px;
+                max-width: 262px;
+            }
+
+            &--img {
+                padding: 15px 16px;
+
+            }
+
+            &--imgdiv {
+                width: 46.742px;
+                height: 46.742px;
+                border-radius: 5.843px;
+                background: rgba(255, 255, 255, 0.20);
+                backdrop-filter: blur(8.764044761657715px);
+
+            }
+        }
+    }
+
+    .mediacate__galle {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 18.1px;
+        row-gap: 20px;
+        margin: 20px 0 20px 0;
+
+        img {
+            cursor: pointer;
+        }
+
+        &--icon {
+            bottom: 12.07px;
+            right: 12.07px;
+            width: 38.786px;
+        }
+    }
+
+    .mediacate__all-text {
+        color: #242424;
+        // font-family: "BBC Reith Sans"; 
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+    }
+
+    .mediacate__all {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        row-gap: 20px;
+        column-gap: 55px;
+        margin: 16.36px 0 20px 0;
+
+        img {
+            cursor: pointer;
+            width: 335px !important;
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 103px 23px 0 12px;
+
+            img {
+                width: 46px !important;
+                height: 46px !important;
+            }
+
+            &-text {
+                // font-family: "BBC Reith Sans"; 
+                font-size: 11.799px;
+                font-style: normal;
+                line-height: normal;
+                // margin-bottom: 4px;
+                color: #ddd;
+            }
+
+        }
+    }
+}
+
+@media only screen and (max-width:576px) {
+    .mediacate__text {
+        display: none;
+    }
+
+    .mediacate__card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 19px;
+
+        &-img {
+            // height: 190px !important;
+            cursor: pointer;
+
+        }
+
+
+        &-box1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 19px;
+
+            img {
+                cursor: pointer;
+            }
+
+        }
+
+        &-posi {
+            bottom: 1px !important;
+            left: 16px !important;
+            display: flex;
+            justify-content: space-between;
+
+            // align-items: center;
+            // gap: 287px;
+            // padding: 0 35px 9px 9px;
+            img {
+                width: 45px;
+                height: 45px;
+            }
+
+            &--title {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 13px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-top: 5px;
+
+            }
+        }
+
+        &-bottom {
+            bottom: 7px;
+            left: 8px;
+            display: flex;
+            justify-content: space-between !important;
+            // gap: 76px; 
+            padding: 0 29px 0 5px;
+
+            img {
+                width: 22px !important;
+                height: 22px !important;
+            }
+
+            &--text {
+                color: #FFF;
+                font-family: "BBC Reith Sans";
+                font-size: 8px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-top: 3px;
+                margin-bottom: 8px;
+                // width: 147px;  
+            }
+
+            &--text1 {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 7px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+            }
+
+            &--title {
+                color: #FFF;
+                // font-family: "BBC Reith Sans";
+                font-size: 19px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                top: 26px;
+                left: 16px;
+            }
+
+            &--img {
+                padding: 7px 6.9px;
+            }
+
+            &--imgdiv {
+                width: 22px !important;
+                height: 22px !important;
+                border-radius: 2px;
+                background: rgba(255, 255, 255, 0.20);
+                backdrop-filter: blur(4px);
+
+            }
+        }
+    }
+
+    .mediacate__galle {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 9px;
+        row-gap: 40px;
+        margin: 10px 0 10px 0;
+
+        img {
+            cursor: pointer;
+        }
+
+        &--icon {
+            bottom: 5px;
+            right: 5px;
+            width: 18px;
+            height: 18px;
+
+        }
+    }
+
+    .mediacate__all-text {
+        color: #242424;
+        // font-family: "BBC Reith Sans"; 
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+    }
+
+    .mediacate__all {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        row-gap: 10px;
+        column-gap: 27px;
+        margin: 8px 0 9px 0;
+
+        img {
+            cursor: pointer;
+        //    max-width: 160px !important;
+            // height: 96px !important;
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 6px 6px 6.15px; 
+            
+            img {
+                width: 22.243px !important;
+                height: 22.243px !important;
+            }
+
+            &-text {
+                // font-family: "BBC Reith Sans"; 
+                font-size: 5px;
+                font-style: normal;
+                line-height: normal;
+                margin-top: 4px;
+                margin-bottom: 0;
+                color: #ddd;
+            }
+
+        }
+    }
+}
+
+@media only screen and (max-width:376px) {
+    .mediacate__text {
+        display: none;
+    }
+
+    .mediacate__card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 19px;
+
+        &-img {
+            height: 190px !important;
+            cursor: pointer;
+
+        }
+
+
+        &-box1 {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 19px;
+
+            img {
+                cursor: pointer;
+            }
+
+        }
+
+        &-posi {
+            bottom: 1px !important;
+            left: 16px !important;
+            display: flex;
+            justify-content: space-between;
+            // align-items: center;
+            // gap: 287px;
+            padding: 0 35px 9px 9px;
+
+            img {
+                width: 45px;
+                height: 45px;
+            }
+
+            &--title {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 13px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-top: 5px;
+
+            }
+        }
+
+        &-bottom {
+            bottom: 7px;
+            left: 8px;
+            display: flex;
+            justify-content: space-between !important;
+            // gap: 76px; 
+            padding: 0 29px 0 5px;
+
+            img {
+                width: 22px !important;
+                height: 22px !important;
+            }
+
+            &--text {
+                color: #FFF;
+                font-family: "BBC Reith Sans";
+                font-size: 8px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-top: 3px;
+                margin-bottom: 8px;
+                // width: 147px;  
+            }
+
+            &--text1 {
+                color: #DDD;
+                font-family: "BBC Reith Sans";
+                font-size: 7px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+            }
+
+            &--title {
+                color: #FFF;
+                // font-family: "BBC Reith Sans";
+                font-size: 19px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                top: 26px;
+                left: 16px;
+            }
+
+            &--img {
+                padding: 7px 6.9px;
+            }
+
+            &--imgdiv {
+                width: 22px !important;
+                height: 22px !important;
+                border-radius: 2px;
+                background: rgba(255, 255, 255, 0.20);
+                backdrop-filter: blur(4px);
+
+            }
+        }
+    }
+
+    .mediacate__galle {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 9px;
+        row-gap: 40px;
+        margin: 10px 0 10px 0;
+
+        img {
+            cursor: pointer;
+        }
+
+        &--icon {
+            bottom: 5px;
+            right: 5px;
+            width: 18px;
+            height: 18px;
+
+        }
+    }
+
+    .mediacate__all-text {
+        color: #242424;
+        // font-family: "BBC Reith Sans"; 
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+    }
+
+    .mediacate__all {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        row-gap: 10px;
+        column-gap: 27px;
+        margin: 8px 0 9px 0;
+
+        img {
+            cursor: pointer;
+
+        }
+
+        &-box {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 49px 6px 6px 6.15px; 
+            img {
+                width: 22.243px !important;
+                height: 22.243px !important;
+            }
+
+            &-text {
+                // font-family: "BBC Reith Sans"; 
+                font-size: 5px;
+                font-style: normal;
+                line-height: normal;
+                margin-top: 4px;
+                margin-bottom: 0;
+                color: #ddd;
+            }
+
+        }
+    }
+}

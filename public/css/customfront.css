@@ -1,0 +1,148 @@
+/*
+
+[Custom Stylesheet]
+
+Project     : USNews - Multipurpose News, Magazine and Blog HTML5 Template
+Author      : themelooks.com
+Author URI  : https://themeforest.net/user/themelooks
+
+*/
+
+
+.prayer--times .nav {
+    margin-top: 15px;
+    color: #999;
+    text-align: center;
+    font-family: inherit;
+}
+
+.prayer--times .nav > li {
+    display: inline-block;
+    /*margin-right: 5px;*/
+}
+
+.prayer--times .nav .title {
+    font-weight: bold;
+    /*margin-right: 10px;*/
+    /*margin-top: 15px;*/
+}
+
+.prayer--times .nav .time {
+    color: #000;
+}
+
+.prayer--times .nav .active {
+    color: #9F1E20;
+    font-weight: bold;
+}
+
+.news--ticker {
+    margin-top: 15px;
+}
+
+
+/* styles.css */
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --image-filter-brightness-dark: 0.7; /* Adjust as needed */
+    --image-filter-brightness-light: 1;
+}
+
+img {
+    filter: brightness(var(--image-filter-brightness));
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.dark-mode {
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+}
+
+
+.mode-toggle {
+    height: 24px!important;
+    cursor: pointer;
+}
+
+
+/*#authorsopinions {*/
+
+/*    width: auto;*/
+/*    height: auto;*/
+
+
+/*}*/
+
+#authorsopinions .thumb {
+    max-width: 70px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    margin-right: 20px;
+    position: relative;
+    z-index: 0;
+}
+
+
+#authorsopinions .post--info-swiper .title .h4 {
+    margin: 0;
+    color: #222;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+}
+
+#authorsopinions .post--info-swiper .title .h4::before {
+    content: "\f10d";
+    margin-left: 1px;
+    margin-right: 9px;
+    color: #999;
+    font-family: "FontAwesome";
+}
+
+#authorsopinions .post--info-swiper .meta {
+    margin: 0 -7.5px;
+    color: #999;
+
+}
+
+
+#authorsopinions2{
+    height: 388px;
+}
+#authorsopinions2 .swiper-wrapper {
+    margin-top: 15px;
+    /*width: auto;*/
+    /*border: 1px solid red;*/
+}
+
+#authorsopinions2 .swiper-slide {
+    /*border: 1px solid red;*/
+
+}
+
+.video-swiper {
+    height: 100%;
+}
+
+.cat:hover{
+    background-color: #9F1E20;
+}
+
+.cat::before{
+    background-color: #9F1E20!important;
+}
+
+.play-video{
+    cursor: pointer;
+}
+
+.play-video:hover{
+    opacity: 0.7;
+}

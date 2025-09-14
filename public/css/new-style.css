@@ -1,0 +1,307 @@
+.main--breadcrumb {
+    margin-top: 10px;
+}
+.post--items.post--items-1 .vidio-post-item {
+    margin-top: 0px;
+}
+.widget--title {
+    border-top: unset;
+}
+.main--sidebar .widget + .widget {
+    margin-top: unset;
+}
+.post--item.swiper-slide-vidio .post--img .thumb, .post--item.post--layout-4 .post--img .thumb {
+    max-width: unset;
+}
+.swiper .swiper-wrapper .swiper-slide .thumb img{
+    width: 150px;
+}
+.list--widget-1  .post--items-3 .post--layout-3 .thumb img {
+    width: 124px;
+    height: 70px;
+}
+.swiper .swiper-wrapper .swiper-slide {
+    margin-bottom: 15px;!important;
+}
+.post--item.post--layout-3 .post--img .thumb, .post--item.post--layout-4 .post--img .thumb {
+    margin-right: 10px;
+}
+
+.post--items.post--items-5 > .nav > li + li {
+    margin-bottom: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.header--menu-links > li > a {
+    font-weight: 600;
+}
+.post--items-1 .post--title-larger .post--img .thumb img {
+    object-fit: cover;
+    width: 562px !important;
+    height: 390px !important;
+}
+
+.similar-information {
+    object-fit: cover;
+    width: 273px;
+    /*height: 187px;*/
+}
+.post--items-2 .similar-information .title .h4 a{
+    line-height: 16px!important;
+}
+.post--layout-1 .post--img .title .h4 a{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    line-height: 21px;
+}
+.main--content .post-audio{
+    width: 100%;
+    margin-top: 20px;
+}
+.post--items-5 {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+.list--widget-1  .post--items-3 .post--layout-3 .post--info .title .h4 a {
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+.post--items-5  .post--item .post--info .title .h4 a {
+    /*line-height: 1.3;*/
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.header--menu-links > li > a {
+    padding: 13px 15px 10px;
+    border-bottom: unset;
+}
+.header--navbar{
+    height: 30px;
+}
+.thumb:before{
+    z-index: 9;
+    background-color: rgba(0,0,0,.3);
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.widget--title {
+    padding: 5px 24px 5px 0;
+}
+.mobile-logo {
+    display: none;
+}
+.list--widget .post--items > .nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.post--items.post--items-3 > .nav > li + li, .post--items.post--items-4 > .nav > li > .nav > li + li, .post--items-title {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+.list--widget .post--items > .nav > li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.post--list .main--content .post--items .post--item .post--content p {
+    min-height: 45px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* From which line on to truncate */
+    overflow: hidden;
+}
+.main-content--section .main--content .list-title:first-letter {
+    text-transform: uppercase
+}
+.post-show .main--content .post--item .post--content iframe {
+    width: 100% !important;
+}
+
+.post-show .main--content .post--item .post--content a b {
+    color: #0012fb;
+}
+.post-show .main--content .post--item .post--content a {
+    color: #0012fb;
+}
+
+.header--search-form .btn {
+    padding: 10px 0 14px;
+}
+.header--topbar {
+    padding: 3px 0 0px;
+}
+.post--layout-1 .post--info  a:hover {
+    color: unset;
+}
+.post--item.post--title-large .post--info .title .h4 {
+    line-height: 20px!important;
+}
+
+/*-----------------*/
+.card-opinion-collection li {
+    width: 100%;
+    margin-bottom: 14px;
+}
+.card-opinion-collection__article {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+}
+.u-clickable-card {
+    position: relative;
+}
+li {
+    text-align: -webkit-match-parent;
+}
+.card-opinion-collection__article__avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin: 0 10px 10px 0;
+    position: relative;
+}
+img {
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+}
+.card-opinion-collection__article__avatar:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #fff;
+}
+.card-opinion-collection__article__content {
+    float: left;
+}
+.card-opinion-collection__article__link {
+    text-decoration: none;
+}
+.u-clickable-card__button:before, .u-clickable-card__link:before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    white-space: nowrap;
+    z-index: 1;
+}
+.card-opinion-collection__article__title {
+    width: 100%;
+    display: block;
+    font-weight: 700;
+    line-height: 1.18;
+    margin-bottom: 10px;
+    /*color: #000;*/
+}
+.card-opinion-collection__article__meta {
+    display: flex;
+}
+.card-opinion-collection__article__icon {
+    margin-right: 10px;
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    display: inline;
+}
+.icon--16 {
+    width: 16px;
+    height: 16px;
+}
+
+.post--items-1 .post--title-larger .post--img .thumb img {
+    object-fit: cover;
+    width: 562px !important;
+    height: 390px !important;
+}
+.post--layout-1 .post--img .thumb img {
+    /*object-fit: cover;*/
+    /*width: 273px;*/
+    /*aspect-ratio: 7/10;*/
+    /*height: 187px;*/
+}
+.post--layout-1 .post--img .thumb img {
+    object-fit: cover;
+    width: 273px;
+    height: 187px;
+}
+.post-list .post--img .thumb img {
+    object-fit: cover;
+    width: 230px;
+    height: 130px;
+}
+.post-show .main--content .sticky-content-inner .post--content, .post-show .main--content .sticky-content-inner .post--content p span,.post-show .main--content .sticky-content-inner .post--content span{
+    font-family: 'PT Serif', sans-serif;
+    font-weight: 500;
+    line-height: 31px!important;
+    font-size: 19px!important;
+}
+.post--items-2 .similar-information .post--content p, .post--items-2 .similar-information .post--content a{
+    line-height: 20px!important;
+    font-size: 15px!important;
+}
+@media (min-width: 769px) {
+    .card-opinion-collection li {
+        width: calc(50% - 20px);
+        margin-bottom: 20px;
+    }
+    .card-opinion-collection__article__title {
+        font-weight: 700;
+    }
+}
+@media screen and (min-width: 991px) {
+    .mobile-logo{
+        display: none!important;
+    }
+}
+.dark-mode .portfolio--item:hover .title .h4 .btn-link {
+    color: #da0000;
+}
+.dark-mode a:hover,
+.dark-mode a:focus,
+.dark-mode .btn-link:hover,
+.dark-mode .btn-link:focus,
+.dark-mode .btn-link.active,
+.dark-mode .nav li a:hover,
+.dark-mode .nav li.active > a,
+.dark-mode .nav li.active > a:hover,
+.dark-mode .nav li.active > a:focus,
+.dark-mode .nav li.open > a,
+.dark-mode .nav li.open > a:hover,
+.dark-mode .nav li.open > a:focus,
+.dark-mode .text--color-1,
+.dark-mode .comment--header .rating,
+.dark-mode .comment-respond .rating .br-widget a:after,
+.dark-mode .tags--widget.style--4 .nav > li > a:hover,
+.dark-mode .search--widget li label span:hover,
+.dark-mode .search--widget li label input:checked + span,
+.dark-mode .megamenu--posts > ul > li:hover > .title,
+.dark-mode .main--breadcrumb .breadcrumb .active,
+.dark-mode .page--title .h2 span,
+.dark-mode .post--items-title .h4,
+.dark-mode .product--item:hover .rating,
+.dark-mode .product--summery .rating .nav,
+.dark-mode .faq--item .panel-title a,
+.dark-mode .checkout--info .title .fa,
+.dark-mode .checkout--info .title a:hover,
+.dark-mode .checkout--info .title a.active,
+.dark-mode .checkout--billing-info .table tbody tr td span,
+.dark-mode .contact--cats .nav > li > a:hover .title .h5,
+.dark-mode .portfolio--item:hover .title .h4 .btn-link{
+    color: #da0000 !important;
+}

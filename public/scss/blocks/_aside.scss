@@ -1,0 +1,150 @@
+.aside {
+
+    &__wrapper {
+        display: flex !important;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__img-add {
+        width: 100%;
+        height: 216px;
+    }
+
+    &__left-spLink {
+        left: 5.797px;
+        bottom: 10px;
+        background: #FFF;
+        padding: 5.63px 13.511px;
+        color: #121212;
+        font-size: 11.594px;
+        text-transform: uppercase;
+    }
+
+    .card-body {
+        padding: 12px 5.8px;
+        gap: 18px;
+    }
+
+    .card-title {
+        color: #121212;
+        font-size: 19.324px;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+
+    .card-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+
+    &__left-sp {
+        overflow: hidden;
+        color: #A0A0A0;
+        text-overflow: ellipsis;
+        font-size: 15.459px;
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .aside {
+        // max-width: 171px;
+
+        &__wrapper {
+            gap: 10px;
+        }
+
+        &__img-add {
+            height: 86px;
+        }
+
+        &__left-spLink {
+            left: 2.877px;
+            bottom: 7px;
+            padding: 2.794px 6.705px;
+            color: #242424;
+            font-family: "BBC Reith Sans", sans-serif;
+            font-size: 5px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        &__left-inner img {
+            height: 97.8px;
+        }
+
+        .card-body {
+            padding: 5.7px 2.8px;
+            gap: 8.94px;
+        }
+
+        .card-title {
+            color: #242424;
+            font-size: 10px;
+        }
+
+        .card-text {
+            color: #242424;
+            font-size: 8px;
+            margin-bottom: 0;
+        }
+
+        &__left-sp {
+            font-size: 7px;
+        }
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .aside {
+        // max-width: 171px;
+
+        &__wrapper {
+            gap: 20px;
+        }
+
+        &__title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 32px;
+        }
+
+        &__img-add {
+            height: 178.082px;
+        }
+
+        &__left-spLink {
+            left: 6px;
+            bottom: 7px;
+            padding: 5.827px 13.984px;
+            color: #121212;
+            font-family: "IBM Plex Sans", sans-serif;
+            font-size: 12px;
+        }
+
+        &__left-inner img {
+            height: 204px;
+        }
+
+        .card-body {
+            padding: 12px 6px;
+            gap: 18.65px;
+        }
+
+        .card-title {
+            color: #121212;
+            font-size: 20px;
+        }
+
+        .card-text {
+            color: #121212;
+            font-size: 16px;
+        }
+
+        &__left-sp {
+            font-size: 16px;
+        }
+    }
+}

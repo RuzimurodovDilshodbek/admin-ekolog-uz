@@ -1,0 +1,78 @@
+.navigate {
+    margin-top: 108px;
+
+    .breadcrumb {
+        padding: 5.6px;
+        margin-bottom: 9px;
+
+        &-item {
+            position: relative;
+            padding-left: 8.96px;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            a {
+                color: #242424;
+                font-feature-settings: 'clig' off, 'liga' off;
+                font-family: "BBC Reith Sans", sans-serif;
+                font-size: 8px;
+                text-transform: capitalize;
+            }
+        }
+
+        .breadcrumb-item.active {
+            color: rgba(62, 50, 50, 0.50);
+            font-feature-settings: 'clig' off, 'liga' off;
+            font-family: "BBC Reith Sans", sans-serif;
+            font-size: 8px;
+            text-transform: capitalize;
+        }
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        position: absolute;
+        float: none;
+        padding-right: 0;
+        color: none;
+        content: " ";
+        background-image: url(../images/right_c.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 8.96px;
+        height: 6px;
+        top: 1px;
+        left: 1px;
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .navigate {
+
+        .breadcrumb {
+            padding: 10px;
+            margin-bottom: 17px;
+
+            &-item {
+                padding-left: 15px;
+
+
+                a {
+                    font-size: 12px;
+                }
+            }
+
+            .breadcrumb-item.active {
+                font-size: 12px;
+            }
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            width: 16px;
+            height: 12px;
+            top: 1px;
+            left: 0;
+        }
+    }
+}

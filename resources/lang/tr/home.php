@@ -1,0 +1,55 @@
+<?php
+return [
+  'намоз_вақтлари' => 'İbadet zamanları',
+    'Энг кўп ўқилган' => 'En çok okunan',
+    'Сайт тест режимида ишламоқда !' => 'Site test modunda!',
+    'Тавсия қилинган' => 'Tavsiye edilen',
+    'Сўровнома' => 'Anket',
+    'Овоз бериш' => 'Oylama',
+    'Реклама' => 'Reklam',
+    'Барча ҳуқуқлар ҳимояланган' => 'Her hakkı saklıdır',
+    'Давомини ўқиш...' => 'Devamını oku...',
+    'Кўришингиз мумкин бўлган' => 'Gördüğünüz gibi',
+    'Мавзуга алоқадор' => 'Konuyla ilgili',
+    'Фикрлар' => 'Görüşler',
+    'Қидирув' => 'Gözlemek',
+    'Маълумот мавжуд эмас' => 'Maglumat ýok',
+
+
+
+
+    'sections'                     => [
+        'Xabarlar'            => 'Haberler',
+        'Turkiy dunyo'       => 'Türk dünyası',
+        'Xalqaro hayot'      => 'Dünya gündemi',
+        'Zehniyat'           => 'Zihniyet',
+        'Islomiyat'          => 'İslâmiyet',
+        'Aqoid'              => 'Akait',
+        'Qur\'on'             => 'Kuran',
+        'Hadis'              => 'Hadis',
+        'Fiqh'              => 'Fıkıh',
+        'Ubudiyat'           => 'Übüdiyet',
+        'Shaxsiyat'          => 'Şahsiyet',
+        'Tarix'              => 'Tarih',
+        'Siyrat & Islom tarixi' => 'Siret & İslam Tarihi',
+        'Jahon tarixi'       => 'Dünya Tarihi',
+        'Adabiyot'           => 'Edebiyat',
+        'Nasr'               => 'Nesir',
+        'Nazm'               => 'Şiir',
+        'Adabiy tahlil'      => 'Edebi anali',
+        'Jamiyat'            => 'Toplum',
+        'Azonli ayol'        => 'Ezanlı Kadın',
+        'Azon bolasi'      => 'Ezan Çocuğu',
+
+
+        'Ehson'              => 'Bağış',
+        'Tazkiya'            => 'Tazkiya',
+        'Azon yoshlari'      => 'Ezan gençliği',
+        'Bog\'lanish'        => 'Bağlantı',
+        'Tarixiyot'          => 'Tarih',
+        'Siyrat'             => 'Siret ',
+        'Islom tarixi'       => 'İslam Tarihi',
+        'O\'zbekiston tarixi' => 'Özbekistan Tarihi',
+        'O\'zbekistion tarixi' => 'Özbekistan Tarihi',
+    ],
+];
