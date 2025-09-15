@@ -19,12 +19,8 @@ class StorePostRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'title_kr' => [
-                'string',
-                'required',
-            ],
             'title_uz' => [
-                'nullable',
+                'required',
                 'string',
                 function ($attribute, $value, $fail) use ($request) {
                     if (in_array('uz', $request->langs) && empty($value)) {
@@ -50,31 +46,18 @@ class StorePostRequest extends FormRequest
                     }
                 },
             ],
-            'title_tr' => [
-                'nullable',
-                'string',
-                function ($attribute, $value, $fail) use ($request) {
-                    if (in_array('tr', $request->langs) && empty($value)) {
-                        $fail(trans('validation.required', ['attribute' => trans('validation.attributes.title_tr')]));
-                    }
-                },
-            ],
             'status' => [
                 'string',
                 'required',
             ],
             'description_uz' => [
-                'nullable',
+                'required',
                 'string',
                 function ($attribute, $value, $fail) use ($request) {
                     if (in_array('uz', $request->langs) && empty($value)) {
                         $fail(trans('validation.required', ['attribute' => trans('validation.attributes.description_uz')]));
                     }
                 },
-            ],
-            'description_kr' => [
-                'string',
-                'required',
             ],
             'description_ru' => [
                 'nullable',
@@ -94,23 +77,11 @@ class StorePostRequest extends FormRequest
                     }
                 },
             ],
-            'description_tr' => [
-                'nullable',
-                'string',
-                function ($attribute, $value, $fail) use ($request) {
-                    if (in_array('tr', $request->langs) && empty($value)) {
-                        $fail(trans('validation.required', ['attribute' => trans('validation.attributes.description_tr')]));
-                    }
-                },
-            ],
             'image_description_uz' => [
                 'string',
                 'nullable',
             ],
-            'image_description_kr' => [
-                'string',
-                'nullable',
-            ],
+
             'image_description_ru' => [
                 'string',
                 'nullable',
@@ -119,10 +90,7 @@ class StorePostRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'image_description_tr' => [
-                'string',
-                'nullable',
-            ],
+
             'image_base64' => [
                 'string',
                 'required',
@@ -131,18 +99,13 @@ class StorePostRequest extends FormRequest
                 'nullable',
             ],
             'content_uz' => [
-                'nullable',
+                'required',
                 'string',
                 function ($attribute, $value, $fail) use ($request) {
                     if (in_array('uz', $request->langs) && empty($value)) {
                         $fail(trans('validation.required', ['attribute' => trans('validation.attributes.content_uz')]));
                     }
                 },
-            ],
-            'content_kr' => [
-                'nullable',
-                'string',
-                'required',
             ],
             'content_ru' => [
                 'nullable',
@@ -162,15 +125,7 @@ class StorePostRequest extends FormRequest
                     }
                 },
             ],
-            'content_tr' => [
-                'nullable',
-                'string',
-                function ($attribute, $value, $fail) use ($request) {
-                    if (in_array('tr', $request->langs) && empty($value)) {
-                        $fail(trans('validation.required', ['attribute' => trans('validation.attributes.content_tr')]));
-                    }
-                },
-            ],
+
             'section_ids' => [
                 'array',
                 'required',

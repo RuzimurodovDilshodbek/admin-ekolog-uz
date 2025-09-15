@@ -28,7 +28,7 @@
                             {{ trans('cruds.section.fields.parent') }}
                         </th>
                         <td>
-                            {{ $section->parent->title ?? '' }}
+                            {{ $section->parent->title_uz ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +36,7 @@
                             {{ trans('cruds.section.fields.slug') }}
                         </th>
                         <td>
-                            {{ $section->slug }}
+                            {{ $section->slug_uz }}
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                             {{ trans('cruds.section.fields.title') }}
                         </th>
                         <td>
-                            {{ $section->title }}
+                            {{ $section->title_uz }}
                         </td>
                     </tr>
                     <tr>

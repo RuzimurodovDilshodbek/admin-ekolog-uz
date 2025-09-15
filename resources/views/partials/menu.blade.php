@@ -86,31 +86,7 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 1]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 1 || Request::get('section_id') == 1) ? "active" : "" }}">
                             <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Янгиликлар</p>
-                        </a>
-                    </li>
-                @endcan
-                @can('section_access')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.postGetSectionId',['id' => 2]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 2 || Request::get('section_id') == 2) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Таълим</p>
-                        </a>
-                    </li>
-                @endcan
-                @can('section_access')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.postGetSectionId',['id' => 3]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 3 || Request::get('section_id') == 3) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Саломатлик</p>
-                        </a>
-                    </li>
-                @endcan
-                @can('section_access')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.postGetSectionId',['id' => 4]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 4 || Request::get('section_id') == 4) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Ҳуқуқий клиника</p>
+                            <p>Xabarlar</p>
                         </a>
                     </li>
                 @endcan
@@ -118,35 +94,35 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 5]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 5 || Request::get('section_id') == 5) ? "active" : "" }}">
                             <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Аччиқтош</p>
+                            <p>Eko muammo</p>
                         </a>
                     </li>
                 @endcan
                 @can('section_access')
                     <li class="nav-item">
-                        <a href="{{ route('admin.postGetSectionId',['id' => 6]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 6 || Request::get('section_id') == 6) ? "active" : "" }}">
+                        <a href="{{ route('admin.postGetSectionId',['id' => 14]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 14 || Request::get('section_id') == 14) ? "active" : "" }}">
                             <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Фойдали</p>
+                            <p>Eko volontiyorlik</p>
                         </a>
                     </li>
                 @endcan
                 @can('section_access')
                     <li class="nav-item">
-                        <a href="{{ route('admin.postGetSectionId',['id' => 7]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 7  || Request::get('section_id') == 7) ? "active" : "" }}">
+                        <a href="{{ route('admin.postGetSectionId',['id' => 19]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 19 || Request::get('section_id') == 19) ? "active" : "" }}">
                             <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Медиа</p>
+                            <p>Murojaatlar</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('section_access')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.postGetSectionId',['id' => 22]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 22 || Request::get('section_id') == 22) ? "active" : "" }}">
+                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <p>Biz haqimizda</p>
                         </a>
                     </li>
                 @endcan
 
-                @can('section_access')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.postGetSectionId',['id' => 8]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 8  || Request::get('section_id') == 8) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
-                            <p>Минбар</p>
-                        </a>
-                    </li>
-                @endcan
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route("admin.sections.index") }}" class="nav-link {{ request()->is("admin/sections") || request()->is("admin/sections/*") ? "active" : "" }}">

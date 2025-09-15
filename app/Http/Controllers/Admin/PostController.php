@@ -83,14 +83,14 @@ class PostController extends Controller
         if ($id = $request->id) {
             $section = Section::query()->where('id',$id)->first();
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$id)->pluck('title_kr', 'id');
+            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$id)->pluck('title_uz', 'id');
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_kr', 'id');
+            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
         }
         abort_if(Gate::denies('post_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tags = Tag::pluck('title_kr', 'id');
+        $tags = Tag::pluck('title_uz', 'id');
 
         $tutors = Tutor::pluck('firstname', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -114,18 +114,18 @@ class PostController extends Controller
             $audiopath =$Fileaudio->storeAs('public/audio/' . $audio_name);
         }
 
-        if($request->title_kr && (!$request->title_uz)) {
+        if($request->title_uz) {
             foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'kr' && in_array($value_local, $request->langs)) {
-                    $to_latin = transliterateLatin($request->title_kr);
+                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+                    $to_latin = transliterateLatin($request->title_uz);
                     $request['title_' . $value_local] = trsTitle($to_latin, $value_local);
                 }
             };
         }
-        if($request->description_kr && (!$request->title_uz)) {
+        if($request->description_uz) {
             foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'kr' && in_array($value_local, $request->langs)) {
-                    $to_latin = transliterateLatin($request->description_kr);
+                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+                    $to_latin = transliterateLatin($request->description_uzr);
                     $request['description_' . $value_local] = trsTitle($to_latin, $value_local);
                 }
             };
@@ -136,30 +136,22 @@ class PostController extends Controller
             'recommended' => $request->recommended,
 
             'title_uz' => $request->title_uz,
-            'title_kr' => $request->title_kr,
             'title_ru' => $request->title_ru,
             'title_en' => $request->title_en,
             'audio_file' => $audio_name,
-            'title_tr' => $request->title_tr,
 
             'description_uz' => $request->description_uz,
-            'description_kr' => $request->description_kr,
             'description_ru' => $request->description_ru,
             'description_en' => $request->description_en,
-            'description_tr' => $request->description_tr,
 
 
             'content_uz' => $request->content_uz,
-            'content_kr' => $request->content_kr,
             'content_ru' => $request->content_ru,
             'content_en' => $request->content_en,
-            'content_tr' => $request->content_tr,
 
             'image_description_uz' => $request->image_description_uz,
-            'image_description_kr' => $request->image_description_kr,
             'image_description_ru' => $request->image_description_ru,
             'image_description_en' => $request->image_description_en,
-            'image_description_tr' => $request->image_description_tr,
 
             'section_ids' => $request->section_ids,
             'langs' => $request->langs,
@@ -170,7 +162,7 @@ class PostController extends Controller
         $tags = $request->input('tags', []);
         foreach ($tags as $index => $tag) {
             if ( !is_numeric($tag)) {
-                $tag_id = Tag::query()->where('title_kr','like',$tag)->first()->id;
+                $tag_id = Tag::query()->where('title_uz','like',$tag)->first()->id;
                 $tags[$index] = $tag_id;
             }
         }
@@ -269,15 +261,15 @@ class PostController extends Controller
         $post = Post::query()->where('id',$request->id)->first();
         if ($section_id = $request->section_id) {
             $section_parent_ids = Section::where('parent_id',$section_id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$section_id)->pluck('title_kr', 'id');
+            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$section_id)->pluck('title_uz', 'id');
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_kr', 'id');
+            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
         }
 
         $tutors = Tutor::pluck('firstname', 'id');
 
-        $tags = Tag::pluck('title_kr', 'id');
+        $tags = Tag::pluck('title_uz', 'id');
 
         $post->load('tags');
         $catTab = 0;
@@ -295,15 +287,15 @@ class PostController extends Controller
         if ($id = $request->id) {
             $section = Section::query()->where('id',$id);
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$id)->pluck('title_kr', 'id');
+            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$id)->pluck('title_uz', 'id');
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_kr', 'id');
+            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
         }
 
         $tutors = Tutor::pluck('firstname', 'id');
 
-        $tags = Tag::pluck('title_kr', 'id');
+        $tags = Tag::pluck('title_uz', 'id');
 
         $post->load('tags');
 
@@ -343,7 +335,7 @@ class PostController extends Controller
         $tags = $request->input('tags', []);
         foreach ($tags as $index => $tag) {
             if ( !is_numeric($tag)) {
-                $tag_id = Tag::query()->where('title_kr','like',$tag)->first()->id;
+                $tag_id = Tag::query()->where('title_uzr','like',$tag)->first()->id;
                 $tags[$index] = $tag_id;
             }
         }

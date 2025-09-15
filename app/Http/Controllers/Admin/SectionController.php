@@ -25,7 +25,7 @@ class SectionController extends Controller
     {
         abort_if(Gate::denies('section_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $parents = Section::pluck('title_kr', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $parents = Section::whereNull('parent_id')->pluck('title_uz', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $catTab = 0;
 
@@ -45,7 +45,7 @@ class SectionController extends Controller
     {
         abort_if(Gate::denies('section_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $parents = Section::pluck('title_kr', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $parents = Section::whereNull('parent_id')->pluck('title_uz', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $section->load('parent');
 

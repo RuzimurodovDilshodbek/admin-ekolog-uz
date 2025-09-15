@@ -100,7 +100,7 @@
                     @foreach (config('app.locales') as $key_title => $item_title)
                         <div class="tab-pane {{ $catTab == $key_title ? 'active' : '' }}" id="tabdescription{{ $key_title }}" style="width: 100%">
                             <div class="form-group">
-                                <label for="description_{{ $item_title }}">{{ trans('cruds.post.fields.description') }}({{ $item_title === 'kr' ? 'ўз' : $item_title }})</label>
+                                <label for="description_{{ $item_title }}">{{'Tavsifi' }}({{ $item_title === 'kr' ? 'ўз' : $item_title }})</label>
                                 <input
                                     class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                     type="text" name="description_{{ $item_title }}"
@@ -183,18 +183,6 @@
                     <input type="file" accept="audio/*" name="audio_file" class="audio_file">
                 </div>
 
-                <div class="form-group">
-                    <label for="tutor_id">Муаллифни танланг</label>
-                    <select class="form-control select2 {{ $errors->has('tutor') ? 'is-invalid' : '' }}" name="tutor_id" id="tutor_id">
-                        @foreach($tutors as $id => $entry)
-                            <option value="{{ $id }}" {{ old('tutor_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has('tutor'))
-                        <span class="text-danger">{{ $errors->first('tutor') }}</span>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.post.fields.tutor_helper') }}</span>
-                </div>
 
                 <div class="form-group">
                     <label for="tags">{{ trans('cruds.post.fields.tags') }}</label>
@@ -218,28 +206,6 @@
                             <input type="hidden" name="telegram_send" value="0">
                             <input class="form-check-input" type="checkbox" name="telegram_send" id="telegram_send" value="1" checked>
                             <label class="form-check-label" for="telegram_send">"Telegram"га чиқсин</label>
-                        </div>
-                        @if($errors->has('recommended'))
-                            <span class="text-danger">{{ $errors->first('recommended') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
-                    </div>
-                    <div class="form-group ml-5">
-                        <div class="form-check {{ $errors->has('facebook_send') ? 'is-invalid' : '' }}">
-                            <input type="hidden" name="facebook_send" value="0">
-                            <input class="form-check-input" type="checkbox" name="facebook_send" id="facebook_send" value="1">
-                            <label class="form-check-label" for="facebook_send">"Facebook"га чиқсин</label>
-                        </div>
-                        @if($errors->has('recommended'))
-                            <span class="text-danger">{{ $errors->first('recommended') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
-                    </div>
-                    <div class="form-group ml-5">
-                        <div class="form-check {{ $errors->has('twitter_send') ? 'is-invalid' : '' }}">
-                            <input type="hidden" name="twitter_send" value="0">
-                            <input class="form-check-input" type="checkbox" name="twitter_send" id="twitter_send" value="1">
-                            <label class="form-check-label" for="twitter_send">"Twitter"га чиқсин</label>
                         </div>
                         @if($errors->has('recommended'))
                             <span class="text-danger">{{ $errors->first('recommended') }}</span>
@@ -762,28 +728,28 @@
                     });
                 }
             }
-            $('#title_kr').on('blur', function () {
+            $('#title_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
                     translateTitle('title', translatedValue)
                 }
             });
-            $('#description_kr').on('blur', function () {
+            $('#description_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
                     translateTitle('description', translatedValue)
                 }
             });
-            $('#image_description_kr').on('blur', function () {
+            $('#image_description_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
                     translateTitle('image_description', translatedValue)
                 }
             });
-            $('#tab_kr').find('.note-editable.card-block').on('blur', function () {
+            $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
                 let e = $(this).clone();
                 const element = e[0];
                 if(element.innerText.trim()) {
@@ -792,26 +758,26 @@
             });
             $('#postCreateForm')[0].addEventListener('submit', async (e) => {
                 e.preventDefault();
-                if($('#title_kr')[0].value && !$('#title_uz')[0].value) {
-                    let inputValue = $('#title_kr')[0].value;
+                if($('#title_uz')[0].value {
+                    let inputValue = $('#title_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         await translateTitle('title', translatedValue)
                     }
                 }
-                if($('#description_kr')[0].value && (!$('#description_uz')[0].value || !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
-                    let inputValue = $('#description_kr')[0].value;
+                if($('#description_uz')[0].value && ( !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
+                    let inputValue = $('#description_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         await translateTitle('description', translatedValue)
                     }
                 }
                 if (
-                    $('#tab_kr').find('.note-editable.card-block')[0].innerText &&
-                    (!$('#tab_uz').find('.note-editable.card-block')[0].innerText || !$('#tab_ru').find('.note-editable.card-block')[0].innerText || !$('#tab_en').find('.note-editable.card-block')[0].innerText || !$('#tab_tr').find('.note-editable.card-block')[0].innerText)
+                    $('#tab_uz').find('.note-editable.card-block')[0].innerText &&
+                    (!$('#tab_kr').find('.note-editable.card-block')[0].innerText || !$('#tab_ru').find('.note-editable.card-block')[0].innerText || !$('#tab_en').find('.note-editable.card-block')[0].innerText || !$('#tab_tr').find('.note-editable.card-block')[0].innerText)
                 ) {
                     // let el = $(this).clone();
-                    let el = $('#tab_kr').find('.note-editable.card-block').clone();
+                    let el = $('#tab_uz').find('.note-editable.card-block').clone();
                     // console.log($('#tab_kr').find('.summernote'));
                     const element = el[0];
                     await translateContent(element);

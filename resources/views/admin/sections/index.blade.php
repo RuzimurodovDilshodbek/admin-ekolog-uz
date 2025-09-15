@@ -58,13 +58,13 @@
                                 {{ $section->id ?? '' }}
                             </td>
                             <td>
-                                {{ $section->parent->title ?? '' }}
+                                {{ $section->parent->title_uz ?? '' }}
                             </td>
                             <td>
-                                {{ $section->slug ?? '' }}
+                                {{ $section->slug_uz ?? '' }}
                             </td>
                             <td>
-                                {{ $section->title ?? '' }}
+                                {{ $section->title_uz ?? '' }}
                             </td>
                             <td>
                                 <span style="display:none">{{ $section->status ?? '' }}</span>
@@ -155,7 +155,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

@@ -129,7 +129,7 @@
                     },
                     success: function (response) {
                         locales.forEach((locale, index) => {
-                            if(locale !== 'kr') {
+                            if(locale !== 'uz') {
                                 $('#' + element + '_' + locale).val(response.data[index-1]);
                             }
                         })
@@ -139,7 +139,7 @@
                     }
                 });
             }
-            $('#title_kr').on('blur', function () {
+            $('#title_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
