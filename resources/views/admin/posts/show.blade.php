@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.posts.index') }}">
+                <a  class="btn btn-default" href="{{ url()->previous() }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -28,7 +28,7 @@
                             {{ trans('cruds.post.fields.slug') }}
                         </th>
                         <td>
-                            {{ $post->slug_kr }}
+                            {{ $post->slug_uz }}
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +52,7 @@
                             {{ trans('cruds.post.fields.title') }}
                         </th>
                         <td>
-                            {{ $post->title }}
+                            {{ $post->title_uz }}
                         </td>
                     </tr>
                     <tr>
@@ -98,8 +98,8 @@
                                     Your browser does not support the audio element.
                                 </audio>
                             @endif
-                        </td> 
-                    </tr>   
+                        </td>
+                    </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.post.fields.tags') }}

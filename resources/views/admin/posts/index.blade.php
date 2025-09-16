@@ -37,10 +37,10 @@
                             {{ trans('cruds.post.fields.status') }}
                         </th>
                         <th>
-                            {{ trans('cruds.post.fields.recommended') }}
+                           Tavsiya etiladi
                         </th>
                         <th>
-                            {{ trans('cruds.post.fields.views') }}
+                            Ko'rishlar soni
                         </th>
                         <th>
                             {{ trans('cruds.post.fields.publish_date') }}

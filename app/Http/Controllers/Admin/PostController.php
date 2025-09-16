@@ -83,7 +83,7 @@ class PostController extends Controller
         if ($id = $request->id) {
             $section = Section::query()->where('id',$id)->first();
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$id)->pluck('title_uz', 'id');
+            $sections = Section::whereIn('id',$section_parent_ids)->pluck('title_uz', 'id');
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
             $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
@@ -162,8 +162,13 @@ class PostController extends Controller
         $tags = $request->input('tags', []);
         foreach ($tags as $index => $tag) {
             if ( !is_numeric($tag)) {
-                $tag_id = Tag::query()->where('title_uz','like',$tag)->first()->id;
-                $tags[$index] = $tag_id;
+                $tagModel = Tag::query()->where('title_uz','like',$tag)->first()->id;
+                if ($tagModel) {
+                    $tags[$index] = $tagModel->id;
+                } else {
+                    // kerak bo‘lsa yangi tag yaratish yoki xatolikni oldini olish
+                    $tags[$index] = null;
+                }
             }
         }
 
@@ -261,7 +266,7 @@ class PostController extends Controller
         $post = Post::query()->where('id',$request->id)->first();
         if ($section_id = $request->section_id) {
             $section_parent_ids = Section::where('parent_id',$section_id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$section_id)->pluck('title_uz', 'id');
+            $sections = Section::whereIn('id',$section_parent_ids)->pluck('title_uz', 'id');
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
             $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
@@ -353,6 +358,7 @@ class PostController extends Controller
 
         if ($post->section_ids){
             return redirect()->route('admin.postGetSectionId',['id' => $post->section_ids[0]]);
+//            return  redirect()->back();
         } else{
             return redirect()->route('admin.posts.index');
         }

@@ -100,7 +100,7 @@
                 @foreach (config('app.locales') as $key_title => $item_title)
                     <div class="tab-pane {{ $catTab == $key_title ? 'active' : '' }}" id="tabdescription{{ $key_title }}" style="width: 100%">
                         <div class="form-group">
-                            <label for="description_{{ $item_title }}">{{ trans('cruds.post.fields.description') }}({{ $item_title }})</label>
+                            <label for="description_{{ $item_title }}">{{ 'Tavsifi' }}({{ $item_title }})</label>
                             <input
                                 class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                 type="text" name="description_{{ $item_title }}"
@@ -181,18 +181,7 @@
                 <label for="audio_file">{{ trans('cruds.post.fields.audio_file') }}</label>
                 <input type="file" accept="audio/*" name="audio_file" class="audio_file">
             </div>
-            <div class="form-group">
-                <label for="tutor_id">Muharrorni tanlang</label>
-                <select class="form-control select2 {{ $errors->has('tutor') ? 'is-invalid' : '' }}" name="tutor_id" id="tutor_id">
-                    <option value disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach($tutors as $id => $entry)
-                        <option value="{{ $id }}" {{ old('tutor_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('tutor'))
-                    <span class="text-danger">{{ $errors->first('tutor') }}</span>
-                @endif
-            </div>
+
 
             <div class="form-group">
                 <label for="tags">{{ trans('cruds.post.fields.tags') }}</label>
@@ -223,28 +212,7 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
                     </div>
-                    <div class="form-group ml-5">
-                        <div class="form-check {{ $errors->has('facebook_send') ? 'is-invalid' : '' }}">
-                            <input type="hidden" name="facebook_send" value="0">
-                            <input class="form-check-input" type="checkbox" name="facebook_send" id="facebook_send" value="1" {{ ($postNetwork->facebook_send=="1")? "checked" : "" }}>
-                            <label class="form-check-label" for="facebook_send">"Facebook"га чиқсин</label>
-                        </div>
-                        @if($errors->has('recommended'))
-                            <span class="text-danger">{{ $errors->first('recommended') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
-                    </div>
-                    <div class="form-group ml-5">
-                        <div class="form-check {{ $errors->has('twitter_send') ? 'is-invalid' : '' }}">
-                            <input type="hidden" name="twitter_send" value="0">
-                            <input class="form-check-input" type="checkbox" name="twitter_send" id="twitter_send" value="1" {{ ($postNetwork->twitter_send=="1")? "checked" : "" }}>
-                            <label class="form-check-label" for="twitter_send">"Twitter"га чиқсин</label>
-                        </div>
-                        @if($errors->has('recommended'))
-                            <span class="text-danger">{{ $errors->first('recommended') }}</span>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
-                    </div>
+
                 </div>
             @endif
             <div class="form-group">
@@ -744,7 +712,7 @@
                     });
                 }
             }
-            $('#title_kr').on('blur', function () {
+            $('#title_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
@@ -752,7 +720,7 @@
                 }
             });
 
-            $('#description_kr').on('blur', function () {
+            $('#description_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
@@ -760,7 +728,7 @@
                 }
             });
 
-            $('#image_description_kr').on('blur', function () {
+            $('#image_description_uz').on('blur', function () {
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
@@ -780,9 +748,8 @@
                 let one = true;
                 let two = true;
                 let tree = true;
-                console.log(!$('#title_uz')[0].value, !$('#title_en')[0].value);
-                if($('#title_kr')[0].value && (!$('#title_uz')[0].value || !$('#title_ru')[0].value || !$('#title_en')[0].value || !$('#title_ru')[0].value)) {
-                    let inputValue = $('#title_kr')[0].value;
+                if($('#title_uz')[0].value && (!$('#title_ru')[0].value || !$('#title_en')[0].value || !$('#title_ru')[0].value)) {
+                    let inputValue = $('#title_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         one = false;
@@ -791,8 +758,8 @@
                         console.log('asnc1')
                     }
                 }
-                if($('#description_kr')[0].value && (!$('#description_uz')[0].value || !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
-                    let inputValue = $('#description_kr')[0].value;
+                if($('#description_uz')[0].value && ( !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
+                    let inputValue = $('#description_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         two = false;
@@ -801,18 +768,18 @@
                         console.log('asnc2')
                     }
                 }
-                if($('#image_description_kr')[0].value && (!$('#image_description_uz')[0].value || !$('#image_description_ru')[0].value || !$('#image_description_en')[0].value || !$('#image_description_ru')[0].value)) {
-                    let inputValue = $('#image_description_kr')[0].value;
+                if($('#image_description_uz')[0].value && ( !$('#image_description_ru')[0].value || !$('#image_description_en')[0].value || !$('#image_description_ru')[0].value)) {
+                    let inputValue = $('#image_description_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         await translate('image_description', translatedValue)
                     }
                 }
                 if (
-                    $('#tab_kr').find('.note-editable.card-block')[0].innerText &&
-                    (!$('#tab_uz').find('.note-editable.card-block')[0].innerText || !$('#tab_ru').find('.note-editable.card-block')[0].innerText || !$('#tab_en').find('.note-editable.card-block')[0].innerText || !$('#tab_tr').find('.note-editable.card-block')[0].innerText)
+                    $('#tab_uz').find('.note-editable.card-block')[0].innerText &&
+                    (!$('#tab_ru').find('.note-editable.card-block')[0].innerText || !$('#tab_en').find('.note-editable.card-block')[0].innerText)
                 ) {
-                    let el = $('#tab_kr').find('.note-editable.card-block').clone();
+                    let el = $('#tab_uz').find('.note-editable.card-block').clone();
                     const element = el[0];
                     await translateContent(element);
                     console.log('asnc3')
