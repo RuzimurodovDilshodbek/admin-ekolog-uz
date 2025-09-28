@@ -7,12 +7,12 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div>
-                            Админлар учун панел
+                            Adminlar uchun panel
                         </div>
                         <div>
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" {{ $site_status == 0 ? 'checked' : null }}  id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Сайтни активсиз ҳолатга ўтказиш</label>
+                                <label class="custom-control-label" for="customSwitch1">Saytni aktivsiz holatga o‘tkazish</label>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         </div>
                     @endif
 
-                        Ассалому алайкум. Админ панелга хуш келибсиз
+                        Assalomu alaykum. Admin panelga xush kelibsiz
                 </div>
             </div>
         </div>

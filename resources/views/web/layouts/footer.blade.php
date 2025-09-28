@@ -89,7 +89,7 @@
 
         <div style="margin-top: 20px;">
             <p class="footer__co-text text-center fw-normal darkMode-sp">
-                © 2022-2023 Bolalar Olami. Barcha huquqlar himoyalangan.
+                © 2025-2026 Ekolog Uz. Barcha huquqlar himoyalangan.
             </p>
         </div>
     </div>

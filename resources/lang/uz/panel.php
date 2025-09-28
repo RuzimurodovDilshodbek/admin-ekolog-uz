@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'site_title' => 'Bolalar olami',
+    'site_title' => 'Ekolog uz',
 
 ];
