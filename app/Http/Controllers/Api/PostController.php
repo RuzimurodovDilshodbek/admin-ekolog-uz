@@ -14,7 +14,8 @@ class PostController extends Controller
         $query = Post::query();
         // agar section_id yuborilsa filterlash
         if ($request->has('section_id')) {
-            $query->whereJsonContains('section_ids', $request->section_id);
+//            dd($request->all());
+            $query->whereJsonContains('section_ids', (int) $request->section_id);
         }
 
         $posts = $query->latest()->get();
