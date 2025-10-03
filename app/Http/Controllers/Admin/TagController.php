@@ -105,8 +105,7 @@ class TagController extends Controller
                     'title_uz' => $result['title_uz'],
                     'title_kr' => $data,
                     'title_ru' => $result['title_ru'],
-                    'title_en' => $result['title_en'],
-                    'title_tr' => $result['title_tr']
+                    'title_en' => $result['title_en']
                 ]);
                 return response()->json(['data' => $tag]);
             }
