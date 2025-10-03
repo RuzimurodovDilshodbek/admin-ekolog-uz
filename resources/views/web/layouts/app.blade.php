@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ==== Document Title ==== -->
-    <title>@yield('title') | Bolalar olami</title>
+    <title>@yield('title') | Ekolog uz</title>
 
     <!-- ==== Document Meta ==== -->
     <meta name="author" content="">
@@ -18,7 +18,7 @@
     <meta property="og:type" content="@yield('og_type')" />
     <meta property="og:locale" content="{{ app()->getLocale()  }}" />
     <meta property="og:locale:alternate" content="uz" />
-    <meta property="og:site_name" content="Bolalar olami" />
+    <meta property="og:site_name" content="Ekolog uz" />
     <meta property="og:image" content="@yield('og_image')" />
 
     <!-- ==== Favicons ==== -->

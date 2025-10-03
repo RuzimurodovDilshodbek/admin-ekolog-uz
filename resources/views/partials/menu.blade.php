@@ -27,7 +27,7 @@
                         <i class="fas fa-fw fa-tachometer-alt nav-icon">
                         </i>
                         <p>
-                            {{ trans('global.dashboard') }}
+                            Bosh sahifa
                         </p>
                     </a>
                 </li>
@@ -38,7 +38,7 @@
 
                             </i>
                             <p>
-                                {{ trans('cruds.userManagement.title') }}
+                               Foydalanuvchilar
                                 <i class="right fa fa-fw fa-angle-left nav-icon"></i>
                             </p>
                         </a>
@@ -50,7 +50,7 @@
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.permission.title') }}
+                                           Ruxsatlar
                                         </p>
                                     </a>
                                 </li>
@@ -62,7 +62,7 @@
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.role.title') }}
+                                           Rol
                                         </p>
                                     </a>
                                 </li>
@@ -74,7 +74,7 @@
 
                                         </i>
                                         <p>
-                                            {{ trans('cruds.user.title') }}
+                                            Userlar
                                         </p>
                                     </a>
                                 </li>
@@ -133,26 +133,26 @@
                         </a>
                     </li>
                 @endcan
-                @can('tag_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.tags.index") }}" class="nav-link {{ request()->is("admin/tags") || request()->is("admin/tags/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs"></i>
-                            <p>
-                                {{ trans('cruds.tag.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('tutor_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.tutors.index") }}" class="nav-link {{ request()->is("admin/tutors") || request()->is("admin/tutors/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs"></i>
-                            <p>
-                                {{ trans('cruds.tutor.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+{{--                @can('tag_access')--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.tags.index") }}" class="nav-link {{ request()->is("admin/tags") || request()->is("admin/tags/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs"></i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.tag.title') }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
+{{--                @can('tutor_access')--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.tutors.index") }}" class="nav-link {{ request()->is("admin/tutors") || request()->is("admin/tutors/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs"></i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.tutor.title') }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
 {{--                @can('tutor_opinion_access')--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route("admin.tutor-opinions.index") }}" class="nav-link {{ request()->is("admin/tutor-opinions") || request()->is("admin/tutor-opinions/*") ? "active" : "" }}">--}}
@@ -165,18 +165,18 @@
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                @endcan--}}
-                @can('tutor_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.quotations.index") }}" class="nav-link {{ request()->is("admin/quotation") || request()->is("admin/quotation/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+{{--                @can('tutor_access')--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.quotations.index") }}" class="nav-link {{ request()->is("admin/quotation") || request()->is("admin/quotation/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                            </i>
-                            <p>
-                                {{ 'Цитаталар' }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+{{--                            </i>--}}
+{{--                            <p>--}}
+{{--                                {{ 'Цитаталар' }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
                 @can('video_access')
                     <li class="nav-item">
                         <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is("admin/vidios") || request()->is("admin/vidios/*") ? "active" : "" }}">
@@ -184,23 +184,23 @@
 
                             </i>
                             <p>
-                                {{ trans('cruds.video.title') }}
+                                Videolar
                             </p>
                         </a>
                     </li>
                 @endcan
-                @can('banner_post_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.banner-posts.index") }}" class="nav-link {{ request()->is("admin/banner-posts") || request()->is("admin/banner-posts/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+{{--                @can('banner_post_access')--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.banner-posts.index") }}" class="nav-link {{ request()->is("admin/banner-posts") || request()->is("admin/banner-posts/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                            </i>
-                            <p>
-                                {{ trans('cruds.bannerPost.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+{{--                            </i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.bannerPost.title') }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
 {{--                @can('dailiy_verse_access')--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route("admin.dailiy-verses.index") }}" class="nav-link {{ request()->is("admin/dailiy-verses") || request()->is("admin/dailiy-verses/*") ? "active" : "" }}">--}}
@@ -213,57 +213,57 @@
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                @endcan--}}
-                @can('poll_ovoz_berish_access')
-                    <li class="nav-item has-treeview {{ request()->is("admin/polls*") ? "menu-open" : "" }} {{ request()->is("admin/poll-variants*") ? "menu-open" : "" }} {{ request()->is("admin/poll-votes*") ? "menu-open" : "" }}">
-                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/polls*") ? "active" : "" }} {{ request()->is("admin/poll-variants*") ? "active" : "" }} {{ request()->is("admin/poll-votes*") ? "active" : "" }}" href="#">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+{{--                @can('poll_ovoz_berish_access')--}}
+{{--                    <li class="nav-item has-treeview {{ request()->is("admin/polls*") ? "menu-open" : "" }} {{ request()->is("admin/poll-variants*") ? "menu-open" : "" }} {{ request()->is("admin/poll-votes*") ? "menu-open" : "" }}">--}}
+{{--                        <a class="nav-link nav-dropdown-toggle {{ request()->is("admin/polls*") ? "active" : "" }} {{ request()->is("admin/poll-variants*") ? "active" : "" }} {{ request()->is("admin/poll-votes*") ? "active" : "" }}" href="#">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                            </i>
-                            <p>
-                                {{ trans('cruds.pollOvozBerish.title') }}
-                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @can('poll_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.polls.index") }}" class="nav-link {{ request()->is("admin/polls") || request()->is("admin/polls/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+{{--                            </i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.pollOvozBerish.title') }}--}}
+{{--                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            @can('poll_access')--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{ route("admin.polls.index") }}" class="nav-link {{ request()->is("admin/polls") || request()->is("admin/polls/*") ? "active" : "" }}">--}}
+{{--                                        <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.poll.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('poll_variant_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.poll-variants.index") }}" class="nav-link {{ request()->is("admin/poll-variants") || request()->is("admin/poll-variants/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+{{--                                        </i>--}}
+{{--                                        <p>--}}
+{{--                                            {{ trans('cruds.poll.title') }}--}}
+{{--                                        </p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endcan--}}
+{{--                            @can('poll_variant_access')--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{ route("admin.poll-variants.index") }}" class="nav-link {{ request()->is("admin/poll-variants") || request()->is("admin/poll-variants/*") ? "active" : "" }}">--}}
+{{--                                        <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.pollVariant.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('poll_vote_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.poll-votes.index") }}" class="nav-link {{ request()->is("admin/poll-votes") || request()->is("admin/poll-votes/*") ? "active" : "" }}">
-                                        <i class="fa-fw nav-icon fas fa-cogs">
+{{--                                        </i>--}}
+{{--                                        <p>--}}
+{{--                                            {{ trans('cruds.pollVariant.title') }}--}}
+{{--                                        </p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endcan--}}
+{{--                            @can('poll_vote_access')--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="{{ route("admin.poll-votes.index") }}" class="nav-link {{ request()->is("admin/poll-votes") || request()->is("admin/poll-votes/*") ? "active" : "" }}">--}}
+{{--                                        <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                                        </i>
-                                        <p>
-                                            {{ trans('cruds.pollVote.title') }}
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </li>
-                @endcan
+{{--                                        </i>--}}
+{{--                                        <p>--}}
+{{--                                            {{ trans('cruds.pollVote.title') }}--}}
+{{--                                        </p>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endcan--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
 {{--                @can('post_comment_access')--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route("admin.post-comments.index") }}" class="nav-link {{ request()->is("admin/post-comments") || request()->is("admin/post-comments/*") ? "active" : "" }}">--}}
@@ -288,18 +288,18 @@
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                @endcan--}}
-                @can('ad_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.ads.index") }}" class="nav-link {{ request()->is("admin/ads") || request()->is("admin/ads/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+{{--                @can('ad_access')--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.ads.index") }}" class="nav-link {{ request()->is("admin/ads") || request()->is("admin/ads/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                            </i>
-                            <p>
-                                {{ trans('cruds.ad.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+{{--                            </i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.ad.title') }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
 {{--                @can('newsletter_access')--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route("admin.newsletters.index") }}" class="nav-link {{ request()->is("admin/newsletters") || request()->is("admin/newsletters/*") ? "active" : "" }}">--}}
@@ -312,19 +312,19 @@
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                @endcan--}}
-                @can('ad_view_access')
-                    <li class="nav-item">
-                        <a href="{{ route("admin.ad-views.index") }}" class="nav-link {{ request()->is("admin/ad-views") || request()->is("admin/ad-views/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+{{--                @can('ad_view_access')--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.ad-views.index") }}" class="nav-link {{ request()->is("admin/ad-views") || request()->is("admin/ad-views/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                            </i>
-                            <p>
-                                {{ trans('cruds.adView.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
-                @can('post_view_access')
+{{--                            </i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.adView.title') }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
+{{--                @can('post_view_access')--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a href="{{ route("admin.post-views.index") }}" class="nav-link {{ request()->is("admin/post-views") || request()->is("admin/post-views/*") ? "active" : "" }}">--}}
 {{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
@@ -335,17 +335,17 @@
 {{--                            </p>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
-                    <li class="nav-item">
-                        <a href="{{ route("admin.post-views-show.index") }}" class="nav-link {{ request()->is("admin/post-views-show") || request()->is("admin/post-views-show/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route("admin.post-views-show.index") }}" class="nav-link {{ request()->is("admin/post-views-show") || request()->is("admin/post-views-show/*") ? "active" : "" }}">--}}
+{{--                            <i class="fa-fw nav-icon fas fa-cogs">--}}
 
-                            </i>
-                            <p>
-                                {{ trans('cruds.postView.title') }}
-                            </p>
-                        </a>
-                    </li>
-                @endcan
+{{--                            </i>--}}
+{{--                            <p>--}}
+{{--                                {{ trans('cruds.postView.title') }}--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')
                         <li class="nav-item">
@@ -353,7 +353,7 @@
                                 <i class="fa-fw fas fa-key nav-icon">
                                 </i>
                                 <p>
-                                    {{ trans('global.change_password') }}
+                                   Parolni o'zgartirish
                                 </p>
                             </a>
                         </li>
@@ -365,7 +365,7 @@
                             <i class="fas fa-fw fa-sign-out-alt nav-icon">
 
                             </i>
-                            <p>{{ trans('global.logout') }}</p>
+                            <p>Chiqish</p>
                         </p>
                     </a>
                 </li>

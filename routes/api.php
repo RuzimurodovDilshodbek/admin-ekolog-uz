@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\PostController;
 use App\Mail\InvoiceCreatedMail;
 use App\Mail\SendRegisterLinkMail;
 use App\Mail\SendResetPassLinkMail;
@@ -39,7 +40,9 @@ Route::group(['prefix' => 'v2', 'as' => 'api.', 'namespace' => 'Api'], function 
 
 
 });
-
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('posts', [PostController::class, 'index']);
+});
 Route::post('/send-invoice-email', function (Request $request) {
 
 
