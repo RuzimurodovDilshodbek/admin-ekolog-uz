@@ -54,7 +54,7 @@ class Telegram
             $this->client->post( 'sendPhoto', [
                 'query' => [
                     'chat_id' => $this->chat_id,
-                    'caption' => "<b>$post->title_uz</b> \n\n<b>Batafsil o‘qing:👉</b>  https://ekolog.uz/$post->id \n\n<a href='https://ekolog.uz'>Veb-sayt</a> | <a href='https://t.me/ekologuz'>Telegram</a> | <a href='https://www.youtube.com/@ekologuz'>Youtube</a> | <a href='instagram.com/ekolog.uz'>Instagram</a> | <a href='https://www.facebook.com/ekologuz1'>Facebook</a> | <a href='https://t.me/eklguz_bot'>Aloqa</a> ",
+                    'caption' => "<b>$post->title_uz</b> \n\n $post->description_uz \n\n<b>Batafsil o‘qing:👉</b>  https://ekolog.uz/$post->id \n\n<a href='https://ekolog.uz'>Veb-sayt</a> | <a href='https://t.me/ekologuz'>Telegram</a> | <a href='https://www.youtube.com/@ekologuz'>Youtube</a> | <a href='instagram.com/ekolog.uz'>Instagram</a> | <a href='https://www.facebook.com/ekologuz1'>Facebook</a> | <a href='https://t.me/eklguz_bot'>Aloqa</a> ",
                     'parse_mode' => 'HTML',
                     'photo' => $post->detail_image?->show_card
                 ]
