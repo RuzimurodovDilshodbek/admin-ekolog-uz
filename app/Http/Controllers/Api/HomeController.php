@@ -40,20 +40,14 @@ class HomeController extends Controller
 
 
         if (isset($request_lang) && ($request_lang == 'en' || $request_lang == 'ru')){
-            $mainBanners = BannerPost::query()->select('banner_posts.id','banner_posts.post_id','banner_posts.header_type','banner_posts.post_id')
-                ->where('banner_posts.type', "main")
-                ->with(['post'=> function ($query) use($request_lang) {
-                    $query->whereNotNull('title_'.$request_lang)->select('id','slug_uz','title_uz','title_kr','title_ru','title_en','slug_kr','slug_ru','slug_en','section_ids');
-                }])
-                ->orderBy("id", "DESC")
-                ->limit(10)
-                ->get();
 
-            $mainPosts = Post::query()->where('recommended',1)->whereNotNull('title_'.$request_lang)->orderBy("created_at", "DESC")->limit(5)
+            $mainPosts = Post::query()
+                ->where('recommended',1)
+                ->whereNotNull('title_'.$request_lang)
+                ->orderBy("created_at", "DESC")
+                ->limit(5)
                 ->select('id','slug_uz','title_uz','title_kr','title_ru','title_en','slug_kr','slug_ru','slug_en','section_ids')
                 ->get();
-
-
 
             $educationPosts = Post::query()->whereIn('section_ids',$eduSectionIds)
                 ->whereNotNull('title_'.$request_lang)
@@ -372,7 +366,7 @@ class HomeController extends Controller
                     'description_uz','description_kr','description_ru','description_en','description_tr')
                 ->paginate(12);
         }
-	
+
 
         $result = [
             'posts' => $posts,

@@ -51,7 +51,7 @@
                     <li class="d-flex align-items-center" style="gap: 6px;">
                         <img src="{{asset('images/mail-icon.svg')}}" alt="mail-icon" class="lightIcon d-block" />
                         <img src="{{asset('images/email-dark.svg')}}" alt="email-dark icon" class="darkIcon d-none" />
-                        <a class="footer__link1 fw-normal darkMode-title" href="#"> bolalarolamiuz@gmail.com</a>
+                        <a class="footer__link1 fw-normal darkMode-title" href="#"> info@ekolog.uz</a>
                     </li>
                     <li class="d-flex" style="gap: 14px;">
                         <img src="{{asset('images/phone-icon.svg')}}" alt="phone-icon" class="lightIcon d-block" />

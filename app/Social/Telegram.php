@@ -11,9 +11,9 @@ use GuzzleHttp\Client;
 class Telegram
 {
     private $telegramApiUrl = 'https://api.telegram.org/';
-    const BOT_TOKEN = '6377246265:AAHPA7_ZsuhzEJcQL2ctxzjvGtU7Eg_FwYI';
-    const TEST_CHAT_ID = -1001851002807;
-    const BOLALAR_CHANNEL_CHAT_ID = -1001851002807; // -1001851002807 rejalangan kontent asosiy
+    const BOT_TOKEN = '8271074734:AAEf5xeK4wK0BU-tXaxfAq595WEPTwqMlgo';
+    const TEST_CHAT_ID = -1003161074565;
+    const BOLALAR_CHANNEL_CHAT_ID = -1003161074565;
     private $client;
     private $chat_id;
 
@@ -54,7 +54,7 @@ class Telegram
             $this->client->post( 'sendPhoto', [
                 'query' => [
                     'chat_id' => $this->chat_id,
-                    'caption' => "<b>$post->title_uz</b> \n\n<b>Batafsil o‘qing:👉</b>  https://bolalarolami.uz/$post->id \n\n<a href='https://bolalarolami.uz'>Veb-sayt</a> | <a href='https://t.me/bolalarolamiuz'>Telegram</a> | <a href='https://www.youtube.com/@bolalarolamiuz'>Youtube</a> | <a href='https://www.instagram.com/bolalarolami.uz'>Instagram</a> | <a href='https://t.me/bolalarolami_bot'>Aloqa</a> ",
+                    'caption' => "<b>$post->title_uz</b> \n\n<b>Batafsil o‘qing:👉</b>  https://ekolog.uz/$post->id \n\n<a href='https://ekolog.uz'>Veb-sayt</a> | <a href='https://t.me/ekologuz'>Telegram</a> | <a href='https://www.youtube.com/@ekologuz'>Youtube</a> | <a href='instagram.com/ekolog.uz'>Instagram</a> | <a href='https://www.facebook.com/ekologuz1'>Facebook</a> | <a href='https://t.me/eklguz_bot'>Aloqa</a> ",
                     'parse_mode' => 'HTML',
                     'photo' => $post->detail_image?->show_card
                 ]
