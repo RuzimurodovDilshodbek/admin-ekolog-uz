@@ -21,7 +21,7 @@ class StoreTagRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'title_kr' => [
+            'title_uz' => [
                 'string',
                 'required',
             ],

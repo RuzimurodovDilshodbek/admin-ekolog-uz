@@ -4,24 +4,24 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-8">
             <a class="btn btn-success" href="{{ route('admin.videos.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.video.title_singular') }}
+                Videolar qo'shish
             </a>
         </div>
-        <div class="col-lg-2">
-            <a class="btn btn-success" href="{{ route('admin.videoEditSort') }}">
-                {{ 'Видео баннери тартиби' }}
-            </a>
-        </div>
+{{--        <div class="col-lg-2">--}}
+{{--            <a class="btn btn-success" href="{{ route('admin.videoEditSort') }}">--}}
+{{--                {{ 'Видео баннери тартиби' }}--}}
+{{--            </a>--}}
+{{--        </div>--}}
         <div class="col-lg-2">
             <a class="btn btn-success" href="{{ route('admin.video-category.index') }}">
-                {{ 'Видео бўлимлари' }}
+                Video bo‘limlari
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.video.title_singular') }} {{ trans('global.list') }}
+        Videolar ro'yxati
     </div>
 
     <div class="card-body">

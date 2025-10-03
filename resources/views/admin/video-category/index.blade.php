@@ -4,14 +4,14 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.video-category.create') }}">
-                Видео категорияси қўшиш
+                Video kategoriyasi qo‘shish
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.video.title_singular') }} {{ trans('global.list') }}
+        Videolar ro'yxati
     </div>
 
     <div class="card-body">
