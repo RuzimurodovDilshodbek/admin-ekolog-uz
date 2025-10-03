@@ -33,17 +33,17 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.video.fields.id') }}
+                            Id
                         </th>
                         <th>Bo'lim</th>
                         <th>
-                            {{ trans('cruds.video.fields.title') }}
+                            Sarlavha
                         </th>
                         <th>
-                            {{ trans('cruds.video.fields.youtube_link') }}
+                            Youtube link
                         </th>
                         <th>
-                            &nbsp;
+                            Amallar
                         </th>
                     </tr>
                 </thead>
@@ -57,7 +57,7 @@
                                 {{ $video->id ?? '' }}
                             </td>
                             <td>
-                                {{ $video->category->title_kr ?? '' }}
+                                {{ $video->category->title_uz ?? $video->category->title_ru }}
                             </td>
                             <td>
                                 {{ $video->title ?? '' }}
