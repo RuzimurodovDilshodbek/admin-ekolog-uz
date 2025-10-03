@@ -117,9 +117,9 @@
         </div>
     </div>
 </div>
-<div class="d-flex justify-content-end text-center">
-    {{ $posts->onEachSide(2)->links('pagination::bootstrap-4') }}
-</div>
+{{--<div class="d-flex justify-content-end text-center">--}}
+{{--    {{ $posts->onEachSide(2)->links('pagination::bootstrap-4') }}--}}
+{{--</div>--}}
 
 
 @endsection
