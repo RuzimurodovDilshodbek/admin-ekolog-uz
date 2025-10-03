@@ -14,7 +14,7 @@
                 <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="category_id" id="category_id" required>
                     <option value disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach($videoCategory as $key => $item)
-                        <option value="{{ $item->id }}" {{ old('type', '') === (string) $key ? 'selected' : '' }}>{{ $item->title_kr }}</option>
+                        <option value="{{ $item->id }}" {{ old('type', '') === (string) $key ? 'selected' : '' }}>{{ $item->title_uz }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('type'))
