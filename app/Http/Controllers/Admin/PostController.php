@@ -160,14 +160,20 @@ class PostController extends Controller
         ]);
 
         $tags = $request->input('tags', []);
+
         foreach ($tags as $index => $tag) {
-            if ( !is_numeric($tag)) {
-                $tagModel = Tag::query()->where('title_uz','like',$tag)->first()->id;
+            if (!is_numeric($tag)) {
+                // mavjud tagni qidiramiz
+                $tagModel = Tag::query()->where('title_uz', $tag)->first();
+
                 if ($tagModel) {
                     $tags[$index] = $tagModel->id;
                 } else {
-                    // kerak bo‘lsa yangi tag yaratish yoki xatolikni oldini olish
-                    $tags[$index] = null;
+                    // agar topilmasa yangi yaratamiz
+                    $newTag = Tag::create([
+                        'title_uz' => $tag,
+                    ]);
+                    $tags[$index] = $newTag->id;
                 }
             }
         }
