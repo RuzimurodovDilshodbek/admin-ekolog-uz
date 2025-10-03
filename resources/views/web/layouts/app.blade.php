@@ -22,7 +22,7 @@
     <meta property="og:image" content="@yield('og_image')" />
 
     <!-- ==== Favicons ==== -->
-    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="icon" href="{{ asset('img/ico.png') }}">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
