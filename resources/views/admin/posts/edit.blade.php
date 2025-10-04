@@ -33,7 +33,7 @@
                     <div class="form-check {{ $errors->has('recommended') ? 'is-invalid' : '' }}">
                         <input type="hidden" name="recommended" value="0">
                         <input class="form-check-input" type="checkbox" name="recommended" id="recommended" value="1" {{ ($post->recommended=="1")? "checked" : "" }}>
-                        <label class="form-check-label" for="recommended">Тавсия этилади</label>
+                        <label class="form-check-label" for="recommended">Tavsiya etiladi</label>
                     </div>
                     @if($errors->has('recommended'))
                         <span class="text-danger">{{ $errors->first('recommended') }}</span>

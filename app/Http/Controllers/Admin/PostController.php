@@ -134,6 +134,7 @@ class PostController extends Controller
         $post = Post::create([
             'status' => $request->status,
             'recommended' => $request->recommended,
+            'is_investigative' => $request->is_investigative,
 
             'title_uz' => $request->title_uz,
             'title_ru' => $request->title_ru,

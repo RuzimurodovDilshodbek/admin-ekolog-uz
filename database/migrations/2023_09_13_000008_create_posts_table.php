@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
             $table->longText('content')->nullable();
             $table->boolean('status')->default(0)->nullable();
             $table->datetime('publish_date')->nullable();
+            $table->tinyInteger('is_investigative')->default(0);
             $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();

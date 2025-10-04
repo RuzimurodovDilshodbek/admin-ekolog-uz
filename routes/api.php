@@ -10,7 +10,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api', ], function () {
+    Route::get('home/get-full-resource', 'HomeController@getNewsHome');
+    Route::get('get-post/{id}', 'HomeController@getPostId');
+    Route::get('get-category/{id}', 'HomeController@getCategoryId');
+
+
 
 });
 
