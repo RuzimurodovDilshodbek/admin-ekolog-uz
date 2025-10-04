@@ -37,6 +37,8 @@
                         @if($errors->has('recommended'))
                             <span class="text-danger">{{ $errors->first('recommended') }}</span>
                         @endif
+                    </div>
+                    <div class="form-group ml-5">
                         <div class="form-check {{ $errors->has('is_investigative') ? 'is-invalid' : '' }}">
                             <input type="hidden" name="is_investigative" value="0">
                             <input class="form-check-input" type="checkbox" name="is_investigative" id="is_investigative" value="1" {{ old('is_investigative', 0) == 1 ? 'checked' : '' }}>

@@ -40,6 +40,17 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
                 </div>
+                <div class="form-group ml-5">
+                    <div class="form-check {{ $errors->has('is_investigative') ? 'is-invalid' : '' }}">
+                        <input type="hidden" name="is_investigative" value="0">
+                        <input class="form-check-input" type="checkbox" name="is_investigative" id="is_investigative" value="1" {{ old('is_investigative', 0) == 1 ? 'checked' : '' }}>
+                        <label class="form-check-label" for="is_investigative">Surishtiruv Post</label>
+                    </div>
+                    @if($errors->has('is_investigative'))
+                        <span class="text-danger">{{ $errors->first('is_investigative') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.post.fields.status_helper') }}</span>
+                </div>
             </div>
             <div class="form-group">
                 <h4 class="label-for-checkbox">{{ trans('cruds.post.fields.section') }}</h4>
