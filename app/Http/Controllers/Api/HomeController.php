@@ -180,12 +180,12 @@ class HomeController extends Controller
             'ekovolontyorlikPosts' => $ekovolontyorlikPosts, // eko volontyorlik sub menulari 4 ta
         ];
 
-        if ($result['postsSaylov']->isEmpty() &&
-            $result['recommendedPosts']->isEmpty() &&
-            $result['newsResent']->isEmpty() &&
-            $result['mostReadPosts']->isEmpty()) {
-            return response()->errorJson('post not found', 404);
-        }
+//        if ($result['latestPosts']->isEmpty() &&
+//            $result['recommendedPosts']->isEmpty() &&
+//            $result['newsResent']->isEmpty() &&
+//            $result['mostReadPosts']->isEmpty()) {
+//            return response()->errorJson('post not found', 404);
+//        }
 
         return response()->successJson(['data' => $result]);
     }
@@ -200,7 +200,7 @@ class HomeController extends Controller
         $columns = call_user_func($this->columns, $request_lang);
 
         $post = Post::query()
-            ->with("tags","editor")
+            ->with("tags")
             ->where('posts.id',$id)
             ->where("posts.status", 1)
             ->whereNotNull('posts.title_'.$request_lang)
@@ -493,16 +493,19 @@ class HomeController extends Controller
 // Hamma post ro'yxatlari uchun umumiy funktsiya
     private function processPosts(&$posts, $request_lang)
     {
-        foreach ($posts as $post) {
-        $post['url'] = localized_url("get-post/{$post->id}");
-        $post['photo'] = $post->detail_image?->url;
-        $post['section_name'] = $post->section->{'title_'.$request_lang};
-        $post['section_slug'] = $post->section->{'slug_'.$request_lang};
+        if($posts){
+            foreach ($posts as $post) {
+                $post['url'] = localized_url("get-post/{$post->id}");
+                $post['photo'] = $post->detail_image?->url;
+                $post['section_name'] = $post->section->{'title_'.$request_lang};
+                $post['section_slug'] = $post->section->{'slug_'.$request_lang};
 //        if ($post->youtube_link) {
 //            $post['youtube_url'] = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
 //        }
-    }
+            }
         $posts->makeHidden(['detail_image', 'card_image', 'media', 'section_ids', 'section']);
+        }
+
     }
 
     public function sendAppeal(Request $request) {
