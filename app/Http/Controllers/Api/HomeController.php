@@ -35,7 +35,7 @@ class HomeController extends Controller
                 'title_'.$lang.' as get_title',
                 'section_ids',
                 'publish_date',
-                'youtube_link',
+//                'youtube_link',
                 'views_count',
                 'description_'.$lang.' as get_description'
             ];
@@ -205,7 +205,7 @@ class HomeController extends Controller
             ->where("posts.status", 1)
             ->whereNotNull('posts.title_'.$request_lang)
             ->select('id', 'slug_'.$request_lang.' as get_slug','title_'.$request_lang.' as get_title', 'section_ids',
-                'publish_date', 'views_count','youtube_link','description_'.$request_lang.' as get_description','content_'.$request_lang.' as get_content','tutor_id','image_description_'.$request_lang.' as get_image_description',
+                'publish_date', 'views_count','description_'.$request_lang.' as get_description','content_'.$request_lang.' as get_content','tutor_id','image_description_'.$request_lang.' as get_image_description',
 
                 )
             ->first();
@@ -246,10 +246,10 @@ class HomeController extends Controller
         ]);
 
         $postClone = clone $post;
-        if (isset($post->youtube_link)) {
-
-            $postClone->youtube_link = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
-        }
+//        if (isset($post->youtube_link)) {
+//
+//            $postClone->youtube_link = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
+//        }
 
         $result = [
             'post' => $postClone,
@@ -498,9 +498,9 @@ class HomeController extends Controller
         $post['photo'] = $post->detail_image?->url;
         $post['section_name'] = $post->section->{'title_'.$request_lang};
         $post['section_slug'] = $post->section->{'slug_'.$request_lang};
-        if ($post->youtube_link) {
-            $post['youtube_url'] = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
-        }
+//        if ($post->youtube_link) {
+//            $post['youtube_url'] = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
+//        }
     }
         $posts->makeHidden(['detail_image', 'card_image', 'media', 'section_ids', 'section']);
     }

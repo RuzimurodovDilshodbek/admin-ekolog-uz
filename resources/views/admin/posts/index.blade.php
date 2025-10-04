@@ -40,6 +40,9 @@
                            Tavsiya etiladi
                         </th>
                         <th>
+                           Jurnalistik post
+                        </th>
+                        <th>
                             Ko'rishlar soni
                         </th>
                         <th>
@@ -82,6 +85,10 @@
                             <td>
                                 <span style="display:none">{{ $post->recommended ?? '' }}</span>
                                 <input type="checkbox" disabled="disabled" {{ $post->recommended == '1' ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                <span style="display:none">{{ $post->is_investigative ?? '' }}</span>
+                                <input type="checkbox" disabled="disabled" {{ $post->is_investigative == '1' ? 'checked' : '' }}>
                             </td>
                             <td>{{ $post->view_count }} </td>
                             <td>
