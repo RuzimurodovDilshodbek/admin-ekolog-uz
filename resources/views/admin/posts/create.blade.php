@@ -62,10 +62,10 @@
                 </div>
 
                 <div class="form-group">
-                    <h4 class="label-for-checkbox">Пост қайси тилларга таржима қилинсин </h4>
+                    <h4 class="label-for-checkbox">Post qaysi tillarga tarjima qilinsin</h4>
                     @foreach (config('app.locales') as $key_title => $value_title)
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input section-checkboxes" type="checkbox" id="lang_{{$key_title}}" value="{{$value_title}}" name="langs[]" {{ $value_title == 'uz' || $value_title == 'kr' ? 'checked' : ''   }}>
+                            <input class="form-check-input section-checkboxes" type="checkbox" id="lang_{{$key_title}}" value="{{$value_title}}" name="langs[]" {{ $value_title == 'uz' || $value_title == 'ru' || $value_title == 'en' ? 'checked' : ''   }}>
                             <span for="lang_{{$key_title}}" class="text-uppercase">{{ $value_title }}</span>
                         </div>
                     @endforeach
@@ -683,9 +683,9 @@
                     },
                     success: function (response) {
                         locales.forEach((locale, index) => {
-                            if(locale !== 'kr' && selectedLangs.includes(locale)) {
+                            if(locale !== 'uz' && selectedLangs.includes(locale)) {
                                 if(!$('#' + element + '_' + locale)[0].value) {
-                                    $('#' + element + '_' + locale).val(response.data[index-1]);
+                                    $('#' + element + '_' + locale).val(response.data[index]);
                                 }
                             }
                         })
@@ -719,13 +719,13 @@
                         success: function (response) {
                             locales.forEach((locale, index) => {
                                 let demoElement = document.createElement("div");
-                                demoElement.innerHTML = response.data[index-1];
+                                demoElement.innerHTML = response.data[index];
                                 [...demoElement.getElementsByTagName('img')].map((f, index) => {
                                     f.setAttribute('src', imageSrc[index]);
                                     return f
                                 });
 
-                                if(locale !== 'kr' && selectedLangs.includes(locale)) {
+                                if(locale !== 'uz' && selectedLangs.includes(locale)) {
                                     if (!$('#tab_' + locale).find('.note-editable.card-block')[0].innerText || $('#tab_' + locale).find('.note-editable.card-block')[0].innerText.trim() === '' ) {
                                         $('#tab_' + locale).find('.summernote').summernote('code', demoElement.innerHTML);
                                     }
@@ -739,6 +739,7 @@
                 }
             }
             $('#title_uz').on('blur', function () {
+                console.log('kelli')
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
@@ -760,6 +761,7 @@
                 }
             });
             $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
+                console.log('tab uz log')
                 let e = $(this).clone();
                 const element = e[0];
                 if(element.innerText.trim()) {
@@ -768,7 +770,8 @@
             });
             $('#postCreateForm')[0].addEventListener('submit', async (e) => {
                 e.preventDefault();
-                if($('#title_uz')[0].value {
+                if($('#title_uz')[0].value && !$('#title_ru')[0].value) {
+                    console.log('kelli22')
                     let inputValue = $('#title_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
