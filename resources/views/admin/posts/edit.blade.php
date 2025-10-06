@@ -747,11 +747,12 @@
                 }
             });
 
-            $('#tab_kr').find('.note-editable.card-block').on('blur', function () {
-                // const element = document.getElementById('tab_kr').getElementsByClassName('note-editable')[0];
+            $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
                 let e = $(this).clone();
                 const element = e[0];
-                translateContent(element)
+                if(element.innerText.trim()) {
+                    translateContent(element);
+                }
             });
 
             $('#postUpdateForm')[0].addEventListener('submit', async (e) => {

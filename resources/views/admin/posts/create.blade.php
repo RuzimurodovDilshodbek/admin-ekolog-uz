@@ -761,7 +761,6 @@
                 }
             });
             $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
-                console.log('tab uz log')
                 let e = $(this).clone();
                 const element = e[0];
                 if(element.innerText.trim()) {
@@ -791,7 +790,7 @@
 
                 if (
                     uzEl && uzEl.innerText &&
-                    (!ruEl?.innerText || !enEl?.innerText || !trEl?.innerText)
+                    (!ruEl?.innerText || !enEl?.innerText )
                 ) {
                     let el = $('#tab_uz').find('.note-editable.card-block').clone();
                     const element = el[0];
