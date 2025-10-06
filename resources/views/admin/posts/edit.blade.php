@@ -22,11 +22,11 @@
                 <div class="form-group">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="status" value="1" name="status" {{ ($post->status=="1")? "checked" : "" }}>
-                        <label class="form-check-label" for="status">актив</label>
+                        <label class="form-check-label" for="status">aktiv</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="status" value="2" name="status" {{ ($post->status=="2")? "checked" : "" }}>
-                        <label class="form-check-label" for="status">архив</label>
+                        <label class="form-check-label" for="status">arxiv</label>
                     </div>
                 </div>
                 <div class="form-group ml-5">

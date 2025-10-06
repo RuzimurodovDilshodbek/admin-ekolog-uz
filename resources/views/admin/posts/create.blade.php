@@ -21,11 +21,11 @@
                     <div class="form-group">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="status" value="1" name="status" checked>
-                            <label class="form-check-label" for="status">актив</label>
+                            <label class="form-check-label" for="status">aktiv</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" id="status" value="2" name="status">
-                            <label class="form-check-label" for="status">архив</label>
+                            <label class="form-check-label" for="status">arxiv</label>
                         </div>
                     </div>
                     <div class="form-group ml-5">
@@ -739,7 +739,7 @@
                 }
             }
             $('#title_uz').on('blur', function () {
-                console.log('kelli')
+
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
@@ -770,7 +770,6 @@
             $('#postCreateForm')[0].addEventListener('submit', async (e) => {
                 e.preventDefault();
                 if($('#title_uz')[0].value && !$('#title_ru')[0].value) {
-                    console.log('kelli22')
                     let inputValue = $('#title_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {

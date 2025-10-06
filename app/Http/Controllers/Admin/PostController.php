@@ -364,7 +364,13 @@ class PostController extends Controller
         }
 
         if ($post->section_ids){
-            return redirect()->route('admin.postGetSectionId',['id' => $post->section_ids[0]]);
+            $section = Section::query()->where('id',$post->section_ids[0])->first();
+            if ($section && $section->parent_id){
+                $section_parent = Section::where('id',$section->parent_id)->first();
+                return redirect()->route('admin.postGetSectionId',['id' => $section_parent->id]);
+            } else{
+                return redirect()->route('admin.postGetSectionId',['id' => $post->section_ids[0]]);
+            }
 //            return  redirect()->back();
         } else{
             return redirect()->route('admin.posts.index');
