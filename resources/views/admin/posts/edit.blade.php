@@ -654,7 +654,7 @@
                 });
                 return selectedLangs;
             }
-            async function translate(element, inputValue) {
+            async function translateTitle(element, inputValue) {
                 const locales = @json($locales);
                 var selectedLangs = getSelectedLangs();
 
@@ -724,18 +724,22 @@
                 }
             }
             $('#title_uz').on('blur', function () {
-                var inputValue = $(this).val();
-                const translatedValue = cyrToLat(inputValue);
-                if(translatedValue) {
-                    translate('title', translatedValue)
+                if($('#title_uz')[0].value && (!$('#title_ru')[0].value || !$('#title_en')[0].value )) {
+                    let inputValue = $('#title_uz')[0].value;
+                    const translatedValue = cyrToLat(inputValue);
+                    if(translatedValue) {
+                        translateTitle('title', translatedValue)
+                    }
                 }
             });
 
             $('#description_uz').on('blur', function () {
-                var inputValue = $(this).val();
-                const translatedValue = cyrToLat(inputValue);
-                if(translatedValue) {
-                    translate('description', translatedValue)
+                if($('#description_uz')[0].value && (!$('#description_ru')[0].value || !$('#description_en')[0].value )) {
+                    let inputValue = $('#description_uz')[0].value;
+                    const translatedValue = cyrToLat(inputValue);
+                    if(translatedValue) {
+                        translateTitle('description', translatedValue)
+                    }
                 }
             });
 
@@ -743,16 +747,26 @@
                 var inputValue = $(this).val();
                 const translatedValue = cyrToLat(inputValue);
                 if(translatedValue) {
-                    translate('image_description', translatedValue)
+                    translateTitle('image_description', translatedValue)
                 }
             });
 
             $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
-                let e = $(this).clone();
-                const element = e[0];
-                if(element.innerText.trim()) {
-                    translateContent(element);
+                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
+                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
+                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
+
+                if (
+                    uzEl && uzEl.innerText &&
+                    (!ruEl?.innerText || !enEl?.innerText )
+                ) {
+                    let e = $(this).clone();
+                    const element = e[0];
+                    if(element.innerText.trim()) {
+                        translateContent(element);
+                    }
                 }
+
             });
 
             $('#postUpdateForm')[0].addEventListener('submit', async (e) => {
@@ -760,12 +774,12 @@
                 let one = true;
                 let two = true;
                 let tree = true;
-                if($('#title_uz')[0].value && (!$('#title_ru')[0].value || !$('#title_en')[0].value || !$('#title_ru')[0].value)) {
+                if($('#title_uz')[0].value && (!$('#title_en')[0].value || !$('#title_ru')[0].value)) {
                     let inputValue = $('#title_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         one = false;
-                        await translate('title', translatedValue);
+                        await translateTitle('title', translatedValue);
                         one = true;
                         console.log('asnc1')
                     }
@@ -775,7 +789,7 @@
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
                         two = false;
-                        await translate('description', translatedValue);
+                        await translateTitle('description', translatedValue);
                         two = true;
                         console.log('asnc2')
                     }
@@ -784,18 +798,24 @@
                     let inputValue = $('#image_description_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
-                        await translate('image_description', translatedValue)
+                        await translateTitle('image_description', translatedValue)
                     }
                 }
+                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
+                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
+                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
+
                 if (
-                    $('#tab_uz').find('.note-editable.card-block')[0].innerText &&
-                    (!$('#tab_ru').find('.note-editable.card-block')[0].innerText || !$('#tab_en').find('.note-editable.card-block')[0].innerText)
+                    uzEl && uzEl.innerText &&
+                    (!ruEl?.innerText || !enEl?.innerText )
                 ) {
                     let el = $('#tab_uz').find('.note-editable.card-block').clone();
                     const element = el[0];
                     await translateContent(element);
                     console.log('asnc3')
                 }
+
+
 
                 // var inputs = this.querySelectorAll('input');
                 // var values = {};

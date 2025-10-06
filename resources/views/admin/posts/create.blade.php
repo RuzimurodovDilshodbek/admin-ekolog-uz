@@ -761,11 +761,23 @@
                 }
             });
             $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
-                let e = $(this).clone();
-                const element = e[0];
-                if(element.innerText.trim()) {
-                    translateContent(element);
+
+                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
+                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
+                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
+
+                if (
+                    uzEl && uzEl.innerText &&
+                    (!ruEl?.innerText || !enEl?.innerText )
+                ) {
+                    let e = $(this).clone();
+                    const element = e[0];
+                    if(element.innerText.trim()) {
+                        console.log('shu yerdab boryabdi')
+                        translateContent(element);
+                    }
                 }
+
             });
             $('#postCreateForm')[0].addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -793,6 +805,8 @@
                 ) {
                     let el = $('#tab_uz').find('.note-editable.card-block').clone();
                     const element = el[0];
+                    console.log('shu yerdab boryabdi22')
+
                     await translateContent(element);
                 }
 
