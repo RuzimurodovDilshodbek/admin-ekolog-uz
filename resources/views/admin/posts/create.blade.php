@@ -785,13 +785,15 @@
                         await translateTitle('description', translatedValue)
                     }
                 }
+                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
+                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
+                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
+
                 if (
-                    $('#tab_uz').find('.note-editable.card-block')[0].innerText &&
-                    (!$('#tab_kr').find('.note-editable.card-block')[0].innerText || !$('#tab_ru').find('.note-editable.card-block')[0].innerText || !$('#tab_en').find('.note-editable.card-block')[0].innerText || !$('#tab_tr').find('.note-editable.card-block')[0].innerText)
+                    uzEl && uzEl.innerText &&
+                    (!ruEl?.innerText || !enEl?.innerText || !trEl?.innerText)
                 ) {
-                    // let el = $(this).clone();
                     let el = $('#tab_uz').find('.note-editable.card-block').clone();
-                    // console.log($('#tab_kr').find('.summernote'));
                     const element = el[0];
                     await translateContent(element);
                 }
