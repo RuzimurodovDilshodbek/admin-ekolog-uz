@@ -66,7 +66,7 @@
                 <h4 class="label-for-checkbox">Post qaysi tillarga tarjima qilinsin</h4>
                 @foreach (config('app.locales') as $key_title => $value_title)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input section-checkboxes" type="checkbox" id="lang_{{$key_title}}" value="{{$value_title}}" name="langs[]" {{ $value_title == 'uz' || $value_title == 'kr' ? 'checked' : ''   }}>
+                        <input class="form-check-input section-checkboxes" type="checkbox" id="lang_{{$key_title}}" value="{{$value_title}}" name="langs[]" {{ $value_title == 'uz' || $value_title == 'ru' || $value_title == 'en' ? 'checked' : ''   }}>
                         <span for="lang_{{$key_title}}" class="text-uppercase">{{ $value_title }}</span>
                     </div>
                 @endforeach
