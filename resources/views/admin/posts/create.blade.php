@@ -726,8 +726,14 @@
                                 });
 
                                 if(locale !== 'uz' && selectedLangs.includes(locale)) {
-                                    if (!$('#tab_' + locale).find('.note-editable.card-block')[0].innerText || $('#tab_' + locale).find('.note-editable.card-block')[0].innerText.trim() === '' ) {
-                                        $('#tab_' + locale).find('.summernote').summernote('code', demoElement.innerHTML);
+                                    const $note = $('#tab_' + locale).find('.summernote');
+                                    const currentContent = $note.summernote('code');
+
+                                    // Summernote har doim <p><br></p> ni bo‘sh holat deb beradi
+                                    const isEmpty = !currentContent || currentContent === '<p><br></p>' || currentContent.trim() === '';
+
+                                    if (isEmpty) {
+                                        $note.summernote('code', demoElement.innerHTML);
                                     }
                                 }
                             })
@@ -760,24 +766,24 @@
                     translateTitle('image_description', translatedValue)
                 }
             });
-            $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
+            $('#tab_uz .note-editable.card-block').on('blur', function () {
+                console.log('content blur bo‘ldi');
 
-                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
-                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
-                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
+                const uzEl = $('#tab_uz .note-editable.card-block');
+                const ruEl = $('#tab_ru .note-editable.card-block');
+                const enEl = $('#tab_en .note-editable.card-block');
 
-                if (
-                    uzEl && uzEl.innerText &&
-                    (!ruEl?.innerText || !enEl?.innerText )
-                ) {
+                const uzText = uzEl.text().trim();
+                const ruText = ruEl.text().trim();
+                const enText = enEl.text().trim();
+
+                if (uzText && (!ruText || !enText)) {
                     let e = $(this).clone();
                     const element = e[0];
-                    if(element.innerText.trim()) {
-                        console.log('shu yerdab boryabdi')
+                    if (uzText) {
                         translateContent(element);
                     }
                 }
-
             });
             $('#postCreateForm')[0].addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -788,11 +794,11 @@
                         await translateTitle('title', translatedValue)
                     }
                 }
-                if($('#description_uz')[0].value && ( !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
-                    let inputValue = $('#description_uz')[0].value;
+                if($('#image_description_uz')[0].value && ( !$('#image_description_ru')[0].value || !$('#image_description_en')[0].value || !$('#image_description_ru')[0].value)) {
+                    let inputValue = $('#image_description_uz')[0].value;
                     const translatedValue = cyrToLat(inputValue);
                     if(translatedValue) {
-                        await translateTitle('description', translatedValue)
+                        await translateTitle('image_description', translatedValue)
                     }
                 }
                 const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
@@ -805,9 +811,8 @@
                 ) {
                     let el = $('#tab_uz').find('.note-editable.card-block').clone();
                     const element = el[0];
-                    console.log('shu yerdab boryabdi22')
-
                     await translateContent(element);
+                    console.log('asnc3')
                 }
 
                 $('#postCreateForm')[0].submit();
