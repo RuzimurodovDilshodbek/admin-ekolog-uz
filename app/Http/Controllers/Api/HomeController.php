@@ -174,6 +174,7 @@ class HomeController extends Controller
             'rolikVideos' => $rolikVideo, // eng tepada o'ng tarafda turadigan videolar, rolik, 3 ta
             'ekoMuammoPosts' => $ekoMuammoPosts, // eko muammo , childlaridan tavsiya berilganlar 6 ta
             'videos' => $umumiyVideos, // videolar 8 ta
+            'interyevPosts' => $interyevPosts, //$interyevPosts 4 ta
             'muroojatlarPosts' => $muroojatlarPosts, // murojaatlar 4 ta
             'rasmiyJavobPosts' => $rasmiyJavobPosts, // rasmiy javob 4 ta
             'surishtiruvPosts' => $surishtiruvPosts, // surishtiruv 4 ta
