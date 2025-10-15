@@ -375,7 +375,7 @@ class HomeController extends Controller
 
         foreach ($posts as $post) {
             $post['url'] = localized_url("get-post/{$post->id}");
-            $post['photo'] = $post->detail_image ?->url;
+            $post['photo'] = $post->detail_image?->show_card;
             $post['section_name'] = $post->section->{'title_' . $request_lang};
             $post['section_slug'] = $post->section->{'slug_' . $request_lang};
         }

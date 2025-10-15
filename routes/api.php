@@ -15,6 +15,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api', ], functio
     Route::get('get-post/{id}', 'HomeController@getPostId');
     Route::get('get-category/{id}', 'HomeController@getCategoryId');
     Route::get('get-search', 'HomeController@getSearch');
+    Route::get('get-tag/{id}', 'HomeController@getTags');
 
 
 
