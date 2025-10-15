@@ -71,6 +71,10 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
+        foreach ($rolikVideo as $post) {
+            $post['youtube_link'] = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
+        }
+
 
         $ekoMuammoPosts = Post::query()
             ->whereIn('section_ids', [6,7,8,9,10,11,12,13])
@@ -92,6 +96,10 @@ class HomeController extends Controller
             ->select('id','youtube_link','title_'.$request_lang.' as get_title',)
             ->limit(8)
             ->get();
+
+        foreach ($umumiyVideos as $post) {
+            $post['youtube_link'] = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
+        }
 
 
         $interyevPosts = Post::query()
