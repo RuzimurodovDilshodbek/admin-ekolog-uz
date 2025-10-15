@@ -49,6 +49,10 @@ class Video extends Model  implements HasMedia
     {
         return getYouTubeVideoThumb($this->youtube_link);
     }
+    public function getYoutubeLinkAttribute()
+    {
+        return 'https://www.youtube.com/embed/' . getYouTubeVideoId($this->youtube_link);
+    }
     public function category()
     {
         return $this->belongsTo(VideoCategory::class, 'category_id');
