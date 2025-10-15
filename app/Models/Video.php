@@ -51,7 +51,7 @@ class Video extends Model  implements HasMedia
     }
     public function getYoutubeLinkAttribute()
     {
-        return 'https://www.youtube.com/embed/' . getYouTubeVideoId($this->youtube_link);
+        return 'https://www.youtube.com/embed/' . getYouTubeVideoId($this->attributes['youtube_link']);
     }
     public function category()
     {
