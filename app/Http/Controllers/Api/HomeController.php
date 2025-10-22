@@ -297,6 +297,37 @@ class HomeController extends Controller
 
     }
 
+    public function getIntervyuCategory(Request $request) {
+
+        $request_lang = $request->header('Accept-Language', 'uz');
+        if (!in_array($request_lang, $this->availableLanguages)) {
+            $request_lang = 'uz';
+        }
+
+        $columns = call_user_func($this->columns, $request_lang);
+
+        $categoryPosts = Post::query()
+            ->where('is_investigative',1)
+            ->whereNotNull('title_'.$request_lang)
+            ->orderBy("publish_date", "DESC")
+            ->select($columns)
+            ->paginate(8);
+
+        $this->processPosts($categoryPosts, $request_lang);
+
+
+        if ($categoryPosts->isEmpty()) {
+            return response()->errorJson('Post not found', 404);
+        }
+
+        $result = [
+            'categoryPosts' => $categoryPosts,
+        ];
+
+        return response()->successJson(['data' => $result]);
+
+    }
+
     public function getSearch(Request $request)
     {
         $search = request()->search;
