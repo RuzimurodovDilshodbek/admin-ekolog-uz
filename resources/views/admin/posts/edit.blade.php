@@ -111,7 +111,7 @@
                 @foreach (config('app.locales') as $key_title => $item_title)
                     <div class="tab-pane {{ $catTab == $key_title ? 'active' : '' }}" id="tabdescription{{ $key_title }}" style="width: 100%">
                         <div class="form-group">
-                            <label for="description_{{ $item_title }}">{{ 'Tavsifi' }}({{ $item_title }})</label>
+                            <label for="description_{{ $item_title }}">{{ 'Qisqa xabar' }}({{ $item_title }})</label>
                             <input
                                 class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                 type="text" name="description_{{ $item_title }}"
