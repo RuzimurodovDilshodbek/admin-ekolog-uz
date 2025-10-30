@@ -122,6 +122,14 @@
                         </a>
                     </li>
                 @endcan
+                @can('section_access')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.postGetSectionId',['id' => 26]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 26 || Request::get('section_id') == 26) ? "active" : "" }}">
+                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <p>Eko korrupsiya</p>
+                        </a>
+                    </li>
+                @endcan
 
                 @can('section_access')
                     <li class="nav-item">

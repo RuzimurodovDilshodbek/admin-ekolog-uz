@@ -83,7 +83,11 @@ class PostController extends Controller
         if ($id = $request->id) {
             $section = Section::query()->where('id',$id)->first();
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+            if ($id == 26) {
+                $sections = Section::where('id',$id)->pluck('title_uz', 'id');
+            }else{
+                $sections = Section::whereIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+            }
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
             $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
@@ -114,21 +118,60 @@ class PostController extends Controller
             $audiopath =$Fileaudio->storeAs('public/audio/' . $audio_name);
         }
 
+        // Translate title to other languages if not provided
         if($request->title_uz) {
             foreach (config('app.locales') as $key_local => $value_local) {
                 if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
-                    $to_latin = transliterateLatin($request->title_uz);
-                    $request['title_' . $value_local] = trsTitle($to_latin, $value_local);
+                    // Only translate if the field is empty
+                    if(empty($request->input('title_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->title_uz);
+                        $translatedTitle = trsTitle($to_latin, $value_local);
+                        $request->merge(['title_' . $value_local => $translatedTitle ?: '']);
+                    }
                 }
-            };
+            }
         }
+
+        // Translate description to other languages if not provided
         if($request->description_uz) {
             foreach (config('app.locales') as $key_local => $value_local) {
                 if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
-                    $to_latin = transliterateLatin($request->description_uzr);
-                    $request['description_' . $value_local] = trsTitle($to_latin, $value_local);
+                    // Only translate if the field is empty
+                    if(empty($request->input('description_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->description_uz);
+                        $translatedDescription = trsTitle($to_latin, $value_local);
+                        $request->merge(['description_' . $value_local => $translatedDescription ?: '']);
+                    }
                 }
-            };
+            }
+        }
+
+        // Translate content to other languages if not provided
+        if($request->content_uz) {
+            foreach (config('app.locales') as $key_local => $value_local) {
+                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+                    // Only translate if the field is empty
+                    if(empty($request->input('content_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->content_uz);
+                        $translatedContent = trs($to_latin, $value_local);
+                        $request->merge(['content_' . $value_local => $translatedContent ?: '']);
+                    }
+                }
+            }
+        }
+
+        // Translate image_description to other languages if not provided
+        if($request->image_description_uz) {
+            foreach (config('app.locales') as $key_local => $value_local) {
+                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+                    // Only translate if the field is empty
+                    if(empty($request->input('image_description_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->image_description_uz);
+                        $translatedImageDesc = trsTitle($to_latin, $value_local);
+                        $request->merge(['image_description_' . $value_local => $translatedImageDesc ?: '']);
+                    }
+                }
+            }
         }
 
         $post = Post::create([
@@ -137,22 +180,21 @@ class PostController extends Controller
             'is_investigative' => $request->is_investigative,
 
             'title_uz' => $request->title_uz,
-            'title_ru' => $request->title_ru,
-            'title_en' => $request->title_en,
+            'title_ru' => $request->input('title_ru'),
+            'title_en' => $request->input('title_en'),
             'audio_file' => $audio_name,
 
             'description_uz' => $request->description_uz,
-            'description_ru' => $request->description_ru,
-            'description_en' => $request->description_en,
-
+            'description_ru' => $request->input('description_ru'),
+            'description_en' => $request->input('description_en'),
 
             'content_uz' => $request->content_uz,
-            'content_ru' => $request->content_ru,
-            'content_en' => $request->content_en,
+            'content_ru' => $request->input('content_ru'),
+            'content_en' => $request->input('content_en'),
 
             'image_description_uz' => $request->image_description_uz,
-            'image_description_ru' => $request->image_description_ru,
-            'image_description_en' => $request->image_description_en,
+            'image_description_ru' => $request->input('image_description_ru'),
+            'image_description_en' => $request->input('image_description_en'),
 
             'section_ids' => $request->section_ids,
             'langs' => $request->langs,
@@ -326,6 +368,63 @@ class PostController extends Controller
             [$imageName, $imageName2] = $this->storeBase64($request->image_base64);
         }
         $audio_name = null;
+
+        // Translate title to other languages if not provided
+        if($request->title_uz) {
+            foreach (config('app.locales') as $key_local => $value_local) {
+                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+                    // Only translate if the field is empty
+                    if(empty($request->input('title_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->title_uz);
+                        $translatedTitle = trsTitle($to_latin, $value_local);
+                        $request->merge(['title_' . $value_local => $translatedTitle ?: '']);
+                    }
+                }
+            }
+        }
+
+        // Translate description to other languages if not provided
+        if($request->description_uz) {
+            foreach (config('app.locales') as $key_local => $value_local) {
+                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+                    // Only translate if the field is empty
+                    if(empty($request->input('description_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->description_uz);
+                        $translatedDescription = trsTitle($to_latin, $value_local);
+                        $request->merge(['description_' . $value_local => $translatedDescription ?: '']);
+                    }
+                }
+            }
+        }
+
+        // Translate content to other languages if not provided
+        if($request->content_uz) {
+            foreach (config('app.locales') as $key_local => $value_local) {
+                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+                    // Only translate if the field is empty
+                    if(empty($request->input('content_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->content_uz);
+                        $translatedContent = trs($to_latin, $value_local);
+                        $request->merge(['content_' . $value_local => $translatedContent ?: '']);
+                    }
+                }
+            }
+        }
+
+        // Translate image_description to other languages if not provided
+        if($request->image_description_uz) {
+            foreach (config('app.locales') as $key_local => $value_local) {
+                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+                    // Only translate if the field is empty
+                    if(empty($request->input('image_description_' . $value_local))) {
+                        $to_latin = transliterateLatin($request->image_description_uz);
+                        $translatedImageDesc = trsTitle($to_latin, $value_local);
+                        $request->merge(['image_description_' . $value_local => $translatedImageDesc ?: '']);
+                    }
+                }
+            }
+        }
+
         $post->update($request->all());
 
         if ($postNetwork = PostsSendAutoSocialNetwork::query()->where('post_id',$post->id)->first()){

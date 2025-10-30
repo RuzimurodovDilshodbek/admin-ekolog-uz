@@ -17,9 +17,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api', ], functio
     Route::get('get-category-intervyu', 'HomeController@getIntervyuCategory');
     Route::get('get-search', 'HomeController@getSearch');
     Route::get('get-tag/{id}', 'HomeController@getTags');
-
-
-
 });
 
 
