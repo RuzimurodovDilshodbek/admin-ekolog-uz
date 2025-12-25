@@ -65,12 +65,6 @@ class Section extends Model
         $this->attributes['slug_en'] = Str::slug($value); // Generate slug from title
     }
 
-    public function setTitleTrAttribute($value)
-    {
-        $this->attributes['title_tr'] = $value;
-        $this->attributes['slug_tr'] = Str::slug($value); // Generate slug from title
-    }
-
     public function getTitleAttribute()
     {
         return $this->attributes['title_' . app()->getLocale()];

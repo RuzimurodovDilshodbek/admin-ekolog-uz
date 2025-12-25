@@ -65,14 +65,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.tag.fields.title_tr') }}
-                        </th>
-                        <td>
-                            {{ $tag->title_tr }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.tag.fields.status') }}
                         </th>
                         <td>

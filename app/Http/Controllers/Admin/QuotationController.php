@@ -42,12 +42,10 @@ class QuotationController extends Controller
             'title_kr' => $request->title_kr,
             'title_ru' => $request->title_ru,
             'title_en' => $request->title_en,
-            'title_tr' => $request->title_tr,
             'author_name_uz' => $request->author_name_uz,
             'author_name_kr' => $request->author_name_kr,
             'author_name_ru' => $request->author_name_ru,
             'author_name_en' => $request->author_name_en,
-            'author_name_tr' => $request->author_name_tr,
         ]);
 
         if ($imageName) {

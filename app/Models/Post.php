@@ -89,12 +89,6 @@ class Post extends Model implements HasMedia
         $this->attributes['slug_en'] = Str::slug($value.'-'.$this->id); // Generate slug from title
     }
 
-    public function setTitleTrAttribute($value)
-    {
-        $this->attributes['title_tr'] = $value;
-        $this->attributes['slug_tr'] = Str::slug($value.'-'.$this->id); // Generate slug from title
-    }
-
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
@@ -165,7 +159,7 @@ class Post extends Model implements HasMedia
     }
     public function getSectionAttribute()
     {
-        return Section::query()->whereIn('id', ($this->section_ids ?? -1))->select('id','slug_uz','title_uz','title_kr','title_ru','title_en','title_tr','slug_kr','slug_ru','slug_en','slug_tr')->first();
+        return Section::query()->whereIn('id', ($this->section_ids ?? -1))->select('id','slug_uz','title_uz','title_kr','title_ru','title_en','slug_kr','slug_ru','slug_en')->first();
     }
 
     public function tutor()

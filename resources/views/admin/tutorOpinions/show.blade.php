@@ -77,15 +77,6 @@
                             {{ $tutorOpinion->short_title_en }}
                         </td>
                     </tr>
-
-                    <tr>
-                        <th>
-                            {{ trans('cruds.tutorOpinion.fields.short_title_tr') }}
-                        </th>
-                        <td>
-                            {{ $tutorOpinion->short_title_tr }}
-                        </td>
-                    </tr>
                     <tr>
                         <th>
                             {{ trans('cruds.tutorOpinion.fields.sort') }}

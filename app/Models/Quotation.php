@@ -23,12 +23,10 @@ class Quotation extends Model implements HasMedia
         'title_kr',
         'title_ru',
         'title_en',
-        'title_tr',
         'author_name_uz',
         'author_name_kr',
         'author_name_ru',
         'author_name_en',
-        'author_name_tr',
     ];
 
     public function registerMediaConversions(Media $media = null): void

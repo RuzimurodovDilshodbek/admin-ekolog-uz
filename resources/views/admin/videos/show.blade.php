@@ -65,15 +65,6 @@
                             {{ $video->title_en }}
                         </td>
                     </tr>
-
-                    <tr>
-                        <th>
-                            {{ trans('cruds.video.fields.title_tr') }}
-                        </th>
-                        <td>
-                            {{ $video->title_tr }}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
