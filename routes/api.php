@@ -31,6 +31,9 @@ Route::post("/trs-tag-create",[ \App\Http\Controllers\Admin\TagController::class
 //Route::get('post/getSectionId', 'PostController@getSectionId')->name('postGetSectionId');
 
 
+// Telegram Bot Webhook
+Route::post('telegram/webhook', [\App\Http\Controllers\TelegramBotController::class, 'webhook']);
+
 Route::group(['prefix' => 'v2', 'as' => 'api.', 'namespace' => 'Api'], function () {
     Route::get('resources/get-sections', 'ResourceController@getSections');
     Route::get('home/get-news-home', 'HomeController@getNewsHome');

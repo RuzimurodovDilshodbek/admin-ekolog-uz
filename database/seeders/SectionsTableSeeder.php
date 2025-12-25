@@ -10,9 +10,9 @@ class SectionsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('sections')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        DB::table('sections')->truncate();
+//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Asosiy bo'limlar
         $xabarlar = Section::create([
@@ -23,6 +23,7 @@ class SectionsTableSeeder extends Seeder
             'slug_ru' => 'soobsheniya',
             'slug_en' => 'messages',
             'parent_id' => null,
+            'status' => 1,
             'sort' => 1,
         ]);
 

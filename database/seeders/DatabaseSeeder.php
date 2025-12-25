@@ -12,10 +12,11 @@ class DatabaseSeeder extends Seeder
 //            PermissionsTableSeeder::class,
 //            RolesTableSeeder::class,
 //            PermissionRoleTableSeeder::class,
-            UsersTableSeeder::class,
-            RoleUserTableSeeder::class,
+//            UsersTableSeeder::class,
+//            RoleUserTableSeeder::class,
 //            SampleData::class,
-        SectionsTableSeeder::class
+        SectionsTableSeeder::class,
+        BotUsersTableSeeder::class,
         ]);
     }
 }

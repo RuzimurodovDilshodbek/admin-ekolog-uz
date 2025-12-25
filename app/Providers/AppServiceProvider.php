@@ -26,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
+
+        // PostgreSQL uchun string uzunligi
+        if (config('database.default') === 'pgsql') {
+            \Illuminate\Support\Facades\Schema::defaultStringLength(191);
+        }
     }
 }

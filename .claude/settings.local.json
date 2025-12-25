@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(test -d \"D:\\\\work\\\\OSPanelV6\\\\home\\\\admin-ekolog-uz\\\\resources\\\\lang\\\\tr\")"
+      "Bash(test -d \"D:\\\\work\\\\OSPanelV6\\\\home\\\\admin-ekolog-uz\\\\resources\\\\lang\\\\tr\")",
+      "Bash(php artisan:*)"
     ]
   }
 }

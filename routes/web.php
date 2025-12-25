@@ -123,6 +123,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('newsletters/destroy', 'NewslettersController@massDestroy')->name('newsletters.massDestroy');
     Route::resource('newsletters', 'NewslettersController');
 
+    // Bot Users
+    Route::delete('bot-users/destroy', 'BotUserController@massDestroy')->name('bot-users.massDestroy');
+    Route::post('bot-users/{botUser}/toggle-active', 'BotUserController@toggleActive')->name('bot-users.toggleActive');
+    Route::resource('bot-users', 'BotUserController');
+
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth', \App\Http\Middleware\SetLocale::class]], function () {
     // Change password
