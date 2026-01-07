@@ -57,7 +57,13 @@
                 @foreach($sections as $id => $entry)
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio"  id="section_ids[]" value="{{ $id }}"  name="section_ids[]" {{ ( in_array($id, $post->section_ids) )? "checked" : "" }}>
-                        <span for="section_ids[]">{{ $entry }}</span>
+                        @if(is_array($entry) && isset($entry['is_parent']) && $entry['is_parent'])
+                            <span for="section_ids[]" style="font-weight: bold;">{{ $entry['title'] }} (asosiy menyu)</span>
+                        @elseif(is_array($entry))
+                            <span for="section_ids[]">{{ $entry['title'] }}</span>
+                        @else
+                            <span for="section_ids[]">{{ $entry }}</span>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -769,62 +775,86 @@
 
             });
 
+            let isSubmitting = false;
             $('#postUpdateForm')[0].addEventListener('submit', async (e) => {
                 e.preventDefault();
-                let one = true;
-                let two = true;
-                let tree = true;
-                if($('#title_uz')[0].value && (!$('#title_en')[0].value || !$('#title_ru')[0].value)) {
-                    let inputValue = $('#title_uz')[0].value;
-                    const translatedValue = cyrToLat(inputValue);
-                    if(translatedValue) {
-                        one = false;
-                        await translateTitle('title', translatedValue);
-                        one = true;
-                        console.log('asnc1')
+
+                // Prevent multiple submissions
+                if (isSubmitting) {
+                    return false;
+                }
+
+                isSubmitting = true;
+                const submitBtn = $('#savePost');
+                const originalText = submitBtn.html();
+
+                // Disable button and show loading state
+                submitBtn.prop('disabled', true);
+                submitBtn.html('<i class="fa fa-spinner fa-spin"></i> Saqlanmoqda...');
+
+                try {
+                    let one = true;
+                    let two = true;
+                    let tree = true;
+                    if($('#title_uz')[0].value && (!$('#title_en')[0].value || !$('#title_ru')[0].value)) {
+                        let inputValue = $('#title_uz')[0].value;
+                        const translatedValue = cyrToLat(inputValue);
+                        if(translatedValue) {
+                            one = false;
+                            await translateTitle('title', translatedValue);
+                            one = true;
+                            console.log('asnc1')
+                        }
                     }
-                }
-                if($('#description_uz')[0].value && ( !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
-                    let inputValue = $('#description_uz')[0].value;
-                    const translatedValue = cyrToLat(inputValue);
-                    if(translatedValue) {
-                        two = false;
-                        await translateTitle('description', translatedValue);
-                        two = true;
-                        console.log('asnc2')
+                    if($('#description_uz')[0].value && ( !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
+                        let inputValue = $('#description_uz')[0].value;
+                        const translatedValue = cyrToLat(inputValue);
+                        if(translatedValue) {
+                            two = false;
+                            await translateTitle('description', translatedValue);
+                            two = true;
+                            console.log('asnc2')
+                        }
                     }
-                }
-                if($('#image_description_uz')[0].value && ( !$('#image_description_ru')[0].value || !$('#image_description_en')[0].value || !$('#image_description_ru')[0].value)) {
-                    let inputValue = $('#image_description_uz')[0].value;
-                    const translatedValue = cyrToLat(inputValue);
-                    if(translatedValue) {
-                        await translateTitle('image_description', translatedValue)
+                    if($('#image_description_uz')[0].value && ( !$('#image_description_ru')[0].value || !$('#image_description_en')[0].value || !$('#image_description_ru')[0].value)) {
+                        let inputValue = $('#image_description_uz')[0].value;
+                        const translatedValue = cyrToLat(inputValue);
+                        if(translatedValue) {
+                            await translateTitle('image_description', translatedValue)
+                        }
                     }
-                }
-                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
-                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
-                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
+                    const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
+                    const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
+                    const enEl = $('#tab_en').find('.note-editable.card-block')[0];
 
-                if (
-                    uzEl && uzEl.innerText &&
-                    (!ruEl?.innerText || !enEl?.innerText )
-                ) {
-                    let el = $('#tab_uz').find('.note-editable.card-block').clone();
-                    const element = el[0];
-                    await translateContent(element);
-                    console.log('asnc3')
-                }
-
+                    if (
+                        uzEl && uzEl.innerText &&
+                        (!ruEl?.innerText || !enEl?.innerText )
+                    ) {
+                        let el = $('#tab_uz').find('.note-editable.card-block').clone();
+                        const element = el[0];
+                        await translateContent(element);
+                        console.log('asnc3')
+                    }
 
 
-                // var inputs = this.querySelectorAll('input');
-                // var values = {};
-                // inputs.forEach(function(input) {
-                //     values[input.name] = input.value;
-                // });
-                // console.log(values);
-                if(one && two) {
-                    $('#postUpdateForm')[0].submit();
+
+                    // var inputs = this.querySelectorAll('input');
+                    // var values = {};
+                    // inputs.forEach(function(input) {
+                    //     values[input.name] = input.value;
+                    // });
+                    // console.log(values);
+                    if(one && two) {
+                        $('#postUpdateForm')[0].submit();
+                    }
+                } catch (error) {
+                    // Re-enable button on error
+                    isSubmitting = false;
+                    submitBtn.prop('disabled', false);
+                    submitBtn.html(originalText);
+                    console.error('Form submission error:', error);
+                    alert('Xatolik yuz berdi. Iltimos qaytadan urinib ko\'ring.');
                 }
             })
         });

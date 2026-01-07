@@ -84,13 +84,47 @@ class PostController extends Controller
             $section = Section::query()->where('id',$id)->first();
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
             if ($id == 26) {
-                $sections = Section::where('id',$id)->pluck('title_uz', 'id');
+                $sections = Section::where('id',$id)->get()->mapWithKeys(function($s) {
+                    return [$s->id => ['title' => $s->title_uz, 'is_parent' => false]];
+                });
             }else{
-                $sections = Section::whereIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+                // Include both parent and child sections
+                $allSections = Section::where('id', $id)
+                    ->orWhereIn('id', $section_parent_ids)
+                    ->get();
+
+                $sections = [];
+                $parentSection = null;
+
+                foreach ($allSections as $s) {
+                    if ($s->id == $id) {
+                        $parentSection = $s;
+                    }
+                }
+
+                // Add parent first (bold with "asosiy menu")
+                if ($parentSection) {
+                    $sections[$parentSection->id] = [
+                        'title' => $parentSection->title_uz,
+                        'is_parent' => true
+                    ];
+                }
+
+                // Add children
+                foreach ($allSections as $s) {
+                    if ($s->id != $id) {
+                        $sections[$s->id] = [
+                            'title' => $s->title_uz,
+                            'is_parent' => false
+                        ];
+                    }
+                }
             }
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+            $sections = Section::whereNotIn('id',$section_parent_ids)->get()->mapWithKeys(function($s) {
+                return [$s->id => ['title' => $s->title_uz, 'is_parent' => false]];
+            });
         }
         abort_if(Gate::denies('post_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -118,61 +152,65 @@ class PostController extends Controller
             $audiopath =$Fileaudio->storeAs('public/audio/' . $audio_name);
         }
 
+        // Translation is now handled by frontend JavaScript for better performance
+        // Backend translation has been disabled to speed up post creation
+        // If you need backend translation as fallback, uncomment the code below:
+
         // Translate title to other languages if not provided
-        if($request->title_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('title_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->title_uz);
-                        $translatedTitle = trsTitle($to_latin, $value_local);
-                        $request->merge(['title_' . $value_local => $translatedTitle ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->title_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('title_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->title_uz);
+        //                 $translatedTitle = trsTitle($to_latin, $value_local);
+        //                 $request->merge(['title_' . $value_local => $translatedTitle ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         // Translate description to other languages if not provided
-        if($request->description_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('description_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->description_uz);
-                        $translatedDescription = trsTitle($to_latin, $value_local);
-                        $request->merge(['description_' . $value_local => $translatedDescription ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->description_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('description_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->description_uz);
+        //                 $translatedDescription = trsTitle($to_latin, $value_local);
+        //                 $request->merge(['description_' . $value_local => $translatedDescription ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         // Translate content to other languages if not provided
-        if($request->content_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('content_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->content_uz);
-                        $translatedContent = trs($to_latin, $value_local);
-                        $request->merge(['content_' . $value_local => $translatedContent ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->content_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('content_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->content_uz);
+        //                 $translatedContent = trs($to_latin, $value_local);
+        //                 $request->merge(['content_' . $value_local => $translatedContent ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         // Translate image_description to other languages if not provided
-        if($request->image_description_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('image_description_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->image_description_uz);
-                        $translatedImageDesc = trsTitle($to_latin, $value_local);
-                        $request->merge(['image_description_' . $value_local => $translatedImageDesc ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->image_description_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs)) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('image_description_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->image_description_uz);
+        //                 $translatedImageDesc = trsTitle($to_latin, $value_local);
+        //                 $request->merge(['image_description_' . $value_local => $translatedImageDesc ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         $post = Post::create([
             'status' => $request->status,
@@ -204,18 +242,27 @@ class PostController extends Controller
 
         $tags = $request->input('tags', []);
 
+        // Optimize tag processing with bulk query
+        $nonNumericTags = [];
         foreach ($tags as $index => $tag) {
             if (!is_numeric($tag)) {
-                // mavjud tagni qidiramiz
-                $tagModel = Tag::query()->where('title_uz', $tag)->first();
+                $nonNumericTags[$index] = $tag;
+            }
+        }
 
-                if ($tagModel) {
-                    $tags[$index] = $tagModel->id;
+        if (!empty($nonNumericTags)) {
+            // Fetch all existing tags in one query
+            $existingTags = Tag::whereIn('title_uz', array_values($nonNumericTags))
+                ->pluck('id', 'title_uz')
+                ->toArray();
+
+            // Process tags and create missing ones
+            foreach ($nonNumericTags as $index => $tagName) {
+                if (isset($existingTags[$tagName])) {
+                    $tags[$index] = $existingTags[$tagName];
                 } else {
-                    // agar topilmasa yangi yaratamiz
-                    $newTag = Tag::create([
-                        'title_uz' => $tag,
-                    ]);
+                    // Create new tag
+                    $newTag = Tag::create(['title_uz' => $tagName]);
                     $tags[$index] = $newTag->id;
                 }
             }
@@ -315,10 +362,42 @@ class PostController extends Controller
         $post = Post::query()->where('id',$request->id)->first();
         if ($section_id = $request->section_id) {
             $section_parent_ids = Section::where('parent_id',$section_id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+            // Include both parent and child sections
+            $allSections = Section::where('id', $section_id)
+                ->orWhereIn('id', $section_parent_ids)
+                ->get();
+
+            $sections = [];
+            $parentSection = null;
+
+            foreach ($allSections as $s) {
+                if ($s->id == $section_id) {
+                    $parentSection = $s;
+                }
+            }
+
+            // Add parent first (bold with "asosiy menu")
+            if ($parentSection) {
+                $sections[$parentSection->id] = [
+                    'title' => $parentSection->title_uz,
+                    'is_parent' => true
+                ];
+            }
+
+            // Add children
+            foreach ($allSections as $s) {
+                if ($s->id != $section_id) {
+                    $sections[$s->id] = [
+                        'title' => $s->title_uz,
+                        'is_parent' => false
+                    ];
+                }
+            }
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+            $sections = Section::whereNotIn('id',$section_parent_ids)->get()->mapWithKeys(function($s) {
+                return [$s->id => ['title' => $s->title_uz, 'is_parent' => false]];
+            });
         }
 
         $tutors = Tutor::pluck('firstname', 'id');
@@ -335,16 +414,48 @@ class PostController extends Controller
         return view('admin.posts.edit', compact('post', 'sections', 'tags', 'tutors','catTab','postNetwork', 'locales' ));
     }
 
-    public function edit(Request $request)
+    public function edit(Post $post, Request $request)
     {
         abort_if(Gate::denies('post_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         if ($id = $request->id) {
             $section = Section::query()->where('id',$id);
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
-            $sections = Section::whereIn('id',$section_parent_ids)->orWhere('id',$id)->pluck('title_uz', 'id');
+            // Include both parent and child sections
+            $allSections = Section::where('id', $id)
+                ->orWhereIn('id', $section_parent_ids)
+                ->get();
+
+            $sections = [];
+            $parentSection = null;
+
+            foreach ($allSections as $s) {
+                if ($s->id == $id) {
+                    $parentSection = $s;
+                }
+            }
+
+            // Add parent first (bold with "asosiy menu")
+            if ($parentSection) {
+                $sections[$parentSection->id] = [
+                    'title' => $parentSection->title_uz,
+                    'is_parent' => true
+                ];
+            }
+
+            // Add children
+            foreach ($allSections as $s) {
+                if ($s->id != $id) {
+                    $sections[$s->id] = [
+                        'title' => $s->title_uz,
+                        'is_parent' => false
+                    ];
+                }
+            }
         } else {
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->pluck('title_uz', 'id');
+            $sections = Section::whereNotIn('id',$section_parent_ids)->get()->mapWithKeys(function($s) {
+                return [$s->id => ['title' => $s->title_uz, 'is_parent' => false]];
+            });
         }
 
         $tutors = Tutor::pluck('firstname', 'id');
@@ -369,61 +480,65 @@ class PostController extends Controller
         }
         $audio_name = null;
 
+        // Translation is now handled by frontend JavaScript for better performance
+        // Backend translation has been disabled to speed up post updates
+        // If you need backend translation as fallback, uncomment the code below:
+
         // Translate title to other languages if not provided
-        if($request->title_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('title_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->title_uz);
-                        $translatedTitle = trsTitle($to_latin, $value_local);
-                        $request->merge(['title_' . $value_local => $translatedTitle ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->title_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('title_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->title_uz);
+        //                 $translatedTitle = trsTitle($to_latin, $value_local);
+        //                 $request->merge(['title_' . $value_local => $translatedTitle ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         // Translate description to other languages if not provided
-        if($request->description_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('description_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->description_uz);
-                        $translatedDescription = trsTitle($to_latin, $value_local);
-                        $request->merge(['description_' . $value_local => $translatedDescription ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->description_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('description_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->description_uz);
+        //                 $translatedDescription = trsTitle($to_latin, $value_local);
+        //                 $request->merge(['description_' . $value_local => $translatedDescription ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         // Translate content to other languages if not provided
-        if($request->content_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('content_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->content_uz);
-                        $translatedContent = trs($to_latin, $value_local);
-                        $request->merge(['content_' . $value_local => $translatedContent ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->content_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('content_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->content_uz);
+        //                 $translatedContent = trs($to_latin, $value_local);
+        //                 $request->merge(['content_' . $value_local => $translatedContent ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         // Translate image_description to other languages if not provided
-        if($request->image_description_uz) {
-            foreach (config('app.locales') as $key_local => $value_local) {
-                if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
-                    // Only translate if the field is empty
-                    if(empty($request->input('image_description_' . $value_local))) {
-                        $to_latin = transliterateLatin($request->image_description_uz);
-                        $translatedImageDesc = trsTitle($to_latin, $value_local);
-                        $request->merge(['image_description_' . $value_local => $translatedImageDesc ?: '']);
-                    }
-                }
-            }
-        }
+        // if($request->image_description_uz) {
+        //     foreach (config('app.locales') as $key_local => $value_local) {
+        //         if($value_local !== 'uz' && in_array($value_local, $request->langs ?? [])) {
+        //             // Only translate if the field is empty
+        //             if(empty($request->input('image_description_' . $value_local))) {
+        //                 $to_latin = transliterateLatin($request->image_description_uz);
+        //                 $translatedImageDesc = trsTitle($to_latin, $value_local);
+        //                 $request->merge(['image_description_' . $value_local => $translatedImageDesc ?: '']);
+        //             }
+        //         }
+        //     }
+        // }
 
         $post->update($request->all());
 
@@ -444,10 +559,30 @@ class PostController extends Controller
         }
 
         $tags = $request->input('tags', []);
+
+        // Optimize tag processing with bulk query
+        $nonNumericTags = [];
         foreach ($tags as $index => $tag) {
-            if ( !is_numeric($tag)) {
-                $tag_id = Tag::query()->where('title_uzr','like',$tag)->first()->id;
-                $tags[$index] = $tag_id;
+            if (!is_numeric($tag)) {
+                $nonNumericTags[$index] = $tag;
+            }
+        }
+
+        if (!empty($nonNumericTags)) {
+            // Fetch all existing tags in one query
+            $existingTags = Tag::whereIn('title_uz', array_values($nonNumericTags))
+                ->pluck('id', 'title_uz')
+                ->toArray();
+
+            // Process tags and create missing ones
+            foreach ($nonNumericTags as $index => $tagName) {
+                if (isset($existingTags[$tagName])) {
+                    $tags[$index] = $existingTags[$tagName];
+                } else {
+                    // Create new tag if it doesn't exist
+                    $newTag = Tag::create(['title_uz' => $tagName]);
+                    $tags[$index] = $newTag->id;
+                }
             }
         }
 
@@ -536,6 +671,12 @@ class PostController extends Controller
 
     private function storeBase64($imageBase64)
     {
+        // Ensure the tmp/uploads directory exists
+        $uploadDir = storage_path('tmp/uploads');
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
         list($type, $imageBase64) = explode(';', $imageBase64);
         list(, $imageBase64)      = explode(',', $imageBase64);
         $imageBase64 = base64_decode($imageBase64);
