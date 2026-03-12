@@ -68,11 +68,12 @@
                 @endforeach
             </div>
 
-            <div class="form-group">
+            {{-- Auto-tarjima paneli yashirilgan (o'chirilgan) --}}
+            <div class="form-group" style="display:none">
                 <h4 class="label-for-checkbox">Post qaysi tillarga tarjima qilinsin</h4>
                 @foreach (config('app.locales') as $key_title => $value_title)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input section-checkboxes" type="checkbox" id="lang_{{$key_title}}" value="{{$value_title}}" name="langs[]" {{ $value_title == 'uz' || $value_title == 'ru' || $value_title == 'en' ? 'checked' : ''   }}>
+                        <input class="form-check-input section-checkboxes" type="checkbox" id="lang_{{$key_title}}" value="{{$value_title}}" name="langs[]" checked>
                         <span for="lang_{{$key_title}}" class="text-uppercase">{{ $value_title }}</span>
                     </div>
                 @endforeach
@@ -729,179 +730,27 @@
                     });
                 }
             }
-            $('#title_uz').on('blur', function () {
-                if($('#title_uz')[0].value && (!$('#title_ru')[0].value || !$('#title_en')[0].value )) {
-                    let inputValue = $('#title_uz')[0].value;
-                    const translatedValue = cyrToLat(inputValue);
-                    if(translatedValue) {
-                        translateTitle('title', translatedValue)
-                    }
-                }
-            });
-
-            $('#description_uz').on('blur', function () {
-                if($('#description_uz')[0].value && (!$('#description_ru')[0].value || !$('#description_en')[0].value )) {
-                    let inputValue = $('#description_uz')[0].value;
-                    const translatedValue = cyrToLat(inputValue);
-                    if(translatedValue) {
-                        translateTitle('description', translatedValue)
-                    }
-                }
-            });
-
-            $('#image_description_uz').on('blur', function () {
-                var inputValue = $(this).val();
-                const translatedValue = cyrToLat(inputValue);
-                if(translatedValue) {
-                    translateTitle('image_description', translatedValue)
-                }
-            });
-
-            $('#tab_uz').find('.note-editable.card-block').on('blur', function () {
-                const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
-                const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
-                const enEl = $('#tab_en').find('.note-editable.card-block')[0];
-
-                if (
-                    uzEl && uzEl.innerText &&
-                    (!ruEl?.innerText || !enEl?.innerText )
-                ) {
-                    let e = $(this).clone();
-                    const element = e[0];
-                    if(element.innerText.trim()) {
-                        translateContent(element);
-                    }
-                }
-
-            });
+            // Auto-tarjima o'chirilgan (funksiyalar saqlanib qolgan, faqat chaqirilmaydi)
 
             let isSubmitting = false;
-            $('#postUpdateForm')[0].addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                // Prevent multiple submissions
-                if (isSubmitting) {
-                    return false;
-                }
-
+            $('#postUpdateForm')[0].addEventListener('submit', function(e) {
+                if (isSubmitting) return false;
                 isSubmitting = true;
                 const submitBtn = $('#savePost');
-                const originalText = submitBtn.html();
-
-                // Disable button and show loading state
                 submitBtn.prop('disabled', true);
                 submitBtn.html('<i class="fa fa-spinner fa-spin"></i> Saqlanmoqda...');
-
-                try {
-                    let one = true;
-                    let two = true;
-                    let tree = true;
-                    if($('#title_uz')[0].value && (!$('#title_en')[0].value || !$('#title_ru')[0].value)) {
-                        let inputValue = $('#title_uz')[0].value;
-                        const translatedValue = cyrToLat(inputValue);
-                        if(translatedValue) {
-                            one = false;
-                            await translateTitle('title', translatedValue);
-                            one = true;
-                            console.log('asnc1')
-                        }
-                    }
-                    if($('#description_uz')[0].value && ( !$('#description_ru')[0].value || !$('#description_en')[0].value || !$('#description_ru')[0].value)) {
-                        let inputValue = $('#description_uz')[0].value;
-                        const translatedValue = cyrToLat(inputValue);
-                        if(translatedValue) {
-                            two = false;
-                            await translateTitle('description', translatedValue);
-                            two = true;
-                            console.log('asnc2')
-                        }
-                    }
-                    if($('#image_description_uz')[0].value && ( !$('#image_description_ru')[0].value || !$('#image_description_en')[0].value || !$('#image_description_ru')[0].value)) {
-                        let inputValue = $('#image_description_uz')[0].value;
-                        const translatedValue = cyrToLat(inputValue);
-                        if(translatedValue) {
-                            await translateTitle('image_description', translatedValue)
-                        }
-                    }
-                    const uzEl = $('#tab_uz').find('.note-editable.card-block')[0];
-                    const ruEl = $('#tab_ru').find('.note-editable.card-block')[0];
-                    const enEl = $('#tab_en').find('.note-editable.card-block')[0];
-
-                    if (
-                        uzEl && uzEl.innerText &&
-                        (!ruEl?.innerText || !enEl?.innerText )
-                    ) {
-                        let el = $('#tab_uz').find('.note-editable.card-block').clone();
-                        const element = el[0];
-                        await translateContent(element);
-                        console.log('asnc3')
-                    }
-
-
-
-                    // var inputs = this.querySelectorAll('input');
-                    // var values = {};
-                    // inputs.forEach(function(input) {
-                    //     values[input.name] = input.value;
-                    // });
-                    // console.log(values);
-                    if(one && two) {
-                        $('#postUpdateForm')[0].submit();
-                    }
-                } catch (error) {
-                    // Re-enable button on error
-                    isSubmitting = false;
-                    submitBtn.prop('disabled', false);
-                    submitBtn.html(originalText);
-                    console.error('Form submission error:', error);
-                    alert('Xatolik yuz berdi. Iltimos qaytadan urinib ko\'ring.');
-                }
-            })
+            });
         });
     </script>
 @endsection
-<style>
-    .label-for-checkbox{
-        font-weight: 700;
-        font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-        font-size: 1rem;
-        line-height: 1.5;
-        color: #212529;
-        text-align: lef
-    }
-</style>
 <style type="text/css">
-    body{
-        background: #f7fbf8;
-    }
-    h1{
-        font-weight: bold;
-        font-size:23px;
-    }
-    img {
-        display: block;
-        max-width: 100%;
-    }
+    img { display: block; max-width: 100%; }
     .preview {
-        text-align: center;
-        overflow: hidden;
-        width: 160px;
-        height: 160px;
-        margin: 10px;
-        border: 1px solid red;
+        text-align: center; overflow: hidden;
+        width: 200px; height: 133px;
+        margin: 10px; border: 2px dashed #d1d9e0; border-radius: 8px;
     }
-    input{
-        margin-top:40px;
-    }
-    .section{
-        margin-top:150px;
-        background:#fff;
-        padding:50px 30px;
-    }
-    .modal-lg{
-        max-width: 1000px !important;
-    }
-    .hidden-button{
-        display: none;
-    }
+    .modal-lg { max-width: 1000px !important; }
+    .hidden-button { display: none; }
+    input[type="file"] { margin-top: 8px !important; }
 </style>

@@ -1,17 +1,20 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 917px;">
     <!-- Brand Logo -->
-    <div class="d-flex align-items-center justify-content-around">
-        <a href="/admin" class="brand-link">
-            <span class="brand-text font-weight-light">
+    <div class="brand-link d-flex align-items-center justify-content-between">
+        <a href="/admin" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
+            <div style="width:32px; height:32px; background:linear-gradient(135deg,#27ae60,#1e8449); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <i class="fas fa-leaf" style="color:#fff; font-size:15px;"></i>
+            </div>
+            <span class="brand-text" style="font-size:14px; font-weight:800; color:#fff; letter-spacing:0.2px;">
                 {{ trans('panel.site_title') }}
             </span>
         </a>
         @can('post_create')
-            <span>
-                <a class="" href="{{ route('admin.posts.create') }}">
-                    <i class="fa fa-plus-circle" style="transform: scale(2); color: #00b249"></i>
-                </a>
-            </span>
+            <a href="{{ route('admin.posts.create') }}"
+               title="Yangi post"
+               style="width:28px; height:28px; background:rgba(39,174,96,0.2); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; text-decoration:none; transition:background 0.2s;">
+                <i class="fa fa-plus" style="color:#27ae60; font-size:13px;"></i>
+            </a>
         @endcan
     </div>
 
@@ -24,11 +27,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs("admin.home") ? "active" : "" }}" href="{{ route("admin.home") }}">
-                        <i class="fas fa-fw fa-tachometer-alt nav-icon">
-                        </i>
-                        <p>
-                            Bosh sahifa
-                        </p>
+                        <i class="fas fa-fw fa-tachometer-alt nav-icon"></i>
+                        <p>Bosh sahifa</p>
                     </a>
                 </li>
                 @can('user_management_access')
@@ -85,7 +85,7 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 1]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 1 || Request::get('section_id') == 1) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <i class="fa-fw nav-icon fas fa-newspaper"></i>
                             <p>Xabarlar</p>
                         </a>
                     </li>
@@ -93,7 +93,7 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 5]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 5 || Request::get('section_id') == 5) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <i class="fa-fw nav-icon fas fa-exclamation-triangle"></i>
                             <p>Eko muammo</p>
                         </a>
                     </li>
@@ -101,7 +101,7 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 14]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 14 || Request::get('section_id') == 14) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <i class="fa-fw nav-icon fas fa-hands-helping"></i>
                             <p>Eko volontiyorlik</p>
                         </a>
                     </li>
@@ -109,7 +109,7 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 19]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 19 || Request::get('section_id') == 19) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <i class="fa-fw nav-icon fas fa-envelope-open-text"></i>
                             <p>Murojaatlar</p>
                         </a>
                     </li>
@@ -117,7 +117,7 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 22]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 22 || Request::get('section_id') == 22) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <i class="fa-fw nav-icon fas fa-info-circle"></i>
                             <p>Biz haqimizda</p>
                         </a>
                     </li>
@@ -125,7 +125,7 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.postGetSectionId',['id' => 26]) }}" class="nav-link {{ request()->is("admin/post*") && (Request::get('id') == 26 || Request::get('section_id') == 26) ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-briefcase"></i>
+                            <i class="fa-fw nav-icon fas fa-shield-alt"></i>
                             <p>Eko korrupsiya</p>
                         </a>
                     </li>
@@ -134,10 +134,8 @@
                 @can('section_access')
                     <li class="nav-item">
                         <a href="{{ route("admin.sections.index") }}" class="nav-link {{ request()->is("admin/sections") || request()->is("admin/sections/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs"></i>
-                            <p>
-                                {{ trans('cruds.section.title') }}
-                            </p>
+                            <i class="fa-fw nav-icon fas fa-sitemap"></i>
+                            <p>{{ trans('cruds.section.title') }}</p>
                         </a>
                     </li>
                 @endcan
@@ -188,12 +186,8 @@
                 @can('video_access')
                     <li class="nav-item">
                         <a href="{{ route("admin.videos.index") }}" class="nav-link {{ request()->is("admin/vidios") || request()->is("admin/vidios/*") ? "active" : "" }}">
-                            <i class="fa-fw nav-icon fas fa-cogs">
-
-                            </i>
-                            <p>
-                                Videolar
-                            </p>
+                            <i class="fa-fw nav-icon fas fa-video"></i>
+                            <p>Videolar</p>
                         </a>
                     </li>
                 @endcan
@@ -358,25 +352,12 @@
                     @can('profile_password_edit')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}" href="{{ route('profile.password.edit') }}">
-                                <i class="fa-fw fas fa-key nav-icon">
-                                </i>
-                                <p>
-                                   Parolni o'zgartirish
-                                </p>
+                                <i class="fa-fw fas fa-key nav-icon"></i>
+                                <p>Parolni o'zgartirish</p>
                             </a>
                         </li>
                     @endcan
                 @endif
-                <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                        <p>
-                            <i class="fas fa-fw fa-sign-out-alt nav-icon">
-
-                            </i>
-                            <p>Chiqish</p>
-                        </p>
-                    </a>
-                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

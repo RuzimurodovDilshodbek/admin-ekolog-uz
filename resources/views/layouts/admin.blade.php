@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="{{ asset('css/adminltev3.css') }}" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
@@ -31,25 +31,42 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" style="color:#6b7a8d; padding: 0 16px; font-size:18px;">
+                        <i class="fa fa-bars"></i>
+                    </a>
                 </li>
             </ul>
+
             <!-- Right navbar links -->
-            @if(count(config('panel.available_languages', [])) > 1)
-                <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto align-items-center" style="gap:4px; padding-right:12px;">
+                @if(count(config('panel.available_languages', [])) > 1)
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            {{ strtoupper(app()->getLocale()) }}
+                        <a class="nav-link d-flex align-items-center" data-toggle="dropdown" href="#"
+                           style="background:#f0f2f5; border-radius:7px; padding:6px 12px; margin-right:4px;">
+                            <i class="fas fa-globe" style="margin-right:6px; color:#6b7a8d; font-size:13px;"></i>
+                            <span style="font-weight:700; font-size:12px; letter-spacing:0.5px; color:#2c3e50;">
+                                {{ strtoupper(app()->getLocale()) }}
+                            </span>
+                            <i class="fas fa-chevron-down" style="margin-left:6px; font-size:10px; color:#6b7a8d;"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             @foreach(config('panel.available_languages') as $langLocale => $langName)
-                                <a class="dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a>
+                                <a class="dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">
+                                    <span style="font-weight:700; min-width:28px; display:inline-block;">{{ strtoupper($langLocale) }}</span>
+                                    <span style="color:#6b7a8d; font-size:12px;">{{ $langName }}</span>
+                                </a>
                             @endforeach
                         </div>
                     </li>
-                </ul>
-            @endif
-
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();"
+                       title="Chiqish"
+                       style="background:#fff0f0; border-radius:7px; padding:6px 12px; color:#e74c3c; font-weight:700; font-size:12px; letter-spacing:0.3px;">
+                        <i class="fas fa-sign-out-alt" style="margin-right:5px;"></i> Chiqish
+                    </a>
+                </li>
+            </ul>
         </nav>
 
         @include('partials.menu')
@@ -78,10 +95,12 @@
         </div>
 
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.0.0-alpha
+            <span style="color:#a0aab4; font-size:12px;">
+                &copy; {{ date('Y') }} {{ trans('panel.site_title') }} &mdash; {{ trans('global.allRightsReserved') }}
+            </span>
+            <div class="float-right d-none d-sm-block" style="color:#c8d0da; font-size:11px; font-weight:600; letter-spacing:0.3px;">
+                Admin Panel <span style="color:#27ae60;">v3</span>
             </div>
-            <strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
         </footer>
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
