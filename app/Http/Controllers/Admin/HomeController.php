@@ -23,7 +23,7 @@ class HomeController
             'total_posts'   => Post::count(),
             'active_posts'  => Post::where('status', 1)->count(),
             'today_posts'   => Post::whereDate('created_at', today())->count(),
-            'total_views'   => Post::sum('views_count'),
+            'total_views'   => PostView::count(),
             'total_videos'  => Video::count(),
             'total_users'   => User::count(),
             'week_views'    => PostView::where('created_at', '>=', now()->subDays(7))->count(),
@@ -35,7 +35,11 @@ class HomeController
             ->take(8)
             ->get();
 
-        $top_posts = Post::orderBy('views_count', 'desc')
+        $top_posts = Post::select('posts.*', \DB::raw('COUNT(post_views.id) as view_count'))
+            ->leftJoin('post_views', 'posts.id', '=', 'post_views.post_id')
+            ->whereNull('posts.deleted_at')
+            ->groupBy('posts.id')
+            ->orderBy('view_count', 'desc')
             ->take(5)
             ->get();
 

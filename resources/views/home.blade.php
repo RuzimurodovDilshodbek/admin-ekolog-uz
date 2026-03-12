@@ -206,7 +206,7 @@
                             </div>
                             <div style="font-size:11.5px; color:#6b7a8d; margin-top:2px;">
                                 <i class="fas fa-eye" style="font-size:10px; margin-right:3px;"></i>
-                                {{ number_format($post->views_count) }} marta
+                                {{ number_format($post->view_count) }} marta
                             </div>
                         </div>
                         @can('post_edit')
