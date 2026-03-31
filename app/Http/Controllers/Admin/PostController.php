@@ -121,6 +121,7 @@ class PostController extends Controller
                 }
             }
         } else {
+            $section = null;
             $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
             $sections = Section::whereNotIn('id',$section_parent_ids)->get()->mapWithKeys(function($s) {
                 return [$s->id => ['title' => $s->title_uz, 'is_parent' => false]];
