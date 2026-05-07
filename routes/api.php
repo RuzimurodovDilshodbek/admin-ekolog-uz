@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api', ], function () {
+    Route::get('site-info', 'SiteInfoController@show');
     Route::get('home/get-full-resource', 'HomeController@getNewsHome');
     Route::get('get-post/{id}', 'HomeController@getPostId');
     Route::get('get-category/{id}', 'HomeController@getCategoryId');
@@ -20,6 +21,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api', ], functio
 });
 
 
+Route::get("/site-info", [\App\Http\Controllers\Api\SiteInfoController::class, "show"]);
 Route::post("/poll-voting", [\App\Http\Controllers\Web\PollController::class, "pollVoting"]);
 Route::post("/news/list-action-items", [\App\Http\Controllers\Web\HomeController::class, "getNewsList"]);
 Route::get("/newsletter", [\App\Http\Controllers\Web\HomeController::class, "newsletter"]);
@@ -35,6 +37,7 @@ Route::post("/trs-tag-create",[ \App\Http\Controllers\Admin\TagController::class
 Route::post('telegram/webhook', [\App\Http\Controllers\TelegramBotController::class, 'webhook']);
 
 Route::group(['prefix' => 'v2', 'as' => 'api.', 'namespace' => 'Api'], function () {
+    Route::get('site-info', 'SiteInfoController@show');
     Route::get('resources/get-sections', 'ResourceController@getSections');
     Route::get('home/get-news-home', 'HomeController@getNewsHome');
     Route::get('get-post/{id}', 'HomeController@getPostId');

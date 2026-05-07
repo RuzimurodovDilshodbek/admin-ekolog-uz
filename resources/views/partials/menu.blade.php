@@ -348,6 +348,13 @@
 {{--                        </a>--}}
 {{--                    </li>--}}
 {{--                @endcan--}}
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/site-info') ? 'active' : '' }}" href="{{ route('admin.site-info.edit') }}">
+                        <i class="fa-fw nav-icon fas fa-address-card"></i>
+                        <p>Aloqa sahifasi</p>
+                    </a>
+                </li>
+
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')
                         <li class="nav-item">

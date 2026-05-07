@@ -123,6 +123,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('newsletters/destroy', 'NewslettersController@massDestroy')->name('newsletters.massDestroy');
     Route::resource('newsletters', 'NewslettersController');
 
+    // Site Info (Aloqa sahifasi)
+    Route::get('site-info', 'SiteInfoController@edit')->name('site-info.edit');
+    Route::put('site-info', 'SiteInfoController@update')->name('site-info.update');
+
     // Bot Users
     Route::delete('bot-users/destroy', 'BotUserController@massDestroy')->name('bot-users.massDestroy');
     Route::post('bot-users/{botUser}/toggle-active', 'BotUserController@toggleActive')->name('bot-users.toggleActive');
