@@ -55,16 +55,43 @@
                     <h4 class="label-for-checkbox">{{ trans('cruds.post.fields.section') }}</h4>
                     @foreach($sections as $id => $entry)
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input section-checkboxes" type="radio" id="section_ids[]" value="{{$id}}" name="section_ids[]" required>
+                            <input class="form-check-input section-checkboxes" type="checkbox" id="section_{{ $id }}" value="{{$id}}" name="section_ids[]" required>
                             @if(is_array($entry) && isset($entry['is_parent']) && $entry['is_parent'])
-                                <span for="section_ids[]" style="font-weight: bold;">{{ $entry['title'] }} (asosiy menyu)</span>
+                                <label class="form-check-label" for="section_{{ $id }}" style="font-weight: bold;">{{ $entry['title'] }} (asosiy menyu)</label>
                             @elseif(is_array($entry))
-                                <span for="section_ids[]">{{ $entry['title'] }}</span>
+                                <label class="form-check-label" for="section_{{ $id }}">{{ $entry['title'] }}</label>
                             @else
-                                <span for="section_ids[]">{{ $entry }}</span>
+                                <label class="form-check-label" for="section_{{ $id }}">{{ $entry }}</label>
                             @endif
                         </div>
                     @endforeach
+
+                    @if(!empty($otherParents) && count($otherParents))
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="toggleOtherSections">
+                                + Boshqa bo'limlar
+                            </button>
+                        </div>
+                        <div id="otherSectionsBox" style="display:none; margin-top:10px; border:1px solid #dee2e6; padding:10px; border-radius:4px; background:#fafafa;">
+                            @foreach($otherParents as $parent)
+                                @if($parent->childs && count($parent->childs))
+                                <div class="other-parent" style="margin-bottom:6px;">
+                                    <a href="javascript:void(0)" class="parent-toggle" data-target="parent-children-{{ $parent->id }}" style="text-decoration:none; color:#212529;">
+                                        <span class="toggle-icon">▸</span> <strong>{{ $parent->title_uz }}</strong>
+                                    </a>
+                                    <div id="parent-children-{{ $parent->id }}" class="parent-children" style="display:none; margin-left:18px; margin-top:4px;">
+                                        @foreach($parent->childs as $child)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input section-checkboxes" type="checkbox" id="section_{{ $child->id }}" value="{{ $child->id }}" name="section_ids[]">
+                                                <label class="form-check-label" for="section_{{ $child->id }}">{{ $child->title_uz }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
                 {{-- Auto-tarjima paneli yashirilgan (o'chirilgan) --}}
@@ -666,6 +693,17 @@
                 }
             });
 
+            $('#toggleOtherSections').on('click', function () {
+                $('#otherSectionsBox').slideToggle(150);
+            });
+            $(document).on('click', '.parent-toggle', function () {
+                var targetId = $(this).data('target');
+                var $box = $('#' + targetId);
+                $box.slideToggle(150);
+                var $icon = $(this).find('.toggle-icon');
+                $icon.text($icon.text().trim() === '▸' ? '▾' : '▸');
+            });
+
             function getSelectedLangs() {
                 var form = document.getElementById('postCreateForm');
                 var langsCheckboxes = form.querySelectorAll('input[name="langs[]"]');
@@ -754,12 +792,12 @@
             // Auto-tarjima o’chirilgan (funksiyalar saqlanib qolgan, faqat chaqirilmaydi)
 
             let isSubmitting = false;
-            $(‘#postCreateForm’)[0].addEventListener(‘submit’, function(e) {
+            $('#postCreateForm')[0].addEventListener('submit', function(e) {
                 if (isSubmitting) return false;
                 isSubmitting = true;
-                const submitBtn = $(‘#sendPost’);
-                submitBtn.prop(‘disabled’, true);
-                submitBtn.html(‘<i class="fa fa-spinner fa-spin"></i> Saqlanmoqda...’);
+                const submitBtn = $('#sendPost');
+                submitBtn.prop('disabled', true);
+                submitBtn.html('<i class="fa fa-spinner fa-spin"></i> Saqlanmoqda...');
             });
 
         })

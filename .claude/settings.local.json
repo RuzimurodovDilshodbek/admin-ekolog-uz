@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(test -d \"D:\\\\work\\\\OSPanelV6\\\\home\\\\admin-ekolog-uz\\\\resources\\\\lang\\\\tr\")",
-      "Bash(php artisan:*)"
+      "Bash(php artisan:*)",
+      "Bash(xargs grep -l \"Biz haqimizda\\\\|about\\\\|team\")",
+      "Bash(Get-ChildItem -Path \".\\\\pages\" -Filter \"*.vue\")",
+      "Bash(Select-Object Name)"
     ]
   }
 }

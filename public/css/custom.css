@@ -190,7 +190,6 @@ body {
     font-size: 13px;
     font-weight: 700;
     color: var(--text-muted);
-    margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.4px;
 }

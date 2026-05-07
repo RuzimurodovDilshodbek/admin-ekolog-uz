@@ -56,16 +56,49 @@
                 <h4 class="label-for-checkbox">{{ trans('cruds.post.fields.section') }}</h4>
                 @foreach($sections as $id => $entry)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio"  id="section_ids[]" value="{{ $id }}"  name="section_ids[]" {{ ( in_array($id, $post->section_ids) )? "checked" : "" }}>
+                        <input class="form-check-input section-checkboxes" type="checkbox" id="section_{{ $id }}" value="{{ $id }}" name="section_ids[]" {{ in_array($id, $post->section_ids) ? "checked" : "" }}>
                         @if(is_array($entry) && isset($entry['is_parent']) && $entry['is_parent'])
-                            <span for="section_ids[]" style="font-weight: bold;">{{ $entry['title'] }} (asosiy menyu)</span>
+                            <label class="form-check-label" for="section_{{ $id }}" style="font-weight: bold;">{{ $entry['title'] }} (asosiy menyu)</label>
                         @elseif(is_array($entry))
-                            <span for="section_ids[]">{{ $entry['title'] }}</span>
+                            <label class="form-check-label" for="section_{{ $id }}">{{ $entry['title'] }}</label>
                         @else
-                            <span for="section_ids[]">{{ $entry }}</span>
+                            <label class="form-check-label" for="section_{{ $id }}">{{ $entry }}</label>
                         @endif
                     </div>
                 @endforeach
+
+                @if(!empty($otherParents) && count($otherParents))
+                    @php
+                        $selectedOtherIds = collect($otherParents)->flatMap(fn($p) => $p->childs->pluck('id'))->intersect($post->section_ids ?? [])->all();
+                    @endphp
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="toggleOtherSections">
+                            + Boshqa bo'limlar @if(count($selectedOtherIds)) <span class="badge badge-info">{{ count($selectedOtherIds) }}</span>@endif
+                        </button>
+                    </div>
+                    <div id="otherSectionsBox" style="display:{{ count($selectedOtherIds) ? 'block' : 'none' }}; margin-top:10px; border:1px solid #dee2e6; padding:10px; border-radius:4px; background:#fafafa;">
+                        @foreach($otherParents as $parent)
+                            @if($parent->childs && count($parent->childs))
+                                @php
+                                    $hasSelectedChild = $parent->childs->pluck('id')->intersect($post->section_ids ?? [])->isNotEmpty();
+                                @endphp
+                                <div class="other-parent" style="margin-bottom:6px;">
+                                    <a href="javascript:void(0)" class="parent-toggle" data-target="parent-children-{{ $parent->id }}" style="text-decoration:none; color:#212529;">
+                                        <span class="toggle-icon">{{ $hasSelectedChild ? '▾' : '▸' }}</span> <strong>{{ $parent->title_uz }}</strong>
+                                    </a>
+                                    <div id="parent-children-{{ $parent->id }}" class="parent-children" style="display:{{ $hasSelectedChild ? 'block' : 'none' }}; margin-left:18px; margin-top:4px;">
+                                        @foreach($parent->childs as $child)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input section-checkboxes" type="checkbox" id="section_{{ $child->id }}" value="{{ $child->id }}" name="section_ids[]" {{ in_array($child->id, $post->section_ids ?? []) ? "checked" : "" }}>
+                                                <label class="form-check-label" for="section_{{ $child->id }}">{{ $child->title_uz }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             {{-- Auto-tarjima paneli yashirilgan (o'chirilgan) --}}
@@ -650,6 +683,16 @@
     </script>
     <script>
         $(document).ready(function () {
+            $('#toggleOtherSections').on('click', function () {
+                $('#otherSectionsBox').slideToggle(150);
+            });
+            $(document).on('click', '.parent-toggle', function () {
+                var targetId = $(this).data('target');
+                $('#' + targetId).slideToggle(150);
+                var $icon = $(this).find('.toggle-icon');
+                $icon.text($icon.text().trim() === '▸' ? '▾' : '▸');
+            });
+
             function getSelectedLangs() {
                 var form = document.getElementById('postUpdateForm');
                 var langsCheckboxes = form.querySelectorAll('input[name="langs[]"]');

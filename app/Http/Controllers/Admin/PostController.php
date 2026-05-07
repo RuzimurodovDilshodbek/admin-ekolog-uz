@@ -56,7 +56,14 @@ class PostController extends Controller
 
 
         $posts = Post::with(['tags', 'media'])
-            ->whereIn('section_ids',$sectionIds)
+            ->where(function ($q) use ($sectionIds) {
+                foreach ($sectionIds as $sid) {
+                    $q->orWhere('section_ids', $sid)
+                      ->orWhere('section_ids', 'LIKE', $sid.',%')
+                      ->orWhere('section_ids', 'LIKE', '%,'.$sid)
+                      ->orWhere('section_ids', 'LIKE', '%,'.$sid.',%');
+                }
+            })
             ->groupBy('posts.id')
             ->orderBy("publish_date", "DESC")
             ->paginate(30)
@@ -129,6 +136,8 @@ class PostController extends Controller
         }
         abort_if(Gate::denies('post_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $otherParents = $this->getOtherParents($section?->id);
+
         $tags = Tag::pluck('title_uz', 'id');
 
         $tutors = Tutor::pluck('firstname', 'id')->prepend(trans('global.pleaseSelect'), '');
@@ -137,7 +146,24 @@ class PostController extends Controller
 
         $locales = config('app.locales');
 
-        return view('admin.posts.create', compact('sections', 'tags', 'catTab', 'locales', 'tutors', 'section'));
+        return view('admin.posts.create', compact('sections', 'tags', 'catTab', 'locales', 'tutors', 'section', 'otherParents'));
+    }
+
+    private function getOtherParents($excludeId = null)
+    {
+        $parentIds = Section::query()
+            ->whereNotNull('parent_id')
+            ->where('parent_id', '!=', 0)
+            ->pluck('parent_id')
+            ->unique()
+            ->values();
+
+        return Section::query()
+            ->whereIn('id', $parentIds)
+            ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+            ->with(['childs' => fn($q) => $q->orderBy('sort')])
+            ->orderBy('sort')
+            ->get();
     }
 
     public function store(StorePostRequest $request)
@@ -412,14 +438,29 @@ class PostController extends Controller
 
         $locales = config('app.locales');
 
-        return view('admin.posts.edit', compact('post', 'sections', 'tags', 'tutors','catTab','postNetwork', 'locales' ));
+        $otherParents = $this->getOtherParents($request->section_id);
+
+        return view('admin.posts.edit', compact('post', 'sections', 'tags', 'tutors','catTab','postNetwork', 'locales', 'otherParents' ));
     }
 
     public function edit(Post $post, Request $request)
     {
         abort_if(Gate::denies('post_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        if ($id = $request->id) {
-            $section = Section::query()->where('id',$id);
+
+        $id = $request->id;
+
+        // Agar URL da ?id= berilmagan bo'lsa, postning birinchi section_id sidan
+        // asosiy parentni aniqlaymiz — shunda yuqoridagi ro'yxat va "Boshqa bo'limlar"
+        // o'rtasida takroriylik bo'lmaydi.
+        if (!$id) {
+            $primarySectionId = collect($post->section_ids)->filter()->first();
+            if ($primarySectionId) {
+                $primarySection = Section::find($primarySectionId);
+                $id = $primarySection?->parent_id ?: $primarySectionId;
+            }
+        }
+
+        if ($id) {
             $section_parent_ids = Section::where('parent_id',$id)->pluck('id');
             // Include both parent and child sections
             $allSections = Section::where('id', $id)
@@ -453,10 +494,7 @@ class PostController extends Controller
                 }
             }
         } else {
-            $section_parent_ids = Section::whereIn('id',Section::pluck('parent_id'))->pluck('id');
-            $sections = Section::whereNotIn('id',$section_parent_ids)->get()->mapWithKeys(function($s) {
-                return [$s->id => ['title' => $s->title_uz, 'is_parent' => false]];
-            });
+            $sections = collect();
         }
 
         $tutors = Tutor::pluck('firstname', 'id');
@@ -471,7 +509,9 @@ class PostController extends Controller
 
         $locales = config('app.locales');
 
-        return view('admin.posts.edit', compact('post', 'sections', 'tags', 'tutors','catTab', 'locales', 'postNetwork' ));
+        $otherParents = $this->getOtherParents($id);
+
+        return view('admin.posts.edit', compact('post', 'sections', 'tags', 'tutors','catTab', 'locales', 'postNetwork', 'otherParents' ));
     }
 
     public function update(UpdatePostRequest $request, Post $post)
