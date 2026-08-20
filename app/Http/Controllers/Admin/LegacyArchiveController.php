@@ -185,13 +185,14 @@ class LegacyArchiveController extends Controller
 
     private function years(): array
     {
+        // substr() sqlite'da ham, mysql'da ham ishlaydi (strftime faqat sqlite'da bor)
         return LegacyPost::query()
-            ->selectRaw("strftime('%Y', published_at) as y, COUNT(*) as c")
+            ->selectRaw('substr(published_at, 1, 4) as y, COUNT(*) as c')
             ->whereNotNull('published_at')
             ->groupBy('y')
             ->orderByDesc('y')
             ->get()
-            ->filter(fn ($r) => $r->y)
+            ->filter(fn ($r) => preg_match('/^\d{4}$/', (string) $r->y))
             ->mapWithKeys(fn ($r) => [$r->y => $r->c])
             ->toArray();
     }
