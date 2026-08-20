@@ -21,7 +21,8 @@ class CleanPostTypographyCommand extends Command
                             {--dry-run : Faqat ko\'rsatadi, hech narsa o\'zgartirmaydi}
                             {--with-align : text-align (justify) ni ham olib tashlash}
                             {--with-color : matn ranglarini ham olib tashlash}
-                            {--id=* : Faqat shu ID li postlar}';
+                            {--id=* : Faqat shu ID li postlar}
+                            {--sample= : Shu ID li postning oldin/keyin ko\'rinishini chiqaradi}';
 
     protected $description = 'Postlardagi Word/Docs shrift uslublarini tozalaydi (font-size, font-family, line-height, MsoNormal...)';
 
@@ -34,6 +35,10 @@ class CleanPostTypographyCommand extends Command
             stripColor: (bool) $this->option('with-color'),
             stripAlign: (bool) $this->option('with-align'),
         );
+
+        if ($sampleId = $this->option('sample')) {
+            return $this->showSample((int) $sampleId, $cleaner);
+        }
 
         $query = Post::query()->select(array_merge(['id', 'title_uz'], self::COLUMNS));
         if ($ids = $this->option('id')) {
@@ -50,6 +55,8 @@ class CleanPostTypographyCommand extends Command
             $updates = [];
             $before  = [];
 
+            $removedHere = 0;
+
             foreach (self::COLUMNS as $col) {
                 $res = $cleaner->clean($post->{$col});
 
@@ -57,9 +64,13 @@ class CleanPostTypographyCommand extends Command
                     $totals[$k] = ($totals[$k] ?? 0) + $n;
                 }
 
-                if ($res['changed']) {
-                    $updates[$col] = $res['html'];
-                    $before[$col]  = $post->{$col};
+                // Faqat haqiqatan uslub olib tashlangan bo'lsa yozamiz.
+                // Aks holda HTML'ni bekorga qayta yozgan bo'lardik (DOM qayta
+                // seriyalashda tirnoq/bo'shliqlar o'zgarib ketishi mumkin).
+                if ($res['changed'] && $res['removed'] !== []) {
+                    $updates[$col]  = $res['html'];
+                    $before[$col]   = $post->{$col};
+                    $removedHere   += array_sum($res['removed']);
                 }
             }
 
@@ -69,8 +80,9 @@ class CleanPostTypographyCommand extends Command
 
             $changed[] = [
                 'id'      => $post->id,
-                'title'   => mb_substr((string) $post->title_uz, 0, 46),
+                'title'   => mb_substr((string) $post->title_uz, 0, 42),
                 'cols'    => implode(', ', array_map(fn ($c) => str_replace('content_', '', $c), array_keys($updates))),
+                'removed' => $removedHere,
                 'saved'   => $this->saved($before, $updates),
             ];
 
@@ -98,13 +110,19 @@ class CleanPostTypographyCommand extends Command
         }
 
         if ($changed) {
+            usort($changed, fn ($a, $b) => $b['removed'] <=> $a['removed']);
+
             $this->line('');
+            $this->line('  Eng ko\'p tozalanadigan postlar:');
             $this->table(
-                ['ID', 'Sarlavha', 'Ustunlar', 'Kichrayadi'],
-                array_map(fn ($c) => [$c['id'], $c['title'], $c['cols'], $c['saved']], array_slice($changed, 0, 25))
+                ['ID', 'Sarlavha', 'Ustunlar', 'Uslub', 'Kichrayadi'],
+                array_map(
+                    fn ($c) => [$c['id'], $c['title'], $c['cols'], $c['removed'], $c['saved']],
+                    array_slice($changed, 0, 20)
+                )
             );
-            if (count($changed) > 25) {
-                $this->line('    ... va yana ' . (count($changed) - 25) . ' ta post');
+            if (count($changed) > 20) {
+                $this->line('    ... va yana ' . (count($changed) - 20) . ' ta post');
             }
         }
 
@@ -114,6 +132,44 @@ class CleanPostTypographyCommand extends Command
             $this->line('');
             $this->comment("  Asl matnlar zaxirasi: storage/app/{$file}");
             $this->comment('  Qaytarish: php artisan posts:restore-typography ' . $file);
+        }
+
+        return self::SUCCESS;
+    }
+
+    /** Bitta postning oldin/keyin ko'rinishini chiqaradi */
+    private function showSample(int $id, TypographyCleaner $cleaner): int
+    {
+        $post = Post::find($id);
+
+        if (! $post) {
+            $this->error("Post #{$id} topilmadi.");
+
+            return self::FAILURE;
+        }
+
+        $this->info("Post #{$id} — " . mb_substr((string) $post->title_uz, 0, 60));
+
+        foreach (self::COLUMNS as $col) {
+            $html = (string) $post->{$col};
+            if (trim($html) === '') {
+                continue;
+            }
+
+            $res = $cleaner->clean($html);
+            if (! $res['changed']) {
+                continue;
+            }
+
+            $this->line('');
+            $this->comment("  --- {$col} ---");
+            $this->line('  OLDIN:');
+            $this->line('    ' . mb_substr(preg_replace('/\s+/', ' ', $html), 0, 420));
+            $this->line('');
+            $this->line('  KEYIN:');
+            $this->line('    ' . mb_substr(preg_replace('/\s+/', ' ', $res['html']), 0, 420));
+            $this->line('');
+            $this->line('  Olib tashlandi: ' . json_encode($res['removed'], JSON_UNESCAPED_UNICODE));
         }
 
         return self::SUCCESS;
