@@ -78,6 +78,31 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        /*
+         | Eski (2015-2025) ekolog.uz WordPress arxivi uchun ALOHIDA baza.
+         | Asosiy sayt bazasiga umuman aloqasi yo'q - faqat o'qish uchun arxiv.
+         | Sukut bo'yicha sqlite fayl; kerak bo'lsa .env orqali pgsql'ga o'tkaziladi.
+         */
+        'legacy' => [
+            'driver'                  => env('LEGACY_DB_DRIVER', 'sqlite'),
+            'url'                     => env('LEGACY_DATABASE_URL'),
+            'database'                => env('LEGACY_DB_DATABASE', database_path('legacy.sqlite')),
+            'host'                    => env('LEGACY_DB_HOST', '127.0.0.1'),
+            'port'                    => env('LEGACY_DB_PORT', '3306'),
+            'username'                => env('LEGACY_DB_USERNAME', ''),
+            'password'                => env('LEGACY_DB_PASSWORD', ''),
+            'unix_socket'             => env('LEGACY_DB_SOCKET', ''),
+            'charset'                 => 'utf8mb4',
+            'collation'               => 'utf8mb4_unicode_ci',
+            'prefix'                  => '',
+            'prefix_indexes'          => true,
+            'strict'                  => true,
+            'engine'                  => null,
+            'search_path'             => 'public',   // pgsql uchun
+            'sslmode'                 => 'prefer',   // pgsql uchun
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),

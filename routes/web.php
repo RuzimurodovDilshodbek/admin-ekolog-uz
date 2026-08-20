@@ -127,6 +127,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('site-info', 'SiteInfoController@edit')->name('site-info.edit');
     Route::put('site-info', 'SiteInfoController@update')->name('site-info.update');
 
+    // Eski sayt arxivi (2015-2025) - faqat ko'rish uchun, alohida bazadan
+    Route::get('arxiv', 'LegacyArchiveController@index')->name('legacy.index');
+    Route::get('arxiv/media', 'LegacyArchiveController@media')->name('legacy.media');
+    // Manzil manba + WordPress ID bo'yicha - qayta import qilinganda ham o'zgarmaydi
+    Route::get('arxiv/{source}/{wpId}', 'LegacyArchiveController@show')
+        ->whereIn('source', ['old', 'old2'])
+        ->whereNumber('wpId')
+        ->name('legacy.show');
+
     // Bot Users
     Route::delete('bot-users/destroy', 'BotUserController@massDestroy')->name('bot-users.massDestroy');
     Route::post('bot-users/{botUser}/toggle-active', 'BotUserController@toggleActive')->name('bot-users.toggleActive');

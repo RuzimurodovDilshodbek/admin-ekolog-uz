@@ -354,6 +354,33 @@
                         <p>Aloqa sahifasi</p>
                     </a>
                 </li>
+                @can('post_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/arxiv*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle {{ request()->is('admin/arxiv*') ? 'active' : '' }}" href="#">
+                            <i class="fa-fw nav-icon fas fa-archive"></i>
+                            <p>
+                                Eski sayt arxivi
+                                <i class="right fa fa-fw fa-angle-left nav-icon"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.legacy.index') }}"
+                                   class="nav-link {{ request()->is('admin/arxiv') ? 'active' : '' }}">
+                                    <i class="fa-fw nav-icon fas fa-newspaper"></i>
+                                    <p>Eski maqolalar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.legacy.media') }}"
+                                   class="nav-link {{ request()->is('admin/arxiv/media') ? 'active' : '' }}">
+                                    <i class="fa-fw nav-icon fas fa-images"></i>
+                                    <p>Eski medialar</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')

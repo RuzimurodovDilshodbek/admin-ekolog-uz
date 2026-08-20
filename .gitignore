@@ -18,3 +18,10 @@ yarn-error.log
 /.idea
 /.vscode
 .htaccess
+
+# Eski sayt arxivi (alohida baza va import fayllari) - git orqali emas,
+# to'g'ridan-to'g'ri ko'chiriladi
+/database/legacy.sqlite
+/storage/app/legacy-import
+/storage/app/legacy-render
+/public/legacy-uploads
