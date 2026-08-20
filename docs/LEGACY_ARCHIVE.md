@@ -106,6 +106,21 @@ Marshrutlar (admin, `post_access` ruxsati bilan):
 > shuning uchun `legacy:import --fresh` qayta bajarilganda ham havolalar
 > ishlashda davom etadi.
 
+## Production holati (161.97.88.95 / admin-ekolog.uz)
+
+O'rnatilgan. Muhim jihatlar:
+
+- Serverda **`pdo_sqlite` yo'q**, shuning uchun arxiv o'sha yerda alohida
+  **MySQL** bazasida: `ekolog_legacy` (asosiy `admin-ekolog` bazasiga tegilmagan).
+  `.env` da `LEGACY_DB_*` o'zgaruvchilari; eski `.env` nusxasi `.env.bak-*` da.
+- Media: `public/legacy-uploads/` — 451 MB, 7 603 fayl.
+- **nginx himoyasi**: `/legacy-uploads/` ostida `.php/.phtml/.phar/.cgi/.pl/.py/.sh/.htm(l)/.svg`
+  bajarilishi ham, ochilishi ham bloklangan (`deny all`). Konfig nusxasi
+  `/etc/nginx/sites-available/admin.ekolog.uz.bak-*` da.
+- PHP-FPM 8.1 ishlatiladi (CLI 8.2) — kod 8.1 bilan mos.
+
+Qayta o'rnatish yoki boshqa serverga ko'chirish uchun quyidagi tartib.
+
 ## Serverga o'rnatish (161.97.88.95)
 
 Arxiv bazasi va media fayllar **git orqali yuborilmaydi** (`.gitignore`da).
