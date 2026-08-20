@@ -65,6 +65,14 @@ class LegacyArchiveController extends Controller
         // Ko'rsatiladigan postlar uchun rasm va ruknlarni bir so'rovda olamiz
         $this->attachThumbnails($posts->getCollection());
 
+        // Cheksiz aylantirish: faqat kartochkalar qaytariladi
+        if ($request->boolean('partial')) {
+            return response()->json([
+                'html' => view('admin.legacy._cards', ['posts' => $posts])->render(),
+                'next' => $posts->hasMorePages() ? $posts->currentPage() + 1 : null,
+            ]);
+        }
+
         return view('admin.legacy.index', [
             'posts'      => $posts,
             'years'      => $this->years(),
@@ -136,6 +144,13 @@ class LegacyArchiveController extends Controller
         $media = $query->orderByDesc('published_at')
             ->paginate(60)
             ->withQueryString();
+
+        if ($request->boolean('partial')) {
+            return response()->json([
+                'html' => view('admin.legacy._media_items', ['media' => $media])->render(),
+                'next' => $media->hasMorePages() ? $media->currentPage() + 1 : null,
+            ]);
+        }
 
         $mediaYears = LegacyMedia::query()
             ->selectRaw("substr(file_path, 1, 4) as y")

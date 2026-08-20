@@ -2,18 +2,28 @@
 
 @section('styles')
 <style>
-    .lg-card{background:#fff;border:1px solid #e6eaef;border-radius:12px;overflow:hidden;height:100%;display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s}
-    .lg-card:hover{box-shadow:0 8px 24px rgba(44,62,80,.12);transform:translateY(-2px)}
-    .lg-thumb{position:relative;width:100%;padding-top:58%;background:#eef1f4;overflow:hidden}
+    .lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;align-items:start}
+    .lg-card{display:flex;flex-direction:column;background:#fff;border:1px solid #e6eaef;border-radius:12px;
+        overflow:hidden;text-decoration:none;transition:box-shadow .18s,transform .18s}
+    .lg-card:hover{box-shadow:0 8px 24px rgba(44,62,80,.12);transform:translateY(-2px);text-decoration:none}
+    .lg-thumb{position:relative;display:block;width:100%;padding-top:58%;background:#eef1f4;overflow:hidden}
     .lg-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    .lg-thumb .lg-noimg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#b6c0cb;font-size:26px}
-    .lg-badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.62);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.3px}
-    .lg-body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
-    .lg-title{font-size:13.5px;font-weight:700;color:#2c3e50;line-height:1.35;margin:0 0 8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-    .lg-meta{margin-top:auto;font-size:11px;color:#8b97a4;display:flex;justify-content:space-between;align-items:center;gap:6px}
+    .lg-badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.62);color:#fff;font-size:10px;
+        font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.3px}
+    /* rasmsiz kartochka: kichik kulrang belgi, ulkan bo'sh joy o'rniga */
+    .lg-badge.flat{position:static;display:inline-block;align-self:flex-start;background:#eef1f4;color:#8b97a4;
+        margin-bottom:6px;padding:2px 7px}
+    .lg-body{display:flex;flex-direction:column;flex:1;padding:12px 14px}
+    .lg-card.no-img .lg-body{padding:10px 12px}
+    .lg-title{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+        font-size:13.5px;font-weight:700;color:#2c3e50;line-height:1.35;margin:0 0 8px}
+    .lg-card.no-img .lg-title{-webkit-line-clamp:4;font-size:13px;margin-bottom:6px}
+    .lg-meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:6px;
+        font-size:11px;color:#8b97a4}
     .lg-chip{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;letter-spacing:.3px}
     .lg-chip.uz{background:#e8f6ee;color:#1e8449}.lg-chip.ru{background:#e8f0fb;color:#2471a3}
     .lg-chip.kr{background:#f4ecfa;color:#7d3c98}.lg-chip.en{background:#fdf0e6;color:#ca6f1e}
+
     .lg-filter{background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:14px 16px;margin-bottom:18px}
     .lg-filter label{font-size:11px;font-weight:700;color:#6b7a8d;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;display:block}
     .lg-filter .form-control,.lg-filter select{font-size:13px;border-radius:8px;border:1px solid #dfe4ea;height:36px}
@@ -22,10 +32,19 @@
     .lg-mini .v{font-size:17px;font-weight:800;color:#2c3e50;line-height:1}
     .lg-mini .l{font-size:11px;color:#8b97a4}
     .lg-warn{background:#fff8e6;border:1px solid #f5dfa6;color:#7a5c12;border-radius:10px;padding:10px 14px;font-size:12.5px}
-    .lgp-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:10px 14px;margin-top:6px}
+    .lg-empty{background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:40px;text-align:center;color:#8b97a4}
+
+    .lg-more{padding:22px 0;text-align:center;font-size:12.5px;color:#8b97a4}
+    .lg-more .spin{display:inline-block;width:16px;height:16px;border:2px solid #dfe4ea;border-top-color:#27ae60;
+        border-radius:50%;animation:lgspin .7s linear infinite;vertical-align:-3px;margin-right:8px}
+    @keyframes lgspin{to{transform:rotate(360deg)}}
+
+    .lgp-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fff;
+        border:1px solid #e6eaef;border-radius:12px;padding:10px 14px;margin-top:6px}
     .lgp-info{font-size:12.5px;color:#8b97a4}.lgp-info b{color:#2c3e50}
     .lgp{display:flex;list-style:none;margin:0;padding:0;gap:4px;flex-wrap:wrap}
-    .lgp-btn{display:inline-flex;align-items:center;gap:5px;min-width:34px;height:32px;padding:0 10px;justify-content:center;border-radius:7px;font-size:12.5px;font-weight:700;color:#5b6b7a;background:#f4f6f8;text-decoration:none;transition:background .15s,color .15s}
+    .lgp-btn{display:inline-flex;align-items:center;gap:5px;min-width:34px;height:32px;padding:0 10px;justify-content:center;
+        border-radius:7px;font-size:12.5px;font-weight:700;color:#5b6b7a;background:#f4f6f8;text-decoration:none}
     .lgp-btn:hover{background:#e6ebf0;color:#2c3e50;text-decoration:none}
     .lgp-btn.on{background:#27ae60;color:#fff}
     .lgp-btn.off{opacity:.4;pointer-events:none}
@@ -62,7 +81,6 @@
     <div class="lg-warn mb-3">
         <i class="fas fa-info-circle"></i>
         Media fayllar hali serverga ko'chirilmagan &mdash; hozircha faqat matn va fayl nomlari ko'rinadi.
-        Rasmlar <code>public/{{ config('legacy.media_dir') }}/</code> papkasiga qo'yilgach avtomatik chiqadi.
     </div>
 @endif
 
@@ -122,42 +140,27 @@
 
 <div class="d-flex justify-content-between align-items-center mb-2" style="font-size:12.5px;color:#6b7a8d;">
     <div><strong style="color:#2c3e50;">{{ number_format($posts->total()) }}</strong> ta yozuv topildi</div>
-    <div>{{ $posts->currentPage() }} / {{ max($posts->lastPage(), 1) }}-sahifa</div>
+    <div id="lg-counter" data-total="{{ $posts->total() }}">{{ $posts->count() }} ta ko'rsatilmoqda</div>
 </div>
 
-<div class="row">
-    @forelse($posts as $post)
-        <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-            <a href="{{ route('admin.legacy.show', [$post->source, $post->wp_id]) }}" style="text-decoration:none;display:block;height:100%;">
-                <div class="lg-card">
-                    <div class="lg-thumb">
-                        @if($post->thumb && $post->thumb->file_exists)
-                            <img src="{{ $post->thumb->url }}" alt="" loading="lazy">
-                        @else
-                            <div class="lg-noimg"><i class="fas fa-image"></i></div>
-                        @endif
-                        <span class="lg-badge">{{ $post->source === 'old' ? 'old' : 'old2' }}</span>
-                    </div>
-                    <div class="lg-body">
-                        <p class="lg-title">{{ $post->title ?: '(sarlavhasiz)' }}</p>
-                        <div class="lg-meta">
-                            <span>{{ $post->published_at?->format('d.m.Y') ?? '—' }}</span>
-                            <span class="lg-chip {{ $post->lang }}">{{ strtoupper($post->lang) }}</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    @empty
-        <div class="col-12">
-            <div style="background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:40px;text-align:center;color:#8b97a4;">
-                <i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:10px;"></i>
-                Hech narsa topilmadi
-            </div>
-        </div>
-    @endforelse
-</div>
+@if($posts->total() === 0)
+    <div class="lg-empty">
+        <i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:10px;"></i>
+        Hech narsa topilmadi
+    </div>
+@else
+    <div class="lg-grid" id="lg-grid">
+        @include('admin.legacy._cards', ['posts' => $posts])
+    </div>
 
-@include('admin.legacy._pagination', ['paginator' => $posts])
+    <div class="lg-more" id="lg-more" hidden><span class="spin"></span>Yuklanmoqda...</div>
+    <div id="lg-sentinel"></div>
 
+    @include('admin.legacy._pagination', ['paginator' => $posts, 'wrapId' => 'lg-pagination'])
+@endif
+
+@endsection
+
+@section('scripts')
+@include('admin.legacy._infinite_scroll', ['prefix' => 'lg', 'paginator' => $posts])
 @endsection

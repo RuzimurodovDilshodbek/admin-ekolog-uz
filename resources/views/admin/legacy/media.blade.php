@@ -5,7 +5,7 @@
     .lg-filter{background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:14px 16px;margin-bottom:18px}
     .lg-filter label{font-size:11px;font-weight:700;color:#6b7a8d;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;display:block}
     .lg-filter .form-control,.lg-filter select{font-size:13px;border-radius:8px;border:1px solid #dfe4ea;height:36px}
-    .mg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+    .mg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-items:start}
     .mg-item{background:#fff;border:1px solid #e6eaef;border-radius:10px;overflow:hidden;transition:box-shadow .18s,transform .18s}
     .mg-item:hover{box-shadow:0 8px 22px rgba(44,62,80,.12);transform:translateY(-2px)}
     .mg-ph{position:relative;padding-top:72%;background:#eef1f4;display:block}
@@ -18,10 +18,19 @@
     .lg-mini .v{font-size:17px;font-weight:800;color:#2c3e50;line-height:1}
     .lg-mini .l{font-size:11px;color:#8b97a4}
     .lg-warn{background:#fff8e6;border:1px solid #f5dfa6;color:#7a5c12;border-radius:10px;padding:10px 14px;font-size:12.5px}
-    .lgp-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:10px 14px;margin-top:6px}
+    .lg-empty{background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:40px;text-align:center;color:#8b97a4}
+
+    .lg-more{padding:22px 0;text-align:center;font-size:12.5px;color:#8b97a4}
+    .lg-more .spin{display:inline-block;width:16px;height:16px;border:2px solid #dfe4ea;border-top-color:#3498db;
+        border-radius:50%;animation:lgspin .7s linear infinite;vertical-align:-3px;margin-right:8px}
+    @keyframes lgspin{to{transform:rotate(360deg)}}
+
+    .lgp-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fff;
+        border:1px solid #e6eaef;border-radius:12px;padding:10px 14px;margin-top:6px}
     .lgp-info{font-size:12.5px;color:#8b97a4}.lgp-info b{color:#2c3e50}
     .lgp{display:flex;list-style:none;margin:0;padding:0;gap:4px;flex-wrap:wrap}
-    .lgp-btn{display:inline-flex;align-items:center;gap:5px;min-width:34px;height:32px;padding:0 10px;justify-content:center;border-radius:7px;font-size:12.5px;font-weight:700;color:#5b6b7a;background:#f4f6f8;text-decoration:none;transition:background .15s,color .15s}
+    .lgp-btn{display:inline-flex;align-items:center;gap:5px;min-width:34px;height:32px;padding:0 10px;justify-content:center;
+        border-radius:7px;font-size:12.5px;font-weight:700;color:#5b6b7a;background:#f4f6f8;text-decoration:none}
     .lgp-btn:hover{background:#e6ebf0;color:#2c3e50;text-decoration:none}
     .lgp-btn.on{background:#27ae60;color:#fff}
     .lgp-btn.off{opacity:.4;pointer-events:none}
@@ -54,8 +63,7 @@
 @if($stats['files_present'] === 0)
     <div class="lg-warn mb-3">
         <i class="fas fa-info-circle"></i>
-        Fayllarning o'zi hali serverga ko'chirilmagan. Ro'yxat va fayl nomlari to'liq &mdash; rasmlar
-        <code>public/{{ config('legacy.media_dir') }}/&lt;manba&gt;/</code> papkasiga joylashtirilgach avtomatik ko'rinadi.
+        Fayllarning o'zi hali serverga ko'chirilmagan. Ro'yxat va fayl nomlari to'liq.
     </div>
 @endif
 
@@ -109,35 +117,27 @@
 
 <div class="d-flex justify-content-between align-items-center mb-2" style="font-size:12.5px;color:#6b7a8d;">
     <div><strong style="color:#2c3e50;">{{ number_format($media->total()) }}</strong> ta fayl</div>
-    <div>{{ $media->currentPage() }} / {{ max($media->lastPage(), 1) }}-sahifa</div>
+    <div id="mg-counter" data-total="{{ $media->total() }}">{{ $media->count() }} ta ko'rsatilmoqda</div>
 </div>
 
-<div class="mg-grid mb-3">
-    @forelse($media as $m)
-        <div class="mg-item">
-            <a class="mg-ph" href="{{ $m->file_exists ? $m->url : '#' }}" target="{{ $m->file_exists ? '_blank' : '_self' }}">
-                @if($m->file_exists && $m->is_image)
-                    <img src="{{ $m->url }}" alt="" loading="lazy">
-                @else
-                    <span class="miss">
-                        <i class="fas fa-{{ $m->is_video ? 'film' : 'image' }}"></i>
-                        @unless($m->file_exists)<small>fayl yo'q</small>@endunless
-                    </span>
-                @endif
-            </a>
-            <div class="mg-cap">
-                <b title="{{ $m->title }}">{{ $m->title ?: basename((string) $m->file_path) }}</b>
-                {{ $m->file_path }}
-                @if($m->width) <br>{{ $m->width }}&times;{{ $m->height }} @endif
-            </div>
-        </div>
-    @empty
-        <div style="grid-column:1/-1;background:#fff;border:1px solid #e6eaef;border-radius:12px;padding:40px;text-align:center;color:#8b97a4;">
-            <i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:10px;"></i>Hech narsa topilmadi
-        </div>
-    @endforelse
-</div>
+@if($media->total() === 0)
+    <div class="lg-empty">
+        <i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:10px;"></i>
+        Hech narsa topilmadi
+    </div>
+@else
+    <div class="mg-grid" id="mg-grid">
+        @include('admin.legacy._media_items', ['media' => $media])
+    </div>
 
-@include('admin.legacy._pagination', ['paginator' => $media])
+    <div class="lg-more" id="mg-more" hidden><span class="spin"></span>Yuklanmoqda...</div>
+    <div id="mg-sentinel"></div>
 
+    @include('admin.legacy._pagination', ['paginator' => $media, 'wrapId' => 'mg-pagination'])
+@endif
+
+@endsection
+
+@section('scripts')
+@include('admin.legacy._infinite_scroll', ['prefix' => 'mg', 'paginator' => $media])
 @endsection

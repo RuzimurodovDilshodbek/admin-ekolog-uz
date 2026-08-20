@@ -11,7 +11,7 @@
         $end     = min($last, max($current + 2, 5));
     @endphp
 
-    <nav class="lgp-wrap">
+    <nav class="lgp-wrap" @isset($wrapId) id="{{ $wrapId }}" @endisset>
         <div class="lgp-info">
             <b>{{ number_format($paginator->firstItem() ?? 0) }}–{{ number_format($paginator->lastItem() ?? 0) }}</b>
             / {{ number_format($paginator->total()) }} ta
