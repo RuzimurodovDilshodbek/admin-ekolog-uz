@@ -315,6 +315,7 @@
 @section('js')
     <script src="{{ asset('/administrator/select2-bootstrap4-theme/select2-bootstrap4.min.css')  }}"></script>
     <script src="{{ asset('/administrator/summernote/summernote-bs4.min.js')  }}"></script>
+    <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.summernote').summernote({
@@ -337,7 +338,7 @@
                 height: 300,
                 toolbar: [
                     ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear', 'fontsizeunit', 'color', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript' ]],
+                    ['font', ['bold', 'italic', 'underline', 'clear', 'color', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript' ]],
                     ['para', ['ul', 'ol', 'paragraph','height', 'style']],
                     ['table', ['table']],
                     ['insert', ['link', 'picture', 'video','table', 'hr']],
@@ -363,7 +364,7 @@
             }
         });
         $(document).ready(function() {
-            $('.summernote').summernote('justifyFull');
+            // justifyFull olib tashlandi: matn tekislashni muharrir o'zi tanlaydi
         });
         $(document).ready(function(){
             $(".nav-tabs a").click(function(){
@@ -408,6 +409,7 @@
         });
     </script>
     <script src="{{ asset('/administrator/summernote/summernote-bs4.min.js')  }}"></script>
+    <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
     <script>
         $('.select2').select2()
     </script>

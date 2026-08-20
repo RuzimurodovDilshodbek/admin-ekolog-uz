@@ -306,6 +306,7 @@
 @section('js')
     <script src="{{ asset('/administrator/select2-bootstrap4-theme/select2-bootstrap4.min.css')  }}"></script>
     <script src="{{ asset('/administrator/summernote/summernote-bs4.min.js')  }}"></script>
+    <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
     <script>
         $('.select2').select2();
         $(document).ready(function() {
@@ -329,7 +330,7 @@
                 height: 300,
                 toolbar: [
                     ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear', 'fontsizeunit', 'color', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript' ]],
+                    ['font', ['bold', 'italic', 'underline', 'clear', 'color', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript' ]],
                     ['para', ['ul', 'ol', 'paragraph','height', 'style']],
                     ['table', ['table']],
                     ['insert', ['link', 'picture', 'video','table', 'hr']],
@@ -340,7 +341,8 @@
                     custom: CustomButton
                 }
             });
-            $('.note-editable').css('font-size','18px');
+            // Muharrir maydoni saytdagi ko'rinishga mos bo'lsin
+            $('.note-editable').css({'font-size':'18px','font-family':'"PT Serif", Georgia, serif','line-height':'1.8'});
             function CustomButton(context) {
                 var ui = $.summernote.ui;
                 var button = ui.button({
@@ -355,7 +357,7 @@
             }
         });
         $(document).ready(function() {
-            $('.summernote').summernote('justifyFull');
+            // justifyFull olib tashlandi: matn tekislashni muharrir o'zi tanlaydi
             $('#summernote').summernote({
                 fontNames: ['IBM Plex Sans, sans-serif']
             });
@@ -401,6 +403,7 @@
         });
     </script>
     <script src="{{ asset('/administrator/summernote/summernote-bs4.min.js')  }}"></script>
+    <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
 
     <script src="{{ asset('/js/translator.js')  }}"></script>
     <script>
