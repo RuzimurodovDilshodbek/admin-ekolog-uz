@@ -96,10 +96,13 @@ class Post extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->fit('crop', 60, 36);
-        $this->addMediaConversion('preview')->fit('crop', 343, 197);
-        $this->addMediaConversion('card')->fit('crop', 348, 202);
-        $this->addMediaConversion('show_card')->fit('crop', 866, 505);
+        // Faqat maqola muqovasi uchun. Bularsiz matn ichidagi har bir rasm ham
+        // to'rtta kesilgan nusxa yaratardi — 60x36 gacha qirqilgan maqola surati
+        // hech qayerda ishlatilmaydi, lekin vaqt va joyni yeydi.
+        $this->addMediaConversion('thumb')->fit('crop', 60, 36)->performOnCollections('detail_image');
+        $this->addMediaConversion('preview')->fit('crop', 343, 197)->performOnCollections('detail_image');
+        $this->addMediaConversion('card')->fit('crop', 348, 202)->performOnCollections('detail_image');
+        $this->addMediaConversion('show_card')->fit('crop', 866, 505)->performOnCollections('detail_image');
     }
 
     public function registerMediaCollections(): void
