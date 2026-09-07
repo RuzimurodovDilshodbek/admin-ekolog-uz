@@ -257,11 +257,13 @@ class HomeController extends Controller
             'resent_posts' => $resent_posts,
         ];
 
-        if ($result['resent_posts']->isEmpty()) {
-            return response()->errorJson('post not found', 404);
-        } else {
-            return response()->successJson(['data' => $result]);
-        }
+        // O'xshash postlar ro'yxati bo'sh bo'lishi maqolaning o'zi yo'q degani
+        // emas. Ilgari bu yerda 404 qaytarilardi va #110 shu sababli saytda
+        // umuman ochilmasdi: uning section_ids qiymati "1,3", accessor esa uni
+        // massivga aylantiradi, yuqoridagi where() bo'lsa massivdan faqat
+        // birinchi elementni bog'laydi — ya'ni "1" bo'yicha qidiradi va hech
+        // narsa topmaydi.
+        return response()->successJson(['data' => $result]);
     }
 
     public function getCategoryId(Request $request, $id) {
