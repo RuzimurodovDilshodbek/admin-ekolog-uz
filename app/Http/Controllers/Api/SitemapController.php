@@ -6,44 +6,81 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 /**
  * Front (Nuxt) /sitemap.xml ni shu ro'yxat asosida quradi.
  *
- * Mavjud /api/v1/posts butun qatorni, ya'ni content_uz/kr/ru/en/tr ustunlarini
+ * Mavjud /api/v1/posts butun qatorni, ya'ni content_uz/kr/ru/en ustunlarini
  * ham qaytaradi. Ba'zi maqolalar ichida rasmlar `data:` URI ko'rinishida yotadi
  * va bitta post o'nlab megabaytga yetadi — sitemap uchun uni tortish bema'nilik.
- * Shuning uchun bu yerda faqat kerakli to'rt maydon tanlanadi.
+ * Shu sababli bu yerda faqat kerakli maydonlar tanlanadi, tilning mavjudligi
+ * esa bazaning o'zida hisoblanadi.
  */
 class SitemapController extends Controller
 {
+    /** Bazadagi til ustunlari. Frontda qaysilari ishlatilishini front hal qiladi. */
+    private const LOCALES = ['uz', 'kr', 'ru', 'en'];
+
     public function index(): JsonResponse
     {
         // publish_date bazada 'Y-m-d H:i:s' MATN sifatida yotadi (datetime emas).
         // Shu formatda leksikografik taqqoslash xronologik taqqoslash bilan
-        // bir xil natija beradi, modeldagi boshqa so'rovlar ham shunday qiladi.
+        // bir xil natija beradi, modeldagi boshqa so'rovlar ham shunga tayanadi.
         $now = now()->format('Y-m-d H:i:s');
 
         $posts = Post::query()
             ->where('status', 1)
             ->where('publish_date', '<=', $now)
             ->orderByDesc('publish_date')
-            ->get(['id', 'langs', 'section_ids', 'publish_date', 'is_investigative'])
+            ->get($this->columns())
             ->map(fn (Post $post) => [
                 'id' => (int) $post->id,
-                // accessor 'uz,ru,en' matnini massivga aylantiradi
-                'langs' => array_values(array_filter((array) $post->langs)),
+                'langs' => $this->availableLocales($post),
                 'sections' => $this->sectionIds($post->getRawOriginal('section_ids')),
                 'investigative' => (bool) $post->is_investigative,
                 'lastmod' => $this->w3cDate($post->getRawOriginal('publish_date')),
             ])
+            ->filter(fn (array $post) => $post['langs'] !== [])
             ->values();
 
         return response()->json([
             'success' => true,
             'data' => ['posts' => $posts],
         ]);
+    }
+
+    /**
+     * Har bir til uchun "tarjima bormi" bayrog'i.
+     *
+     * `langs` ustuniga ishonib bo'lmaydi: u muharrir tanlagan niyatni saqlaydi,
+     * haqiqiy holatni emas — 141 post o'zini ruscha deb e'lon qiladi, aslida
+     * ruscha sarlavhasi bori 109 ta. Yo'q tarjimani sitemap'ga qo'shish
+     * kraulerni 404 ga yuborardi (API title_{til} bo'sh bo'lsa 404 qaytaradi).
+     *
+     * Shart bazaning o'zida bajariladi, ya'ni ulkan content_* ustunlari
+     * uzatilmaydi — faqat 1/0 qaytadi.
+     */
+    private function columns(): array
+    {
+        $columns = ['id', 'section_ids', 'publish_date', 'is_investigative'];
+
+        foreach (self::LOCALES as $locale) {
+            $columns[] = DB::raw(
+                "(TRIM(COALESCE(title_{$locale}, '')) <> '' AND COALESCE(content_{$locale}, '') <> '') AS has_{$locale}"
+            );
+        }
+
+        return $columns;
+    }
+
+    private function availableLocales(Post $post): array
+    {
+        return array_values(array_filter(
+            self::LOCALES,
+            fn (string $locale) => (bool) $post->getAttribute("has_{$locale}")
+        ));
     }
 
     /** section_ids vergul bilan ajratilgan matn: "8" yoki "8,9" -> [8, 9] */
