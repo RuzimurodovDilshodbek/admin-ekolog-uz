@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\SitemapController;
 use App\Mail\InvoiceCreatedMail;
 use App\Mail\SendRegisterLinkMail;
 use App\Mail\SendResetPassLinkMail;
@@ -53,6 +54,8 @@ Route::group(['prefix' => 'v2', 'as' => 'api.', 'namespace' => 'Api'], function 
 });
 Route::group(['prefix' => 'v1'], function () {
     Route::get('posts', [PostController::class, 'index']);
+    // Front /sitemap.xml ni shundan quradi — yengil ro'yxat, content'siz
+    Route::get('sitemap', [SitemapController::class, 'index']);
 });
 Route::post('/send-invoice-email', function (Request $request) {
 
