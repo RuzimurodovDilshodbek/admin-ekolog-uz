@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -47,8 +48,52 @@ class SitemapController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => ['posts' => $posts],
+            'data' => [
+                'posts' => $posts,
+                'tags' => $this->tags(),
+            ],
         ]);
+    }
+
+    /**
+     * Sitemap uchun tag ro'yxati. Frontend /tags/{id} sifatida ko'rsatadi
+     * (slug emas). Post`ga bog'langan tag'lar keladi — bog'lanmagan tag
+     * sahifasida hech narsa yo'q, indekslash uchun ma'no yo'q.
+     */
+    private function tags(): array
+    {
+        return Tag::query()
+            ->whereExists(fn ($q) => $q->select(DB::raw(1))
+                ->from('post_tag')
+                ->join('posts', 'posts.id', '=', 'post_tag.post_id')
+                ->whereColumn('post_tag.tag_id', 'tags.id')
+                ->where('posts.status', 1)
+                ->whereNull('posts.deleted_at'))
+            ->get($this->tagColumns())
+            ->map(fn (Tag $tag) => [
+                'id' => (int) $tag->id,
+                'langs' => array_values(array_filter(
+                    self::LOCALES,
+                    fn (string $locale) => (bool) $tag->getAttribute("has_{$locale}")
+                )),
+                'lastmod' => $this->w3cDate($tag->getRawOriginal('updated_at')),
+            ])
+            ->filter(fn (array $tag) => $tag['langs'] !== [])
+            ->values()
+            ->all();
+    }
+
+    private function tagColumns(): array
+    {
+        $columns = ['id', 'updated_at'];
+
+        foreach (self::LOCALES as $locale) {
+            $columns[] = DB::raw(
+                "TRIM(COALESCE(title_{$locale}, '')) <> '' AS has_{$locale}"
+            );
+        }
+
+        return $columns;
     }
 
     /**
