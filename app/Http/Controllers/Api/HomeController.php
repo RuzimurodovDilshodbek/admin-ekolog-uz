@@ -13,6 +13,7 @@ use App\Models\Tutor;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use App\Social\Telegram;
+use App\Support\PostLocales;
 use Carbon\Carbon;
 use http\Exception;
 use Illuminate\Http\Request;
@@ -270,6 +271,15 @@ class HomeController extends Controller
         ]);
 
         $postClone = clone $post;
+
+        // Maqola sahifasi hreflang teglarini shu ro'yxat bo'yicha chiqaradi.
+        // Ilgari front barcha tillar uchun alternate e'lon qilardi, chunki
+        // javobda tarjima bor-yo'qligi haqida hech narsa yo'q edi: 33 post
+        // o'zini ruscha, 56 tasi inglizcha deb ko'rsatib turgan, o'sha
+        // manzillar esa 404 qaytarardi. Sitemap ham aynan shu manbadan
+        // foydalanadi, ya'ni ikkalasi bir xil gapiradi.
+        $postClone->available_langs = PostLocales::forPost((int) $post->id);
+
 //        if (isset($post->youtube_link)) {
 //
 //            $postClone->youtube_link = 'https://www.youtube.com/embed/' . getYouTubeVideoId($post->youtube_link);
