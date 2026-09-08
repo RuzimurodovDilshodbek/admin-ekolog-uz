@@ -14,6 +14,7 @@ use App\Models\Section;
 use App\Models\Tag;
 use App\Models\Tutor;
 use App\Social\ApiManager;
+use App\Support\EditorImage;
 use App\Social\Telegram;
 use Carbon\Carbon;
 use Gate;
@@ -706,6 +707,16 @@ class PostController extends Controller
         $model->id = $request->input('crud_id', 0);
         $model->exists = true;
         $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+
+        // Suratlar kameradan to'g'ridan-to'g'ri tashlanadi — 2560x1920 odatiy hol,
+        // maqola ustuni esa eng kengi bilan ~800px. Kichraytirish saqlangandan
+        // keyin bajariladi: shunda fayl nomi ham, qaytariladigan URL ham
+        // o'zgarmaydi, media.size esa haqiqiy hajmga mos qoladi.
+        $shrunk = EditorImage::shrink($media->getPath());
+
+        if (EditorImage::commit($media->getPath(), $shrunk)) {
+            $media->forceFill(['size' => $shrunk['after']])->saveQuietly();
+        }
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
