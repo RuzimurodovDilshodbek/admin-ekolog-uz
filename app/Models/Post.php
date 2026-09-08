@@ -96,9 +96,9 @@ class Post extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        // Faqat maqola muqovasi uchun. Bularsiz matn ichidagi har bir rasm ham
-        // to'rtta kesilgan nusxa yaratardi — 60x36 gacha qirqilgan maqola surati
-        // hech qayerda ishlatilmaydi, lekin vaqt va joyni yeydi.
+        // Kesiladigan nusxalar faqat muqova uchun. Bularsiz matn ichidagi har
+        // bir rasm ham to'rtta kesilgan nusxa olardi — 60x36 gacha qirqilgan
+        // maqola surati hech qayerda ishlatilmaydi, lekin vaqt va joyni yeydi.
         $this->addMediaConversion('thumb')->fit('crop', 60, 36)->performOnCollections('detail_image');
         $this->addMediaConversion('preview')->fit('crop', 343, 197)->performOnCollections('detail_image');
         $this->addMediaConversion('card')->fit('crop', 348, 202)->performOnCollections('detail_image');
@@ -115,6 +115,22 @@ class Post extends Model implements HasMedia
             ->format('jpg')
             ->quality(82)
             ->performOnCollections('detail_image');
+
+        // Matn ichidagi rasmlar uchun ikkita kichik nusxa. Asl fayl 1600px
+        // (EditorImage shunga tushiradi), maqola ustuni esa monitorda 788px,
+        // telefonda ~360px — ya'ni hozircha hamma bir xil, eng katta faylni
+        // yuklaydi. Bu ikkitasi srcset ga qo'shiladi va brauzer ekraniga
+        // qarab tanlaydi: 800px ham oddiy monitorni (1x), ham telefonni (2x)
+        // qoplaydi, 1600px esa faqat zich ekranli kattalarga qoladi.
+        //
+        // Kesilmaydi va format o'zgarmaydi — matndagi rasmlarning nisbati
+        // har xil, ularni bir qolipga solish suratni buzardi.
+        foreach ([480, 800] as $width) {
+            $this->addMediaConversion("w{$width}")
+                ->width($width)
+                ->quality(82)
+                ->performOnCollections('ck-media');
+        }
     }
 
     public function registerMediaCollections(): void

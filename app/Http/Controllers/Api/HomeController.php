@@ -13,6 +13,7 @@ use App\Models\Tutor;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use App\Social\Telegram;
+use App\Support\ContentImages;
 use App\Support\PostLocales;
 use Carbon\Carbon;
 use http\Exception;
@@ -279,6 +280,11 @@ class HomeController extends Controller
         // manzillar esa 404 qaytarardi. Sitemap ham aynan shu manbadan
         // foydalanadi, ya'ni ikkalasi bir xil gapiradi.
         $postClone->available_langs = PostLocales::forPost((int) $post->id);
+
+        // Matndagi rasmlarga srcset qo'shamiz — muharrir yozgan HTML da bitta
+        // qat'iy manzil bo'ladi, ya'ni telefon ham monitor bilan bir xil
+        // faylni yuklaydi.
+        $postClone->get_content = ContentImages::addSrcset($postClone->get_content);
 
 //        if (isset($post->youtube_link)) {
 //
