@@ -562,6 +562,11 @@ class HomeController extends Controller
             foreach ($posts as $post) {
                 $post['url'] = localized_url("get-post/{$post->id}");
                 $post['photo'] = $post->detail_image?->show_card;
+                // Ro'yxatdagi kichik kartochkalar uchun. 866x505 li show_card
+                // o'rtacha 98 KB, 348x202 li card esa 21 KB — kartochka ekranda
+                // baribir ~300px joy egallaydi. Front ikkalasini srcset ga
+                // qo'yadi, shunda zich ekranlarda sifat ham tushmaydi.
+                $post['photo_card'] = $post->detail_image?->card;
                 $post['section_name'] = $post->section->{'title_'.$request_lang};
                 $post['section_slug'] = $post->section->{'slug_'.$request_lang};
 //        if ($post->youtube_link) {
