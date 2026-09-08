@@ -233,8 +233,31 @@ class HomeController extends Controller
             return response()->errorJson('post not found', 404);
         }
 
+        // section_ids vergul bilan ajratilgan matn ("9,11"), model accessor'i esa
+        // uni massivga aylantiradi. Ilgarigi where('section_ids', $post->section_ids)
+        // massivdan faqat birinchi elementni bog'lardi, ya'ni "9,11" o'rniga "9"
+        // ni qidirardi: bo'lim to'plami boshqacha bo'lgan maqolalar bir-birini
+        // umuman ko'rmasdi. Endi kamida bitta umumiy bo'lim yetarli.
+        $sectionIds = array_filter(
+            array_map('trim', explode(',', (string) $post->getRawOriginal('section_ids'))),
+            'ctype_digit'
+        );
+
         $resent_posts = Post::query()
-            ->where('section_ids',$post->section_ids)
+            // O'qilayotgan maqolaning o'zi tavsiyalar orasida chiqmasin
+            ->where('posts.id', '!=', $post->id)
+            // Arxivlangan yoki shu tilda tarjimasi yo'q maqolaning sahifasi 404
+            // beradi — ularga havola qo'yishning ma'nosi yo'q
+            ->where('posts.status', 1)
+            ->whereNotNull('posts.title_'.$request_lang)
+            ->where(function ($query) use ($sectionIds) {
+                // Bo'limi yo'q maqola uchun ro'yxat bo'sh qolsin, butun baza emas
+                $query->whereRaw('1 = 0');
+
+                foreach ($sectionIds as $sectionId) {
+                    $query->orWhereRaw('FIND_IN_SET(?, posts.section_ids)', [$sectionId]);
+                }
+            })
             ->orderBy("created_at", "DESC")->limit(6)
             ->select($columns)
             ->get();
