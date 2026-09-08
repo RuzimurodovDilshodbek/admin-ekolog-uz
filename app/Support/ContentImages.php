@@ -98,17 +98,32 @@ final class ContentImages
         $originalWidth = self::originalWidth($item);
         $candidates = [];
 
+        $originalBytes = @filesize($item->getPath()) ?: PHP_INT_MAX;
+
         foreach (self::CONVERSIONS as $name => $width) {
-            // Asl rasmdan keng nomzodning ma'nosi yo'q: unda qo'shimcha
-            // tafsilot yo'q, hajmi esa aksincha kattaroq chiqishi mumkin.
+            // Asl rasmdan keng nomzodda qo'shimcha tafsilot yo'q. Bundan
+            // tashqari FIT_MAX kattalashtirmaydi, ya'ni bunday nusxaning
+            // haqiqiy kengligi nomidan kichik bo'lardi — deskriptor yolg'on
+            // bo'lib chiqadi va brauzer noto'g'ri tanlaydi.
             if ($width >= $originalWidth) {
                 continue;
             }
 
             // Konversiya yaratilmagan bo'lishi mumkin (eski fayl, xatolik)
-            if ($item->hasGeneratedConversion($name)) {
-                $candidates[] = $item->getUrl($name) . ' ' . $width . 'w';
+            if (! $item->hasGeneratedConversion($name)) {
+                continue;
             }
+
+            // Kichikroq o'lcham ba'zan og'irroq chiqadi: yaxshi siqilgan
+            // kichik rasmni qayta kodlash hajmni oshiradi. Bunday nomzodni
+            // taklif qilish brauzerni ko'proq yuklab olishga undaydi.
+            $bytes = @filesize($item->getPath($name));
+
+            if (! $bytes || $bytes >= $originalBytes) {
+                continue;
+            }
+
+            $candidates[] = $item->getUrl($name) . ' ' . $width . 'w';
         }
 
         // Faqat asl fayl qolsa, srcset qo'shishning hojati yo'q
