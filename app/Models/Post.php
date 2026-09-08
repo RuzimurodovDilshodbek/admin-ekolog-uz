@@ -103,6 +103,18 @@ class Post extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 343, 197)->performOnCollections('detail_image');
         $this->addMediaConversion('card')->fit('crop', 348, 202)->performOnCollections('detail_image');
         $this->addMediaConversion('show_card')->fit('crop', 866, 505)->performOnCollections('detail_image');
+
+        // Maqola sahifasidagi katta muqova. Ilgari u yerda asl fayl ko'rsatilardi
+        // — muharrirlar 1920x1280 PNG yuklaydi, ya'ni har bir maqola 2-4 MB rasm
+        // bilan ochilardi. show_card bu ish uchun to'g'ri kelmaydi: u 866x505 ga
+        // KESADI, asl kadr esa 3:2, ya'ni suratning yuqori va pastki qismi
+        // yo'qolardi. Shuning uchun bu yerda faqat eni cheklanadi — nisbat
+        // muharrir yuklagancha qoladi, ko'rinish o'zgarmaydi.
+        $this->addMediaConversion('hero')
+            ->width(1280)
+            ->format('jpg')
+            ->quality(82)
+            ->performOnCollections('detail_image');
     }
 
     public function registerMediaCollections(): void
@@ -179,6 +191,7 @@ class Post extends Model implements HasMedia
             $file->preview = $file->getUrl('preview');
             $file->card = $file->getUrl('card');
             $file->show_card = $file->getUrl('show_card');
+            $file->hero = $file->getUrl('hero');
         }
 
         return $file;
