@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -125,9 +126,12 @@ class Post extends Model implements HasMedia
         //
         // Kesilmaydi va format o'zgarmaydi — matndagi rasmlarning nisbati
         // har xil, ularni bir qolipga solish suratni buzardi.
+        // FIT_MAX — chunki width() kichik rasmni KATTALASHTIRADI: 720px li
+        // surat 800px ga cho'zilib, 129 KB dan 186 KB ga o'sib ketgan edi.
+        // Balandlik amalda cheklamaydi, faqat kenglik muhim.
         foreach ([480, 800] as $width) {
             $this->addMediaConversion("w{$width}")
-                ->width($width)
+                ->fit(Manipulations::FIT_MAX, $width, $width * 10)
                 ->quality(82)
                 ->performOnCollections('ck-media');
         }

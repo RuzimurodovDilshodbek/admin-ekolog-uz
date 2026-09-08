@@ -95,15 +95,23 @@ final class ContentImages
         }
 
         $item = $media->get($id);
+        $originalWidth = self::originalWidth($item);
         $candidates = [];
 
         foreach (self::CONVERSIONS as $name => $width) {
+            // Asl rasmdan keng nomzodning ma'nosi yo'q: unda qo'shimcha
+            // tafsilot yo'q, hajmi esa aksincha kattaroq chiqishi mumkin.
+            if ($width >= $originalWidth) {
+                continue;
+            }
+
             // Konversiya yaratilmagan bo'lishi mumkin (eski fayl, xatolik)
             if ($item->hasGeneratedConversion($name)) {
                 $candidates[] = $item->getUrl($name) . ' ' . $width . 'w';
             }
         }
 
+        // Faqat asl fayl qolsa, srcset qo'shishning hojati yo'q
         if (! $candidates) {
             return $tag;
         }
@@ -111,7 +119,7 @@ final class ContentImages
         // Asl fayl eng katta nomzod. EditorImage uni 1600px gacha tushiradi,
         // shundan kichigi bo'lsa haqiqiy kengligini yozamiz — noto'g'ri
         // deskriptor brauzerni noto'g'ri tanlovga olib keladi.
-        $candidates[] = $item->getUrl() . ' ' . self::originalWidth($item) . 'w';
+        $candidates[] = $item->getUrl() . ' ' . $originalWidth . 'w';
 
         return preg_replace(
             '/\s*\/?>$/',
