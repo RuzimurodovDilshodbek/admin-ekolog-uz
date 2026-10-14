@@ -403,6 +403,7 @@
         });
     </script>
     <script src="{{ asset('/administrator/summernote/summernote-bs4.min.js')  }}"></script>
+    <script src="{{ asset('/js/summernote-video-url.js') }}"></script>
     <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
 
     <script src="{{ asset('/js/translator.js')  }}"></script>
