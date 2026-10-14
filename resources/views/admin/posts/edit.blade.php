@@ -335,7 +335,12 @@
     <script>
         $(document).ready(function() {
             $('.summernote').summernote({
-                height: 300,
+                // 300px uzun maqolaga kichik: oyna ichida ham, sahifada ham
+                // varaqlashga to'g'ri kelardi. Ekran bo'yiga moslaymiz, lekin
+                // kichik noutbukda ham 420px dan tushmaydi.
+                height: Math.max(420, $(window).height() - 300),
+                // Pastga tushganda tugmalar paneli yuqorida yopishib qoladi.
+                followingToolbar: true,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'clear', 'color', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript' ]],
