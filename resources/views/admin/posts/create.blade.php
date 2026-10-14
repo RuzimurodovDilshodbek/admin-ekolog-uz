@@ -416,7 +416,13 @@
             url: '{{ route('admin.posts.storeCKEditorImages') }}',
             crudId: {{ $post->id ?? 0 }}
         };
+
+        // Qoralama kaliti maqolaga bog'lanadi.
+        window.postDraftId = {{ $post->id ?? 0 }};
     </script>
+    {{-- Muharrirlar ishga tushgandan KEYIN yuklanishi shart: qoralama matnni
+         textarea'dan emas, muharrir ichidan oladi. --}}
+    <script src="{{ asset('/js/post-editor-drafts.js') }}"></script>
     <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
 
     <script src="{{ asset('/js/translator.js')  }}"></script>
