@@ -425,10 +425,14 @@
 
         // Qoralama kaliti maqolaga bog'lanadi.
         window.postDraftId = {{ $post->id ?? 0 }};
+
+        // Tab qatorlaridagi tillar tartibi — holat nuqtalari shunga bog'lanadi.
+        window.postLocales = @json(config('app.locales'));
     </script>
-    {{-- Muharrirlar ishga tushgandan KEYIN yuklanishi shart: qoralama matnni
-         textarea'dan emas, muharrir ichidan oladi. --}}
+    {{-- Muharrirlar ishga tushgandan KEYIN yuklanishi shart: ikkalasi ham
+         matnni textarea'dan emas, muharrir ichidan oladi. --}}
     <script src="{{ asset('/js/post-editor-drafts.js') }}"></script>
+    <script src="{{ asset('/js/post-editor-langs.js') }}"></script>
     <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
     <script>
         $('.select2').select2()
