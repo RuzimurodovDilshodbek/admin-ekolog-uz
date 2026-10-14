@@ -404,6 +404,14 @@
     </script>
     <script src="{{ asset('/administrator/summernote/summernote-bs4.min.js')  }}"></script>
     <script src="{{ asset('/js/summernote-video-url.js') }}"></script>
+    <script src="{{ asset('/js/summernote-image-upload.js') }}"></script>
+    <script>
+        // Rasm matn ichiga base64 bo'lib yopishmasligi uchun yuklash manzili.
+        window.summernoteUpload = {
+            url: '{{ route('admin.posts.storeCKEditorImages') }}',
+            crudId: {{ $post->id ?? 0 }}
+        };
+    </script>
     <script src="{{ asset('/js/summernote-clean-paste.js') }}"></script>
 
     <script src="{{ asset('/js/translator.js')  }}"></script>

@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Support\EditorImage;
 use App\Support\InlineImageExtractor;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -44,11 +45,24 @@ class PostObserver
                         $locale = str_replace('content_', '', $column);
                         $name = sprintf('post-%d-%s-%d-%s.%s', $post->id, $locale, $index + 1, now()->format('His'), $extension);
 
-                        return $post->addMediaFromString($binary)
+                        $media = $post->addMediaFromString($binary)
                             ->usingFileName($name)
                             ->usingName(pathinfo($name, PATHINFO_FILENAME))
-                            ->toMediaCollection('ck-media')
-                            ->getUrl();
+                            ->toMediaCollection('ck-media');
+
+                        // Nusxa ko'chirilgan rasm ham kameradan kelgani bilan
+                        // bir xil — 2560px li surat maqola ustuniga (eng kengi
+                        // ~800px) hech qachon kerak bo'lmaydi. storeCKEditorImages
+                        // buni yuklash paytida qiladi; bu yo'l unga tegmay
+                        // o'tardi, ya'ni rasm qo'lda buyruq berilmaguncha asl
+                        // o'lchamida yotardi.
+                        $shrunk = EditorImage::shrink($media->getPath());
+
+                        if (EditorImage::commit($media->getPath(), $shrunk)) {
+                            $media->forceFill(['size' => $shrunk['after']])->saveQuietly();
+                        }
+
+                        return $media->getUrl();
                     }
                 );
             } catch (Throwable $e) {
