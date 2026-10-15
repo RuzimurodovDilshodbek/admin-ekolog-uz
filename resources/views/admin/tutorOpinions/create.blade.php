@@ -2,6 +2,41 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+<style type="text/css">
+    body{
+        background: #f7fbf8;
+    }
+    h1{
+        font-weight: bold;
+        font-size:23px;
+    }
+    img {
+        display: block;
+        max-width: 100%;
+    }
+    .preview {
+        text-align: center;
+        overflow: hidden;
+        width: 240px!important;
+        height: 160px;
+        margin: 10px;
+        border: 1px solid red;
+    }
+    input{
+        margin-top:40px;
+    }
+    .section{
+        margin-top:150px;
+        background:#fff;
+        padding:50px 30px;
+    }
+    .modal-lg{
+        max-width: 1000px !important;
+    }
+    .hidden-button{
+        display: none;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -293,38 +328,3 @@
     })
 </script>
 @endsection
-<style type="text/css">
-    body{
-        background: #f7fbf8;
-    }
-    h1{
-        font-weight: bold;
-        font-size:23px;
-    }
-    img {
-        display: block;
-        max-width: 100%;
-    }
-    .preview {
-        text-align: center;
-        overflow: hidden;
-        width: 240px!important;
-        height: 160px;
-        margin: 10px;
-        border: 1px solid red;
-    }
-    input{
-        margin-top:40px;
-    }
-    .section{
-        margin-top:150px;
-        background:#fff;
-        padding:50px 30px;
-    }
-    .modal-lg{
-        max-width: 1000px !important;
-    }
-    .hidden-button{
-        display: none;
-    }
-</style>

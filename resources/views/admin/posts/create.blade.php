@@ -3,6 +3,17 @@
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
     <link rel="stylesheet" href="{{ asset('/administrator/summernote/summernote-bs4.css')  }}">
+<style type="text/css">
+    img { display: block; max-width: 100%; }
+    .preview {
+        text-align: center; overflow: hidden;
+        width: 240px !important; height: 160px;
+        margin: 10px; border: 2px dashed #d1d9e0; border-radius: 8px;
+    }
+    .modal-lg { max-width: 1000px !important; }
+    .hidden-button { display: none; }
+    input[type="file"] { margin-top: 8px !important; }
+</style>
 @endsection
 
 @section('content')
@@ -829,14 +840,3 @@
         })
     </script>
 @endsection
-<style type="text/css">
-    img { display: block; max-width: 100%; }
-    .preview {
-        text-align: center; overflow: hidden;
-        width: 240px !important; height: 160px;
-        margin: 10px; border: 2px dashed #d1d9e0; border-radius: 8px;
-    }
-    .modal-lg { max-width: 1000px !important; }
-    .hidden-button { display: none; }
-    input[type="file"] { margin-top: 8px !important; }
-</style>
