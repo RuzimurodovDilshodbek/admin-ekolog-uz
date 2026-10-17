@@ -58,7 +58,8 @@ class HomeController extends Controller
         $latestPosts = Post::query()
             ->whereNotNull('title_' . $request_lang)
             ->whereNotIn('id', $usedIds)
-            ->orderBy("created_at", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(5)
             ->get();
@@ -79,7 +80,8 @@ class HomeController extends Controller
             ->whereNotNull('title_' . $request_lang)
             ->whereNotIn('id', $usedIds)
             ->where('recommended',1)
-            ->orderBy("id", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(6)
             ->get();
@@ -100,7 +102,8 @@ class HomeController extends Controller
             ->where('section_ids', 4)
             ->whereNotNull('title_' . $request_lang)
             ->whereNotIn('id', $usedIds)
-            ->orderBy("id", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(4)
             ->get();
@@ -111,7 +114,8 @@ class HomeController extends Controller
             ->where('section_ids', 21)
             ->whereNotNull('title_' . $request_lang)
             ->whereNotIn('id', $usedIds)
-            ->orderBy("id", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(4)
             ->get();
@@ -122,7 +126,8 @@ class HomeController extends Controller
             ->where('section_ids', 20)
             ->whereNotNull('title_' . $request_lang)
             ->whereNotIn('id', $usedIds)
-            ->orderBy("id", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(4)
             ->get();
@@ -132,7 +137,8 @@ class HomeController extends Controller
         $surishtiruvPosts = Post::query()
             ->where('is_investigative', 1)
             ->whereNotNull('title_' . $request_lang)
-            ->orderBy("id", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(4)
             ->get();
@@ -145,7 +151,8 @@ class HomeController extends Controller
             ->whereNotNull('title_' . $request_lang)
             ->whereNotIn('id', $usedIds)
             ->where('recommended',1)
-            ->orderBy("id", "DESC")
+            ->where('publish_date', '<=', now())
+            ->orderBy("publish_date", "DESC")
             ->select($columns)
             ->limit(4)
             ->get();
